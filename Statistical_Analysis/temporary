@@ -1,0 +1,64 @@
+boolean flag = false;
+			c.setTime(begin);
+			
+			while(flag == false) {
+				if(Close_M.get(formatter.format(c.getTime())) != null) {
+					//System.out.println(Close_M.get(formatter.format(c.getTime())));
+					return_arr.add(Close_M.get(formatter.format(c.getTime())));
+					
+					if(formatter.format(c.getTime()).equals(formatter.format(fin))) {
+						flag = true;
+						return return_arr;
+					} else {
+						c.add(Calendar.DATE, 1);
+					}
+				} else {
+					if(formatter.format(c.getTime()).equals(formatter.format(fin))) {
+						flag = true;
+						return return_arr;
+					} else {
+						c.add(Calendar.DATE, 1);
+					}
+				}
+			}
+			return return_arr;
+			
+			
+			
+			
+			
+//Percentage
+
+			S1_Close = S1.request("CLOSE", startdate, enddate);
+			
+			/*
+			 * Divided into two cases where the first case there is no problem with indexing, but the second case,
+			 * if the size of (range of) price data from which we want to draw percentage change info is correctly
+			 * divided by a time slice without any leftover.
+			 * 
+			 * Dealt with it.
+			 * 
+			 * No, I thought wrong. For example, drawing 20 days gap percentage from 100 price data means that I can only draw
+			 * 4 equally-sized gap.
+			 */
+			
+			
+			int k = S1_Close.size() - 1;
+			if(S1_Close.size() % TimeSlice == 0) {
+				for(int i = 0; i < (S1_Close.size() / TimeSlice); i++) {
+					if(k - TimeSlice < 0) {
+						System.out.println(S1_Close.get(k) + "   " + S1_Close.get(0));
+						S1_Percentage_Change.add(   (S1_Close.get(k) - S1_Close.get(0)) / (S1_Close.get(0))   );
+					} else {
+						System.out.println(S1_Close.get(k) + "   " + S1_Close.get(k - TimeSlice));
+						S1_Percentage_Change.add(   (S1_Close.get(k) - S1_Close.get(k - TimeSlice)) / (S1_Close.get(k - TimeSlice))   );
+					}
+					k -= TimeSlice;
+				}
+			} else if (S1_Close.size() % TimeSlice != 0){
+				for(int i = 0; i < S1_Close.size() / TimeSlice; i++) {
+					S1_Percentage_Change.add(   (S1_Close.get(k) - S1_Close.get(k - TimeSlice)) / (S1_Close.get(k - TimeSlice))   );
+					k -= TimeSlice;
+				}
+			}
+			return S1_Percentage_Change;
