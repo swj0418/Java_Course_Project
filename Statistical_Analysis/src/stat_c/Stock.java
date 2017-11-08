@@ -21,8 +21,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Stock {
 	public String SYMBOL;
+	public Boolean localAvailability = false;
 	public String Stock_Name;
 	public Integer Avail_Size;
+	public String LastDate;
+	public String FirtstDate;
+	
 	ArrayList Total = new ArrayList();
 	public ArrayList<Double> Close = new ArrayList<Double>();
 	public ArrayList<String> Date = new ArrayList<String>();
@@ -55,9 +59,7 @@ public class Stock {
 	@SuppressWarnings("unchecked")
 	public void retrieve() {
 		URL url;
-	    String csvString;
 	    URLConnection urlConn = null;
-	    InputStreamReader  inStream = null;
 	    BufferedReader br = null;
 		String msg;
 		StringBuilder bd;
@@ -85,7 +87,7 @@ public class Stock {
 				int u = 0; // This variable is just for skipping the first line of the data which all are strings
 				while((msg = br.readLine()) != null)
 				{
-					String tmpList[] = msg.split(",");
+					String tmpList[] = msg.split(csvSplitBy);
 					
 					bd.append(msg);
 					Total.add(msg);
@@ -123,6 +125,7 @@ public class Stock {
 		}
 		saveCSV(); //Saving data as a file
 		Extractor(); //Extracting and saving separated datasets in an instance
+		recordLocal();
 	}
 	/*
 	 * Data saving and manipulating methods.
@@ -285,6 +288,60 @@ public class Stock {
 		}
 	}
 	
+	/*
+	 * Local Data Availability Check
+	 */
+	public void recordLocal() {
+		File file = new File("./DataMeta");
+		if(file.exists() != true) {
+			file.mkdir();
+			recordLocal(); //Call again
+		} else if(file.exists()) {
+			file = new File("./DataMeta/Availability.csv"); // 0 : Symbol 1 : fisrt available date 2 : last available date
+			try {
+				FileOutputStream fos = new FileOutputStream(file);
+				FileWriter fw = new FileWriter(file);
+				if(checkLocal() == false) {
+					fw.write(SYMBOL);
+				} else if(checkLocal() == true) {
+					return;
+				}
+				
+				fw.close();
+			} catch (Exception e) { e.printStackTrace();}
+		} 
+	}
+	public Boolean checkLocal() {
+		File file = new File("./DataMeta");
+		if(file.exists() != true) {
+			file.mkdir();
+			recordLocal(); //Call again
+		} else if(file.exists()) {
+			file = new File("./DataMeta/Availability.csv"); // 0 : Symbol 1 : fisrt available date 2 : last available date
+			try {
+				FileReader fr = new FileReader(file);
+				FileInputStream fis = new FileInputStream(file);
+				StringBuilder builder = new StringBuilder();
+				String line = null;
+				BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+				while((line = br.readLine()) != null) {
+					String tmp[] = line.split(",");
+					for(int i = 0; i < tmp.length; i++) {
+						if(tmp[0] == SYMBOL) {
+							localAvailability = true;
+							return true;
+						} else {
+							localAvailability = false;
+							return false;
+						}
+					}
+				}
+			} catch (Exception e) { e.printStackTrace();
+			}
+			
+		}
+		return localAvailability;
+	}
 	
 	
 	/*

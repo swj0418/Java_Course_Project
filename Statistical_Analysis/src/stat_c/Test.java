@@ -27,14 +27,36 @@ public class Test {
 		//SStat class test
 		
 		Stock S = new Stock("AAPL");
+		Stock S_TSLA = new Stock("TSLA");
+		Stock S_GENE = new Stock("GENE");
 		S.retrieve();
+		S_TSLA.retrieve();
+		S_GENE.retrieve();
+		
 		SStat St = new SStat(S);
+		SStat St2 = new SStat(S_TSLA);
+		SStat St3 = new SStat(S_GENE);
 		
+		System.out.println("<<<" + S.SYMBOL + ">>>");
 		System.out.println(St.Geometricmean("CLOSE", "2015-12-25", "2016-01-01"));
-		
 		ArrayList tmpArray1 = St.PercentageChange("CLOSE", 100, "2012-12-15", "2016-01-01");
 		System.out.println(tmpArray1);
 		ArrayList tmpArray2 = St.PercentageChange("OPEN", 300, "2012-12-15", "2016-01-01");
+		System.out.println(tmpArray2);
+		
+		System.out.println("<<<" + S_TSLA.SYMBOL + ">>>");
+		System.out.println(St2.Geometricmean("CLOSE", "2015-12-25", "2016-01-01"));
+		tmpArray1 = St2.PercentageChange("CLOSE", 100, "2012-12-15", "2016-01-01");
+		System.out.println(tmpArray1);
+		tmpArray2 = St2.PercentageChange("OPEN", 300, "2012-12-15", "2016-01-01");
+		System.out.println(tmpArray2);
+		
+		System.out.println("<<<" + S_GENE.SYMBOL + ">>>");
+		System.out.println(St3.Geometricmean("CLOSE", "2015-12-25", "2016-01-01"));
+		
+		tmpArray1 = St3.PercentageChange("CLOSE", 100, "2012-12-15", "2016-01-01");
+		System.out.println(tmpArray1);
+		tmpArray2 = St3.PercentageChange("OPEN", 300, "2012-12-15", "2016-01-01");
 		System.out.println(tmpArray2);
 		
 

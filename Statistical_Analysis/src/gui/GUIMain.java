@@ -155,7 +155,7 @@ public class GUIMain extends JPanel {
     private static void createAndShowGui() {
     	Stock S_TSLA = new Stock("TSLA");
     	S_TSLA.retrieve();
-    	ArrayList TSLA_A = S_TSLA.request("CLOSE", "2015-01-01", "2017-05-16");
+    	ArrayList TSLA_A = S_TSLA.request("CLOSE", "2011-01-01", "2017-05-16");
 
         GUIMain mainPanel = new GUIMain(TSLA_A);
         mainPanel.setPreferredSize(new Dimension(800, 600));
