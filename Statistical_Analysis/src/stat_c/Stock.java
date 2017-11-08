@@ -28,7 +28,7 @@ public class Stock {
 	public String FirtstDate;
 	
 	ArrayList Total = new ArrayList();
-	public ArrayList<Double> Close = new ArrayList<Double>();
+	public ArrayList<Double> Close = new ArrayList<Double>();		
 	public ArrayList<String> Date = new ArrayList<String>();
 	public ArrayList<Double> Open = new ArrayList<Double>();
 	public ArrayList<Double> Volume = new ArrayList<Double>();
@@ -58,74 +58,126 @@ public class Stock {
 	 */
 	@SuppressWarnings("unchecked")
 	public void retrieve() {
-		URL url;
-	    URLConnection urlConn = null;
-	    BufferedReader br = null;
-		String msg;
-		StringBuilder bd;
-		InputStream ins = null;
+		checkLocal(); //First, check if the data is there and is up-to-date.
 		
-		String line = "";
-		String csvSplitBy = ",";
-		
-		//Using AlphaVantage API to retrieve information
-		String urlString = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" +
-				SYMBOL +"&apikey=QX75TG29OOA9H7CJ&datatype=csv&outputsize=full";
-		
-		//Connecting to AlphaVantage with my apikey
-		try {
-			url = new URL(urlString);
-			urlConn = url.openConnection();
-			ins = url.openStream();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			br = new BufferedReader(new InputStreamReader(ins));
-			bd = new StringBuilder();
-			msg = null;
+		if(localAvailability != true) {
+			URL url;
+		    URLConnection urlConn = null;
+		    BufferedReader br = null;
+			String msg;
+			StringBuilder bd;
+			InputStream ins = null;
+			
+			String line = "";
+			String csvSplitBy = ",";
+			
+			//Using AlphaVantage API to retrieve information
+			String urlString = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" +
+					SYMBOL +"&apikey=QX75TG29OOA9H7CJ&datatype=csv&outputsize=full";
+			
+			//Connecting to AlphaVantage with my apikey
 			try {
-				int u = 0; // This variable is just for skipping the first line of the data which all are strings
-				while((msg = br.readLine()) != null)
-				{
-					String tmpList[] = msg.split(csvSplitBy);
-					
-					bd.append(msg);
-					Total.add(msg);
-					Total.add("\n");
-					bd.append("\n");
-					
-					list.add(tmpList[0]); 
-					list.add(tmpList[1]); 
-					list.add(tmpList[2]); 
-					list.add(tmpList[3]); 
-					list.add(tmpList[4]);
-					list.add(tmpList[5]);
-					if(u != 0) {
-						Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
-						Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
-						Volume_M.put(tmpList[0], Double.valueOf(tmpList[5]));
-						High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
-						Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
-						DATE_M.put(tmpList[0], tmpList[0]);
-					}
-					u++;
-				}
+				url = new URL(urlString);
+				urlConn = url.openConnection();
+				ins = url.openStream();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				System.out.println("Retrieval Done");
+				br = new BufferedReader(new InputStreamReader(ins));
+				bd = new StringBuilder();
+				msg = null;
+				try {
+					int u = 0; // This variable is just for skipping the first line of the data which all are strings
+					while((msg = br.readLine()) != null)
+					{
+						String tmpList[] = msg.split(csvSplitBy);
+						
+						bd.append(msg);
+						Total.add(msg);
+						Total.add("\n");
+						bd.append("\n");
+						
+						list.add(tmpList[0]); 
+						list.add(tmpList[1]); 
+						list.add(tmpList[2]); 
+						list.add(tmpList[3]); 
+						list.add(tmpList[4]);
+						list.add(tmpList[5]);
+						if(u != 0) {
+							Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
+							Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
+							Volume_M.put(tmpList[0], Double.valueOf(tmpList[5]));
+							High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
+							Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
+							DATE_M.put(tmpList[0], tmpList[0]);
+						}
+						u++;
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					System.out.println("Retrieval Done");
+				}
+				
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-			
-			try {
-				br.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			saveCSV(); //Saving data as a file
+			Extractor(); //Extracting and saving separated datasets in an instance
+			recordLocal();
 		}
-		saveCSV(); //Saving data as a file
-		Extractor(); //Extracting and saving separated datasets in an instance
-		recordLocal();
+		
+		else if(localAvailability == true) {
+			File file = new File("./Data/" + SYMBOL + ".csv");
+			String msg = null;
+			BufferedReader br = null;
+			try {
+				FileReader fr = new FileReader(file);
+				FileInputStream fis = new FileInputStream(file);
+				br = new BufferedReader(new InputStreamReader(fis));
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+				try {
+					int u = 0; // This variable is just for skipping the first line of the data which all are strings
+					while((msg = br.readLine()) != null)
+					{
+						String tmpList[] = msg.split(",");
+						Total.add(msg);
+						Total.add("\n");
+
+						list.add(tmpList[0]); 
+						list.add(tmpList[1]); 
+						list.add(tmpList[2]); 
+						list.add(tmpList[3]); 
+						list.add(tmpList[4]);
+						list.add(tmpList[5]);
+						if(u != 0) {
+							Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
+							Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
+							Volume_M.put(tmpList[0], Double.valueOf(tmpList[5]));
+							High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
+							Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
+							DATE_M.put(tmpList[0], tmpList[0]);
+						}
+						u++;
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					System.out.println("Loading " + SYMBOL + " Done");
+				}
+			}
+			}
+
+			
+			
 	}
 	/*
 	 * Data saving and manipulating methods.
@@ -295,18 +347,18 @@ public class Stock {
 		File file = new File("./DataMeta");
 		if(file.exists() != true) {
 			file.mkdir();
-			recordLocal(); //Call again
-		} else if(file.exists()) {
+		} else if(file.exists() == true) {
 			file = new File("./DataMeta/Availability.csv"); // 0 : Symbol 1 : fisrt available date 2 : last available date
 			try {
-				FileOutputStream fos = new FileOutputStream(file);
-				FileWriter fw = new FileWriter(file);
-				if(checkLocal() == false) {
-					fw.write(SYMBOL);
-				} else if(checkLocal() == true) {
-					return;
+				//FileOutputStream fos = new FileOutputStream(file); //It is this fileoutputstream that forcedly overwrites on a file
+				//Remember not to make the same mistake
+				FileWriter fw = new FileWriter(file, true);
+				BufferedWriter buffw = new BufferedWriter(fw);
+				if(localAvailability == false) {
+					fw.append(SYMBOL + "," + this.Date.get(0) + "," + this.Date.get(Date.size() - 1) + "\n");
+				} else if(localAvailability == true) {
+					System.out.println("Local File Available");
 				}
-				
 				fw.close();
 			} catch (Exception e) { e.printStackTrace();}
 		} 
@@ -315,25 +367,21 @@ public class Stock {
 		File file = new File("./DataMeta");
 		if(file.exists() != true) {
 			file.mkdir();
-			recordLocal(); //Call again
-		} else if(file.exists()) {
+		} else if(file.exists() == true) {
 			file = new File("./DataMeta/Availability.csv"); // 0 : Symbol 1 : fisrt available date 2 : last available date
 			try {
 				FileReader fr = new FileReader(file);
 				FileInputStream fis = new FileInputStream(file);
-				StringBuilder builder = new StringBuilder();
 				String line = null;
 				BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 				while((line = br.readLine()) != null) {
 					String tmp[] = line.split(",");
-					for(int i = 0; i < tmp.length; i++) {
-						if(tmp[0] == SYMBOL) {
-							localAvailability = true;
-							return true;
-						} else {
-							localAvailability = false;
-							return false;
-						}
+					if(tmp[0].equals(SYMBOL)) { // tmp[0] == SYMBOL did not work. Remember not to make the same mistake
+												//Also, I have to find out a way to know which date is the latest date for stock information
+						localAvailability = true;
+						break;
+					} else if (tmp[0] != SYMBOL){
+						continue;
 					}
 				}
 			} catch (Exception e) { e.printStackTrace();

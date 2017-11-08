@@ -153,11 +153,11 @@ public class GUIMain extends JPanel {
     }
 
     private static void createAndShowGui() {
-    	Stock S_TSLA = new Stock("TSLA");
-    	S_TSLA.retrieve();
-    	ArrayList TSLA_A = S_TSLA.request("CLOSE", "2011-01-01", "2017-05-16");
+    	Stock S_AAPL = new Stock("AAPL");
+    	S_AAPL.retrieve();
+    	ArrayList AAPL_A = S_AAPL.request("CLOSE", "2015-01-01", "2017-05-16");
 
-        GUIMain mainPanel = new GUIMain(TSLA_A);
+        GUIMain mainPanel = new GUIMain(AAPL_A);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
