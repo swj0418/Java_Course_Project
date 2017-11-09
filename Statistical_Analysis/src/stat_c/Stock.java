@@ -25,7 +25,7 @@ public class Stock {
 	public String Stock_Name;
 	public Integer Avail_Size;
 	public String LastDate;
-	public String FirtstDate;
+	public String FirstDate;
 	
 	ArrayList Total = new ArrayList();
 	public ArrayList<Double> Close = new ArrayList<Double>();		
@@ -34,9 +34,11 @@ public class Stock {
 	public ArrayList<Double> Volume = new ArrayList<Double>();
 	public ArrayList<Double> High = new ArrayList<Double>();
 	public ArrayList<Double> Low = new ArrayList<Double>();
+	public ArrayList<Double> Adj_Close = new ArrayList<Double>();
 	
 	private ArrayList<String> list = new ArrayList<String>();
 	
+	public Map<String, Double> Adj_Close_M = new HashMap<String, Double>();
 	public Map<String, Double> Close_M = new HashMap<String, Double>();
 	public Map<String, Double> Open_M = new HashMap<String, Double>();
 	public Map<String, Double> Volume_M = new HashMap<String, Double>();
@@ -72,7 +74,12 @@ public class Stock {
 			String csvSplitBy = ",";
 			
 			//Using AlphaVantage API to retrieve information
+			
+			/*
 			String urlString = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" +
+					SYMBOL +"&apikey=QX75TG29OOA9H7CJ&datatype=csv&outputsize=full";
+			*/
+			String urlString = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" +
 					SYMBOL +"&apikey=QX75TG29OOA9H7CJ&datatype=csv&outputsize=full";
 			
 			//Connecting to AlphaVantage with my apikey
@@ -97,19 +104,22 @@ public class Stock {
 						Total.add("\n");
 						bd.append("\n");
 						
-						list.add(tmpList[0]); 
-						list.add(tmpList[1]); 
-						list.add(tmpList[2]); 
-						list.add(tmpList[3]); 
-						list.add(tmpList[4]);
-						list.add(tmpList[5]);
+						list.add(tmpList[0]); //Date
+						list.add(tmpList[1]); //Open
+						list.add(tmpList[2]); //High
+						list.add(tmpList[3]); //Low
+						list.add(tmpList[4]); //Close
+						list.add(tmpList[5]); //Volume
+						list.add(tmpList[6]); //Adjusted Close
+						list.add(tmpList[7]); //stock split event
 						if(u != 0) {
 							Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
 							Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
-							Volume_M.put(tmpList[0], Double.valueOf(tmpList[5]));
+							Volume_M.put(tmpList[0], Double.valueOf(tmpList[6]));
 							High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
 							Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
 							DATE_M.put(tmpList[0], tmpList[0]);
+							Adj_Close_M.put(tmpList[0], Double.valueOf(tmpList[5]));
 						}
 						u++;
 					}
@@ -156,14 +166,17 @@ public class Stock {
 						list.add(tmpList[2]); 
 						list.add(tmpList[3]); 
 						list.add(tmpList[4]);
-						list.add(tmpList[5]);
+						list.add(tmpList[5]); //Adj Close
+						list.add(tmpList[6]); //Volume
+						list.add(tmpList[7]); //stock split event
 						if(u != 0) {
 							Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
 							Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
-							Volume_M.put(tmpList[0], Double.valueOf(tmpList[5]));
+							Volume_M.put(tmpList[0], Double.valueOf(tmpList[6]));
 							High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
 							Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
 							DATE_M.put(tmpList[0], tmpList[0]);
+							Adj_Close_M.put(tmpList[0], Double.valueOf(tmpList[5]));
 						}
 						u++;
 					}
@@ -173,11 +186,9 @@ public class Stock {
 				} finally {
 					System.out.println("Loading " + SYMBOL + " Done");
 				}
+				Extractor(); //Extracting and saving separated datasets in an instance
 			}
 			}
-
-			
-			
 	}
 	/*
 	 * Data saving and manipulating methods.
@@ -202,7 +213,11 @@ public class Stock {
 		//Core writing
 		try {
 			fw = new FileWriter(file);
-			int blocksize = 6; // Might need to be adjusted when data source is changed
+			int blocksize = 8; // Might need to be adjusted when data source is changed
+			/*
+			 * Block size 8 for call with adjusted close data
+			 * Block size 6 for a call without any adjusted close data
+			 */
 			int j = 1;
 			//System.out.println(list.size());
 			for(int i = 0; i < list.size(); i++)
@@ -210,14 +225,14 @@ public class Stock {
 				fw.write(list.get(i));
 				fw.write(",");
 				
-				if(i == 5)
+				if(i == 7)
 				{
 					j++;
 					fw.write(",");
 					fw.write("\n");
 				}
 				
-				else if(i == 6 * j - 1)
+				else if(i == 8 * j - 1)
 				{
 					j++;
 					fw.write(",");
@@ -307,7 +322,16 @@ public class Stock {
 				begin = begin.plusDays(1);
 			}
 			return return_arr;
-		} else {
+		} else if (cat == "ADJ_CLOSE") {
+			while(! begin.isAfter(fin)) {
+				if(Adj_Close_M.get(begin.toString()) != null) {
+					return_arr.add(Adj_Close_M.get(begin.toString()));
+				}
+				begin = begin.plusDays(1);
+			}
+			return return_arr;
+		} 
+		else {
 			// May need to add more if date category increases
 			System.out.println("No such data");
 			return return_arr;
@@ -321,21 +345,25 @@ public class Stock {
 	 */
 	
 	private void Extractor() { //This method extracts sub data. Will be called within the method retrieve
-		for(int i = 6; i < list.size(); i++) { // "i" here must be changed when using another data or on a data size
+		for(int i = 8; i < list.size(); i++) { // "i" here must be changed when using another data or on a data size
 											   // The reason i starts from 6 is because the first 6 elements are indexes thus they are string
-			if(i % 6 == 0)
+			if(i % 8 == 0)
 			{
 				Date.add(list.get(i).toString());	
-			} else if (i % 6 == 1) {
+			} else if (i % 8 == 1) {
 				Open.add(Double.valueOf(list.get(i)));
-			} else if(i % 6 == 2) {
+			} else if(i % 8 == 2) {
 				High.add(Double.valueOf(list.get(i)));
-			} else if(i % 6 == 3) {
+			} else if(i % 8 == 3) {
 				Low.add(Double.valueOf(list.get(i)));
-			} else if (i % 6 == 4) {
+			} else if (i % 8 == 4) {
 				Close.add(Double.valueOf(list.get(i)));
-			} else if (i % 6 == 5) {
+			} else if (i % 8 == 5) {
+				Adj_Close.add(Double.valueOf(list.get(i)));
+			} else if (i % 8 == 6) {
 				Volume.add(Double.valueOf(list.get(i)));
+			} else if (i % 8 == 7) {
+				continue;
 			}
 		}
 	}
@@ -356,6 +384,8 @@ public class Stock {
 				BufferedWriter buffw = new BufferedWriter(fw);
 				if(localAvailability == false) {
 					fw.append(SYMBOL + "," + this.Date.get(0) + "," + this.Date.get(Date.size() - 1) + "\n");
+					FirstDate = this.Date.get(0);
+					LastDate = this.Date.get(Date.size() - 1);
 				} else if(localAvailability == true) {
 					System.out.println("Local File Available");
 				}
@@ -379,6 +409,7 @@ public class Stock {
 					if(tmp[0].equals(SYMBOL)) { // tmp[0] == SYMBOL did not work. Remember not to make the same mistake
 												//Also, I have to find out a way to know which date is the latest date for stock information
 						localAvailability = true;
+						//System.out.println(tmp[0] + " First Data : " + this.FirstDate + " Last Data : " + this.LastDate);
 						break;
 					} else if (tmp[0] != SYMBOL){
 						continue;
@@ -423,6 +454,11 @@ public class Stock {
 	public void printLow() {
 		for(int i = 0; i < Low.size(); i++) {
 			System.out.println(Date.get(i) + " ::::: " + Low.get(i));
+		}
+	}
+	public void printAdjClose() {
+		for(int i = 0; i < Adj_Close.size(); i++) {
+			System.out.println(Date.get(i) + " ::::: " + Adj_Close.get(i));
 		}
 	}
 }

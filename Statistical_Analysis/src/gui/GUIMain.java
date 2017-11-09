@@ -27,10 +27,11 @@ public class GUIMain extends JPanel {
     private int labelPadding = 25;
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
+    //private Color pointColor = new Color(44, 102, 230, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
-    private int pointWidth = 4;
-    private int numberYDivisions = 10;
+    private int pointWidth = 2;
+    private int numberYDivisions = 25;
     private List<Double> scores;
 
     public GUIMain(List<Double> scores) {
@@ -45,7 +46,7 @@ public class GUIMain extends JPanel {
 
         double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / (scores.size() - 1);
         double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxScore() - getMinScore());
-
+        
         List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < scores.size(); i++) {
             int x1 = (int) (i * xScale + padding + labelPadding);
@@ -68,7 +69,7 @@ public class GUIMain extends JPanel {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
-                String yLabel = ((int) ((getMinScore() + (getMaxScore() - getMinScore()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
+                String yLabel = ((int) ((getMinScore() + (getMaxScore() - getMinScore()) * ((i * 10.0) / numberYDivisions)) * 100f)) / 100.0 + "";
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -131,7 +132,7 @@ public class GUIMain extends JPanel {
         for (Double score : scores) {
             minScore = Math.min(minScore, score);
         }
-        return minScore;
+        return minScore - (minScore / 50);
     }
 
     private double getMaxScore() {
@@ -139,7 +140,7 @@ public class GUIMain extends JPanel {
         for (Double score : scores) {
             maxScore = Math.max(maxScore, score);
         }
-        return maxScore;
+        return maxScore + (maxScore / 50);
     }
 
     public void setScores(List<Double> scores) {
@@ -153,11 +154,18 @@ public class GUIMain extends JPanel {
     }
 
     private static void createAndShowGui() {
-    	Stock S_AAPL = new Stock("AAPL");
+    	Stock S_AAPL = new Stock("EDIG");
     	S_AAPL.retrieve();
-    	ArrayList AAPL_A = S_AAPL.request("CLOSE", "2015-01-01", "2017-05-16");
+    	ArrayList P = S_AAPL.request("ADJ_CLOSE", "2017-05-08", "2017-11-08");
+    	//ArrayList AAPL_A = S_AAPL.request("CLOSE", "2012-01-01", "2017-01-01");
 
-        GUIMain mainPanel = new GUIMain(AAPL_A);
+    	SStat EDIG_S = new SStat(S_AAPL);
+    	ArrayList AL = EDIG_S.PercentageChange("CLOSE", 30, "2012-01-01", "2017-01-01");
+    	ArrayList AL2 = EDIG_S.ReturnVariance("CLOSE", 30, "2012-01-01", "2017-01-01");
+    	System.out.println(AL);
+    	System.out.println(AL2);
+    	
+        GUIMain mainPanel = new GUIMain(P);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
