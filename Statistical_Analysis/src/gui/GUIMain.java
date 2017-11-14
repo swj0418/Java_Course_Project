@@ -69,7 +69,7 @@ public class GUIMain extends JPanel {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
-                String yLabel = ((int) ((getMinScore() + (getMaxScore() - getMinScore()) * ((i * 10.0) / numberYDivisions)) * 100f)) / 100.0 + "";
+                String yLabel = ((int) ((getMinScore() + (getMaxScore() - getMinScore()) * ((i * 100.0) / numberYDivisions)) * 100f)) / 100.0 + "";
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -154,17 +154,14 @@ public class GUIMain extends JPanel {
     }
 
     private static void createAndShowGui() {
-    	Stock S_AAPL = new Stock("TSLA");
-    	S_AAPL.retrieve();
-    	ArrayList P = S_AAPL.request("ADJ_CLOSE", "2017-05-08", "2017-11-08");
-    	//ArrayList AAPL_A = S_AAPL.request("CLOSE", "2012-01-01", "2017-01-01");
-
-    	SStat EDIG_S = new SStat(S_AAPL);
-    	ArrayList AL = EDIG_S.PercentageChange("CLOSE", 30, "2012-01-01", "2017-01-01");
-    	System.out.println(AL);
-    	ArrayList Dev = EDIG_S.ReturnDeviation("ADJ_CLOSE", 30, "2012-01-01", "2014-01-01", "GEO");
+    	Stock Test = new Stock("TESTS");
+    	Test.retrieve();
+    	SStat Test_St = new SStat(Test);
+    	ArrayList Ret = Test_St.ReturnDeviation("ADJ_CLOSE", 1, "2017-11-02", "2017-11-10", "ARI");
+    	Ret = Test_St.PercentageChange("ADJ_CLOSE", 1, "2016-01-01", "2017-11-20");
+    	Ret = Test.Adj_Close;
     	
-        GUIMain mainPanel = new GUIMain(Dev);
+        GUIMain mainPanel = new GUIMain(Ret);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
