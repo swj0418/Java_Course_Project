@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 public class Stock {
 	public String SYMBOL;
 	public Boolean localAvailability = false;
+	public Boolean UpdateNeeds = false;
 	public String Stock_Name;
 	public Integer Avail_Size;
 	public String LastDate;
@@ -382,17 +383,36 @@ public class Stock {
 				//Remember not to make the same mistake
 				FileWriter fw = new FileWriter(file, true);
 				BufferedWriter buffw = new BufferedWriter(fw);
-				if(localAvailability == false) {
-					fw.append(SYMBOL + "," + this.Date.get(0) + "," + this.Date.get(Date.size() - 1) + "\n");
+				if(localAvailability == false && UpdateNeeds != true) {
+					LocalDate D = null; D.parse(D.now().toString(), DateTimeFormatter.ISO_DATE);
+					fw.append(SYMBOL + "," + D.now().toString() + "," + this.Date.get(Date.size() - 1) + "\n");
 					FirstDate = this.Date.get(0);
 					LastDate = this.Date.get(Date.size() - 1);
-				} else if(localAvailability == true) {
+				} else if(localAvailability == true && UpdateNeeds == false) {
 					System.out.println("Local File Available");
+				} else if(localAvailability == false && UpdateNeeds == true) { //When only updating the last date of data availability
+					FileReader fr = new FileReader(file);
+					FileInputStream fis = new FileInputStream(file);
+					String line = null;
+					BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+					while((line = br.readLine()) != null) {
+						String[] tmpLine = line.split(",");
+						if(tmpLine[0].equals(SYMBOL)) {
+							LocalDate D = null; D.parse(D.now().toString(), DateTimeFormatter.ISO_DATE);
+							fw = new FileWriter(file, false); // Renewing the file... I can't come up with a better solution.
+							fw.write(SYMBOL + "," + D.now().toString() + "," + this.Date.get(Date.size() - 1) + "\n");
+							FirstDate = this.Date.get(0);
+							LastDate = this.Date.get(Date.size() - 1);
+							// LastDate = D.toString(); should I use this as the last date..?
+							System.out.println(tmpLine[0] + "   " + tmpLine[1] + "   " + tmpLine[2]);
+						}
+					}
 				}
 				fw.close();
 			} catch (Exception e) { e.printStackTrace();}
 		} 
 	}
+	
 	public Boolean checkLocal() {
 		File file = new File("./DataMeta");
 		if(file.exists() != true) {
@@ -404,15 +424,24 @@ public class Stock {
 				FileInputStream fis = new FileInputStream(file);
 				String line = null;
 				BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+				
+				LocalDate checkdate = null;
+				checkdate.parse(checkdate.now().toString(), DateTimeFormatter.ISO_DATE);
+				
 				while((line = br.readLine()) != null) {
 					String tmp[] = line.split(",");
-					if(tmp[0].equals(SYMBOL)) { // tmp[0] == SYMBOL did not work. Remember not to make the same mistake
-												//Also, I have to find out a way to know which date is the latest date for stock information
+					if(tmp[0].equals(SYMBOL) && checkdate.now().toString().equals(tmp[1]) == true) { // tmp[0] == SYMBOL did not work. Remember not to make the same mistake
+																							   //Also, I have to find out a way to know which date is the latest date for stock information
 						localAvailability = true;
-						//System.out.println(tmp[0] + " First Data : " + this.FirstDate + " Last Data : " + this.LastDate);
+						UpdateNeeds = false;
+						System.out.println(tmp[0] + " First Data : " + tmp[2] + " Last Data : " + tmp[1]);
 						break;
-					} else if (tmp[0] != SYMBOL){
+					} else if (tmp[0].equals(SYMBOL) != true){
 						continue;
+					} else if (tmp[0].equals(SYMBOL) == true && checkdate.now().toString().equals(tmp[1]) != true) {
+						localAvailability = false;
+						UpdateNeeds = true;
+						break;
 					}
 				}
 			} catch (Exception e) { e.printStackTrace();
@@ -421,8 +450,6 @@ public class Stock {
 		}
 		return localAvailability;
 	}
-	
-	
 	/*
 	 * Printing Methods
 	 */

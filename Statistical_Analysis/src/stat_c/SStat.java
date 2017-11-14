@@ -39,18 +39,20 @@ public class SStat {
 	Double Arimean = 0.d;
 	Double ReturnGeomean = 0.d;
 	Double ReturnArimean = 0.d;
-	Double S1_MeanVariance = 0.d;
-	Double S2_MeanVariance = 0.d;
+	Double S1_Variance_Return = 0.d;
+	Double S2_Variance_Return = 0.d;
+	Double S1_StandardDeviation_Return = 0.d;
+	Double S2_StandardDeviation_Return = 0.d;
 	
 	//Percentage Arrays
 	ArrayList<Double> S1_Percentage_Change = new ArrayList<Double>();
 	ArrayList<Double> S2_Percentage_Change = new ArrayList<Double>();
 	
 	//Variance Arrays ::::: Variance is a difference between individual stock prices and its mean.
-	ArrayList<Double> S1_ReturnVariance = new ArrayList<Double>();
-	ArrayList<Double> S2_ReturnVariance = new ArrayList<Double>();
-	ArrayList<Double> S1_PriceVariance = new ArrayList<Double>();
-	ArrayList<Double> S2_PriceVariance = new ArrayList<Double>();
+	ArrayList<Double> S1_ReturnDeviation = new ArrayList<Double>();
+	ArrayList<Double> S2_ReturnDeviation = new ArrayList<Double>();
+	ArrayList<Double> S1_PriceDeviation = new ArrayList<Double>();
+	ArrayList<Double> S2_PriceDeviation = new ArrayList<Double>();
 	
 	//Beta Arrays  ::::: Beta is a variance of an individual stock price derived from the index.
 	ArrayList<Double> S1_Beta = new ArrayList<Double>();
@@ -67,6 +69,8 @@ public class SStat {
 	ArrayList<Double> S2_Low = new ArrayList<Double>();
 	ArrayList<Double> S1_Volume = new ArrayList<Double>();
 	ArrayList<Double> S2_Volume = new ArrayList<Double>();
+	ArrayList<Double> S1_Adj_Close = new ArrayList<Double>();
+	ArrayList<Double> S2_Adj_Close = new ArrayList<Double>();
 	//
 	
 	public SStat(Stock S1) {
@@ -83,7 +87,7 @@ public class SStat {
 	public Double Arithmeticmean(String Category, String startdate, String enddate) {
 		total = 0.d; //Initialize
 		Arimean = 0.d;
-		String cat = Category.toUpperCase();
+		Category = Category.toUpperCase();
 		if(S1.request(Category, startdate, enddate) == null) {
 			System.out.println("Error occurred");
 			return 0.d;
@@ -127,14 +131,23 @@ public class SStat {
 			Arimean = total / S1_Low.size();
 			
 			return Arimean;
-		} else {
+		} else if (Category == "Adj_Close" || Category == "ADJ_CLOSE"){
+			S1_Adj_Close = S1.request(Category, startdate, enddate);
+			for(int i = 0; i < S1_Adj_Close.size(); i++) {
+				total += S1_Adj_Close.get(i);
+			}
+			Arimean = total / S1_Adj_Close.size();
+			
+			return Arimean;
+		}
+		else {
 			return 0.d;
 		}
 	}
 	public Double Geometricmean(String Category, String startdate, String enddate) {
 		total = 1.d; //Initialize
 		Geomean = 0.d;
-		String cat = Category.toUpperCase();
+		Category = Category.toUpperCase();
 		if(S1.request(Category, startdate, enddate) == null) {
 			System.out.println("Error occurred");
 			return 0.d;
@@ -183,17 +196,28 @@ public class SStat {
 			
 			total = 0.d;
 			return Geomean;
-		} else {
+		} else if (Category == "Adj_Close" || Category == "ADJ_CLOSE"){
+			S1_Adj_Close = S1.request(Category, startdate, enddate);
+			for(int i = 0; i < S1_Adj_Close.size(); i++) {
+				total *= S1_Adj_Close.get(i);
+			}
+			Geomean = Math.pow(total, (1.d / S1_Adj_Close.size()));
+			
+			total = 0.d;
+			return Geomean;
+		}
+		else {
 			return 0.d;
 		}
 	}
 	public Double MeanReturnGeometric(String Category, int TimeSlice, String startdate, String enddate) {
-		this.S1_ReturnVariance = new ArrayList<Double>();
+		this.S1_ReturnDeviation = new ArrayList<Double>();
 		ReturnGeomean = 1.d;
 		
+		Category = Category.toUpperCase();
 		if(S1.request(Category, startdate, enddate) == null) {
 			System.out.println("An Error Occured in MeanReturnGeometric()");
-		} else if (S1.request(Category, startdate, enddate) != null && Category == "CLOSE") {
+		} else if (S1.request(Category, startdate, enddate) != null) {
 			S1_Percentage_Change = PercentageChange(Category, TimeSlice, startdate, enddate);
 			
 			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
@@ -201,46 +225,31 @@ public class SStat {
 			}
 			ReturnGeomean = Math.pow(ReturnGeomean, (1.0d / S1_Percentage_Change.size())) - 1;
 			return ReturnGeomean;
-		} else if (S1.request(Category, startdate, enddate) != null && Category == "OPEN") {
-			S1_Percentage_Change = PercentageChange(Category, TimeSlice, startdate, enddate);
-			
-			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
-				ReturnGeomean *= (1 + S1_Percentage_Change.get(i));
-			}
-			ReturnGeomean = Math.pow(ReturnGeomean, (1.0d / S1_Percentage_Change.size()));
-			return ReturnGeomean;
-		} else if (S1.request(Category, startdate, enddate) != null && Category == "HIGH") {
-			S1_Percentage_Change = PercentageChange(Category, TimeSlice, startdate, enddate);
-			
-			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
-				ReturnGeomean *= (1 + S1_Percentage_Change.get(i));
-			}
-			ReturnGeomean = Math.pow(ReturnGeomean, (1.0d / S1_Percentage_Change.size()));
-			return ReturnGeomean;
-		} else if (S1.request(Category, startdate, enddate) != null && Category == "LOW") {
-			S1_Percentage_Change = PercentageChange(Category, TimeSlice, startdate, enddate);
-			
-			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
-				ReturnGeomean *= (1 + S1_Percentage_Change.get(i));
-			}
-			ReturnGeomean = Math.pow(ReturnGeomean, (1.0d / S1_Percentage_Change.size()));
-			return ReturnGeomean;
-		} else if (S1.request(Category, startdate, enddate) != null && Category == "VOLUME") { 
-			// There is no such thing as a return in volume, but I am putting this here just because I want to use
-			// Volume percentage change as a research data.
-			S1_Percentage_Change = PercentageChange(Category, TimeSlice, startdate, enddate);
-			
-			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
-				ReturnGeomean *= (1 + S1_Percentage_Change.get(i));
-			}
-			ReturnGeomean = Math.pow(ReturnGeomean, (1.0d / S1_Percentage_Change.size()));
-			return ReturnGeomean;
-		} else {
+		}
+		else {
 			System.out.print("Wrong parameters in MeanReturnGeometric()");
 		}
 		
 		
 		return ReturnGeomean;
+	}
+	public Double MeanReturnArithmetic(String Category, int TimeSlice, String startdate, String enddate) {
+		this.S1_ReturnDeviation = new ArrayList<Double>();
+		ReturnArimean = 0.d;
+		
+		Category = Category.toUpperCase();
+		if(S1.request(Category, startdate, enddate) == null) {
+			System.out.println("An Error Occured in MeanReturnGeometric()");
+		} else if (S1.request(Category, startdate, enddate) != null) {
+			S1_Percentage_Change = PercentageChange(Category, TimeSlice, startdate, enddate);
+			
+			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
+				ReturnArimean += S1_Percentage_Change.get(i);
+			}
+			ReturnArimean = ReturnArimean / S1_Percentage_Change.size();
+			return ReturnArimean;
+		}
+		return ReturnArimean;
 	}
 	public ArrayList PercentageChange(String Category, int TimeSlice, String startdate, String enddate) {
 		S1_Percentage_Change = new ArrayList<Double>();
@@ -348,40 +357,90 @@ public class SStat {
 					k -= TimeSlice;
 				}
 			}
+		} else if (Category == "ADJ_CLOSE") {
+			S1_Adj_Close = S1.request(Category, startdate, enddate);
+
+			int k = S1_Adj_Close.size() - 1;
+			if(S1_Adj_Close.size() % TimeSlice == 0) {
+				for(int i = 0; i < (S1_Adj_Close.size() / TimeSlice) - 1; i++) {
+					S1_Percentage_Change.add(   (S1_Adj_Close.get(k) - S1_Adj_Close.get(k - TimeSlice)) / (S1_Adj_Close.get(k - TimeSlice))   );
+					k -= TimeSlice;
+				}
+			} else if (S1_Adj_Close.size() % TimeSlice != 0){
+				for(int i = 0; i < S1_Adj_Close.size() / TimeSlice; i++) {
+					S1_Percentage_Change.add(   (S1_Adj_Close.get(k) - S1_Adj_Close.get(k - TimeSlice)) / (S1_Adj_Close.get(k - TimeSlice))   );
+					k -= TimeSlice;
+				}
+			}
 		}
+		
+		/*
+		 * Reversing
+		 */
+		
+		ArrayList<Double> revtmp = new ArrayList<Double>();
+		for(int i = S1_Percentage_Change.size() - 1; i >= 0; i--) {
+			revtmp.add(S1_Percentage_Change.get(i));
+		}
+		S1_Percentage_Change.clear();
+		for(int i = 0; i < revtmp.size(); i++) {
+			S1_Percentage_Change.add(revtmp.get(i));
+		}
+		
 		return S1_Percentage_Change;
 	}
-	public ArrayList ReturnVariance(String Category, int TimeSlice, String startdate, String enddate) {
-		S1_ReturnVariance = new ArrayList<Double>();
+	public ArrayList ReturnDeviation(String Category, int TimeSlice, String startdate, String enddate, String Type) {
+		S1_ReturnDeviation = new ArrayList<Double>();
+		ReturnGeomean = 0.d;
+		ReturnArimean = 0.d;
 		/*
 		 * I could have a price variance and return variance.
 		 * Normally, a return variance is required, so return variance first,
 		 * and if I will have some more time, make calculations for price variance
 		 * 
 		 * Gotta make mean return function.
+		 * 
+		 * String Type is for Geometric or Arithmetic
 		 */
 		if(S1.request(Category, startdate, enddate) == null) {
 			System.out.println("Could not request the stock data => Error from Variance()");
-		} else if(S1.request(Category, startdate, enddate) != null) {
+		} else if(S1.request(Category, startdate, enddate) != null && Type.equals("GEO")) {
 			this.MeanReturnGeometric(Category, TimeSlice, startdate, enddate); // Geometric mean will be stored in the instance
-			
+			// Sigma^2 = addall(  (Xi - u)^2  ) / N
 			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
-				S1_ReturnVariance.add(S1_Percentage_Change.get(i) - ReturnGeomean); 
+				Double tmp = 0.d;
+				tmp = (S1_Percentage_Change.get(i) - ReturnGeomean);
+				S1_ReturnDeviation.add(tmp);
 			}
-			return S1_ReturnVariance;
-			
+			return S1_ReturnDeviation;
+		} else if(S1.request(Category, startdate, enddate) != null && Type.equals("ARI")) {
+			this.MeanReturnArithmetic(Category, TimeSlice, startdate, enddate);
+			for(int i = 0; i < S1_Percentage_Change.size(); i++) {
+				Double tmp = 0.d;
+				tmp = (S1_Percentage_Change.get(i) - ReturnArimean);
+				S1_ReturnDeviation.add(tmp);
+			}
+			return S1_ReturnDeviation;
 		}
-		return S1_ReturnVariance;
+		return S1_ReturnDeviation;
 	}
-	public Double MeanReturnVariance(String Category, int TimeSlice, String startdate, String enddate) {
-		ReturnVariance(Category, TimeSlice, startdate, enddate);
+	public Double Variance_Return(String Category, int TimeSlice, String startdate, String enddate, String Type) {
+		ReturnGeomean = 0.d;
+		ReturnArimean = 0.d;
+		ReturnDeviation(Category, TimeSlice, startdate, enddate, Type);
 		Double ReturnTotal = 0.d;
-		for(int i = 0; i < S1_ReturnVariance.size(); i++) {
-			ReturnTotal += Math.pow(S1_ReturnVariance.get(i), 2.d);
+		for(int i = 0; i < S1_ReturnDeviation.size(); i++) {
+			ReturnTotal += Math.pow(S1_ReturnDeviation.get(i), 2.d);
 		}
-		S1_MeanVariance = Math.pow(ReturnTotal, (1.0d /S1_ReturnVariance.size()));
+		S1_Variance_Return = ReturnTotal / S1_ReturnDeviation.size();
 		
-		return S1_MeanVariance;
+		return S1_Variance_Return;
 	}
-	
+	public Double StandardDeviation_Return(String Category, int TimeSlice, String startdate, String enddate, String Type) {
+		S1_StandardDeviation_Return = 0.d;
+		Variance_Return(Category, TimeSlice, startdate, enddate, Type);
+		S1_StandardDeviation_Return = Math.pow(S1_Variance_Return, 0.5d);
+		
+		return S1_StandardDeviation_Return;
+	}
 }

@@ -1,27 +1,27 @@
 package stat_c;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Test {
-	
 	Test() {
-
-		//SStat Test 2
-		Stock S_EDIG = new Stock("EDIG");
-		S_EDIG.retrieve();
-		SStat St = new SStat(S_EDIG);
-		
-		System.out.println("<<<" + S_EDIG.SYMBOL + ">>>");
-		System.out.println("Geometric mean Return: " + St.MeanReturnGeometric("CLOSE", 30, "2012-12-25", "2016-01-01"));
-		
-		ArrayList tmpArray1 = St.PercentageChange("CLOSE", 100, "2012-12-15", "2016-01-01");
-		System.out.println("Percentage Change (Close, 100 from 2012/12/15 to 2016/01/01)\n" + tmpArray1);
-		
-		ArrayList ReturnVariance_tmp_Array = St.ReturnVariance("CLOSE", 30, "2012-12-15", "2016-01-01");
-		System.out.println("Return Variance (Close, 100 from 2012/12/15 to 2016/01/01)\n" + ReturnVariance_tmp_Array);
-		
-		System.out.println(St.MeanReturnVariance("CLOSE", 30, "2012-12-15", "2016-01-01"));
+		Stock S = new Stock("TSLA");
+		S.retrieve();
+		SStat Stat = new SStat(S);
+		System.out.println("Test Value");
+		S.printAdjClose();
+		Stat.PercentageChange("ADJ_CLOSE", 500, "2015-10-02", "2017-11-13");
+		System.out.println(Stat.S1_Percentage_Change);
+		System.out.println(Stat.MeanReturnGeometric("ADJ_CLOSE", 100, "2015-11-02", "2017-11-13"));
+		System.out.println(Stat.MeanReturnArithmetic("ADJ_CLOSE", 100, "2015-11-02", "2017-11-13"));
+		System.out.println(Stat.ReturnDeviation("ADJ_CLOSE", 100, "2015-11-02", "2017-11-13", "ARI"));
+		System.out.println(Stat.Variance_Return("ADJ_CLOSE", 100, "2015-11-02", "2017-11-13", "ARI"));
+		System.out.println(Stat.StandardDeviation_Return("ADJ_CLOSE", 100, "2015-11-02", "2017-11-13", "ARI"));
+		Double VR = Stat.Variance_Return("ADJ_CLOSE", 100, "2015-11-02", "2017-11-13", "ARI");
+		String String_VR = Double.toString(((int)(VR * 100000000.0d)) / 100000000.0d);
+		System.out.println(String_VR);
 	}
 	
 	public static void main(String[] ar) {

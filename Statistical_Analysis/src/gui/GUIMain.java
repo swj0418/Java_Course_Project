@@ -154,18 +154,17 @@ public class GUIMain extends JPanel {
     }
 
     private static void createAndShowGui() {
-    	Stock S_AAPL = new Stock("EDIG");
+    	Stock S_AAPL = new Stock("TSLA");
     	S_AAPL.retrieve();
     	ArrayList P = S_AAPL.request("ADJ_CLOSE", "2017-05-08", "2017-11-08");
     	//ArrayList AAPL_A = S_AAPL.request("CLOSE", "2012-01-01", "2017-01-01");
 
     	SStat EDIG_S = new SStat(S_AAPL);
     	ArrayList AL = EDIG_S.PercentageChange("CLOSE", 30, "2012-01-01", "2017-01-01");
-    	ArrayList AL2 = EDIG_S.ReturnVariance("CLOSE", 30, "2012-01-01", "2017-01-01");
     	System.out.println(AL);
-    	System.out.println(AL2);
+    	ArrayList Dev = EDIG_S.ReturnDeviation("ADJ_CLOSE", 30, "2012-01-01", "2014-01-01", "GEO");
     	
-        GUIMain mainPanel = new GUIMain(P);
+        GUIMain mainPanel = new GUIMain(Dev);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
