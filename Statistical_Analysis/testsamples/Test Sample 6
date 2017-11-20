@@ -1,0 +1,37 @@
+		Stock TSLA = new Stock("TSLA");
+		Stock AAPL = new Stock("GOOG");
+		
+		PP Portfolio = new PP(TSLA, AAPL, "ADJ_CLOSE", 30, "2017-01-02", "2017-11-10", "ARI", true, 0.5d, 0.5d);
+		System.out.println("TSLA Percentage Change : " + Portfolio.S1S.S_Percentage_Change);
+		System.out.println("AAPL Percentage Change : " + Portfolio.S2S.S_Percentage_Change);
+		System.out.println();
+		System.out.println("TSLA Arithmetic Mean   : " + Portfolio.S1S.ReturnArimean);
+		System.out.println("AAPL Arithmetic Mean   : " + Portfolio.S2S.ReturnArimean);
+		System.out.println();
+		System.out.println("TSLA Price Deviation   : " + Portfolio.S1S.S_ReturnDeviation);
+		System.out.println("AAPL Price Deviation   : " + Portfolio.S2S.S_ReturnDeviation);
+		System.out.println();
+		System.out.println("TSLA Return Variance   : " + Portfolio.S1S.S_Variance_Return);
+		System.out.println("AAPL Return Variance   : " + Portfolio.S2S.S_Variance_Return);
+		System.out.println();
+		System.out.println("TSLA Standard Deviation: " + Portfolio.S1S.S_StandardDeviation_Return);
+		System.out.println("AAPL Standard Deviation: " + Portfolio.S2S.S_StandardDeviation_Return);
+		System.out.println("============================Portfolio===============================");
+		System.out.println("AAPL & TSLA Covariance : " + Portfolio.Covariance());
+		System.out.println("AAPL & TSLA Correlation: " + Portfolio.Correlation());
+		SummaryStatistics SumS = new SummaryStatistics();
+		DescriptiveStatistics DesS = new DescriptiveStatistics();
+		
+		for(int i = 0; i < Portfolio.S1S.S_Percentage_Change.size(); i++) {
+			SumS.addValue(Portfolio.S1S.S_Percentage_Change.get(i));
+			DesS.addValue(Portfolio.S1S.S_Percentage_Change.get(i));
+		}
+		Double Kurtosis = DesS.getKurtosis();
+		Double Skewness = DesS.getSkewness();
+		Double Percentile_VBearish = DesS.getPercentile(10);
+		Double Percentile_Bearish = DesS.getPercentile(30);
+		Double Median = DesS.getPercentile(50);
+		Double Percentile_Bullish = DesS.getPercentile(80);
+		Double Percentile_VBullish = DesS.getPercentile(90);
+		System.out.println(Percentile_VBearish + "           " + Percentile_Bearish + "           " + Median + "             " 
+		+ Percentile_Bullish + "         " + Percentile_VBullish);

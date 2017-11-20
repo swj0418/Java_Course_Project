@@ -1,0 +1,9 @@
+		
+		
+		System.out.println("========================TSLA=========================");
+		System.out.println("Percentage Change        : " + TSLA_Stat.S1_Percentage_Change);
+		System.out.println("Return Arithmetic Mean   : " + TSLA_Stat.ReturnArimean);
+		System.out.println("Return Variance          : " + TSLA_Stat.S1_Variance_Return);
+		System.out.println("Return StandardDeviation : " + TSLA_Stat.S1_StandardDeviation_Return);
+		
+		
