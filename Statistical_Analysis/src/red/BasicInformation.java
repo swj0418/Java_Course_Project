@@ -28,6 +28,7 @@ public class BasicInformation {
 			Symbolgetter(SymbolorTrade);
 		} else {
 			this.StockSymbol = SymbolorTrade;
+			System.out.println("Symbol not supported");
 		}
 	}
 	public HashMap Symbolgetter(String Index) {

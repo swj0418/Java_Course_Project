@@ -1,5 +1,8 @@
 package red;
 import java.util.*;
+
+import black.DataRetriever;
+
 import java.math.*;
 
 /*
@@ -74,7 +77,7 @@ public class Statistics {
 		 */
 		this.S = S;
 		this.S.request(Category, startdate, enddate);
-		this.S.retrieve();
+		new DataRetriever("AlphaVantage").retrieve(S.SYMBOL);
 		
 		if(autocomplete.equals(true)) {
 			Arithmeticmean(Category, startdate, enddate);
@@ -91,7 +94,7 @@ public class Statistics {
 		else if(autocomplete.equals(false)) {
 			this.S = S;
 			this.S.request(Category, startdate, enddate);
-			this.S.retrieve();
+			new DataRetriever("AlphaVantage").retrieve(S.SYMBOL);
 		}
 	}
 	Statistics(Stock S, Stock S2, String Category) {

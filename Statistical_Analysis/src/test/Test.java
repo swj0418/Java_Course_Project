@@ -2,58 +2,13 @@ package test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import black.DataRetriever;
+import blue.IndexBuilder;
 import red.*;
 
 public class Test {
 	public static void main(String[] ar) {
-		Stock S = new Stock("EDIG");
-		Stock S2 = new Stock("AAPL");
-		Stock S3 = new Stock("TSLA");
-		Stock S4 = new Stock("GOOG");
-		Stock S5 = new Stock("SCG");
-		System.out.println(">>>>>>>>>>>>>>>>>>>>" + S.SYMBOL + "<<<<<<<<<<<<<<<<<<<");
-		System.out.println(S.Adj_Close);
-		Statistics Stat = new Statistics(S, "ADJ_CLOSE", 30, "2014-01-01", "2015-01-01", "ARI", true);
-		System.out.println("Geometric Mean Return : " + Stat.Geomean + "   " + Stat.ReturnGeomean);
-		System.out.println("Arithmetic Mean Return: " + Stat.Arimean + "   " + Stat.ReturnArimean);
-		Portfolio P = new Portfolio(S, S2, "ADJ_CLOSE", 1, "2017-10-30","2017-11-10", "ARI", true,
-				0.50, 0.50, 95, 95);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>" + S.SYMBOL + " " + S2.SYMBOL + "<<<<<<<<<<<<<<<<<<<");
-		System.out.println("Covariance  : " + P.Cov);
-		System.out.println("Correlation : " + P.Corr);
-		System.out.println("Portfolio Expected Return : " + P.Portfolio_ExpectedReturn);
-		
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>INDEX BUILDER<<<<<<<<<<<<<<<<<<<<<<<<<<");
-		ArrayList<Stock> Basket = new ArrayList<Stock>();
-		Basket.add(S);
-		Basket.add(S2);
-		Basket.add(S3);
-		Basket.add(S4);
-		Basket.add(S5);
-		IndexBuilder IB = new IndexBuilder(Basket);
-		for(int i = 0; i < IB.Basket.size(); i++) {
-			System.out.println(IB.Basket.get(i).SYMBOL);
-		}
-		System.out.println(IB.Basket.size());
-		System.out.println("Price Index : " + IB.getPriceIndex());
-		
-		HashMap List = new BasicInformation().Symbolgetter("NASDAQ");
-		System.out.println(List.get("GOOG"));
-		System.out.println("Key sets : " + List.keySet());
-		ArrayList<String> keys = new ArrayList<String>();
-		for(int i = 0; i < List.size(); i++) {
-			keys.addAll(List.keySet()); //I don't know why but the key size is all weird;
-		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>Pooled stocks in an arraylist now<<<<<<<<<<<<<<<<<<<<<<<<");
-		ArrayList<Stock> StockPool = new ArrayList<Stock>();
-		long start = System.currentTimeMillis();
-		for(int i = 0; i < List.size(); i++) {
-			StockPool.add(new Stock(keys.get(i)));
-			System.out.println("++++++++++++++++++++++++++++++++++KEYSIZE : " + List.size());
-			Double p = (100.0d * ((i+0.d) / (List.size()+0.d)));
-			long now = System.currentTimeMillis();
-			long time = (now - start) / 1000;
-			System.out.println("\n" + p + "% Downloaded" + " Time taken : " + time + " seconds" + "\n");
-		}
+		Stock S = new Stock("TSLA");
+		System.out.println(S.Adj_Close_M.keySet());
 	}
 }
