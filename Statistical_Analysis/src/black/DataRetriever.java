@@ -16,10 +16,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import blue.UpdateControl;
 import red.BadDataException;
 
 public class DataRetriever {
-	
 	String FirstDate = null;
     String LastDate = null;
 	String API = "";
@@ -55,9 +55,8 @@ public class DataRetriever {
 	public void retrieve(String SYMBOL) {
 		this.SYMBOL = SYMBOL;
 		System.out.println("Retrieving " + SYMBOL);
-		checkLocal(); //First, check if the data is there and is up-to-date.
 
-		if(localAvailability != true) {
+		if(!UpdateControl.CheckValidationData(SYMBOL)) {
 			System.out.println(SYMBOL + " is not locally available");
 			URL url;
 		    URLConnection urlConn = null;
@@ -65,10 +64,9 @@ public class DataRetriever {
 			String msg;
 			StringBuilder bd;
 			InputStream ins = null;
-			
-			String line = "";
 			String csvSplitBy = ",";
 			String urlString = new Utils().APIString(SYMBOL);
+			
 			try {
 				url = new URL(urlString);
 				urlConn = url.openConnection();
@@ -143,10 +141,10 @@ public class DataRetriever {
 			}
 			saveCSV(); //Saving data as a file
 			Extractor(); //Extracting and saving separated datasets in an instance
-			recordLocal();
+			UpdateControl.UpdateValidationData(SYMBOL);
 		}
 		
-		else if(localAvailability == true) {
+		else if(UpdateControl.CheckValidationData(SYMBOL)) {
 			System.out.println(this.SYMBOL + " is locally available");
 			File file = new File("./Data/Historical/" + SYMBOL + ".csv");
 			String msg = null;
@@ -196,92 +194,6 @@ public class DataRetriever {
 				Extractor(); //Extracting and saving separated datasets in an instance
 			}
 			}
-	}
-
-	public void recordLocal() {
-		File file = new File("./DataMeta");
-		if(file.exists() != true) {
-			file.mkdir();
-			System.out.println("Metadata directory created");
-		} else if(file.exists() == true) {
-			System.out.println("Updating metadata, Availability");
-			file = new File("./DataMeta/Availability.csv"); // 0 : Symbol 1 : fisrt available date 2 : last available date
-			try {
-				//FileOutputStream fos = new FileOutputStream(file); //It is this fileoutputstream that forcedly overwrites on a file
-				//Remember not to make the same mistake
-				FileWriter fw = new FileWriter(file, true);
-				BufferedWriter buffw = new BufferedWriter(fw);
-				if(localAvailability == false && UpdateNeeds != true) {
-					LocalDate D = null; D.parse(D.now().toString(), DateTimeFormatter.ISO_DATE);
-					fw.append(SYMBOL + "," + D.now().toString() + "," + this.Date.get(Date.size() - 1) + "\n");
-					FirstDate = this.Date.get(0);
-					LastDate = this.Date.get(Date.size() - 1);
-				} else if(localAvailability == true && UpdateNeeds == false) {
-					System.out.println("Local File Available");
-				} else if(localAvailability == false && UpdateNeeds == true) { //When only updating the last date of data availability
-					FileReader fr = new FileReader(file);
-					FileInputStream fis = new FileInputStream(file);
-					String line = null;
-					BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-					while((line = br.readLine()) != null) {
-						String[] tmpLine = line.split(",");
-						if(tmpLine[0].equals(SYMBOL)) {
-							LocalDate D = null; D.parse(D.now().toString(), DateTimeFormatter.ISO_DATE);
-							fw = new FileWriter(file, false); // Renewing the file... I can't come up with a better solution.
-							fw.write(SYMBOL + "," + D.now().toString() + "," + this.Date.get(Date.size() - 1) + "\n");
-							FirstDate = this.Date.get(0);
-							LastDate = this.Date.get(Date.size() - 1);
-							// LastDate = D.toString(); should I use this as the last date..?
-							System.out.println(tmpLine[0] + "   " + tmpLine[1] + "   " + tmpLine[2]);
-						}
-					}
-				}
-				fw.close();
-			} catch (Exception e) {
-				System.out.println("An error writing a metadata, Availability");
-				e.printStackTrace();}
-		} 
-	}
-	
-	public Boolean checkLocal() {
-		System.out.println("Checking for local availability");
-		File file = new File("./DataMeta");
-		if(file.exists() != true) {
-			file.mkdir();
-		} else if(file.exists() == true) {
-			file = new File("./DataMeta/Availability.csv"); // 0 : Symbol 1 : fisrt available date 2 : last available date
-			try {
-				FileReader fr = new FileReader(file);
-				FileInputStream fis = new FileInputStream(file);
-				String line = null;
-				BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-				
-				LocalDate checkdate = null;
-				checkdate.parse(checkdate.now().toString(), DateTimeFormatter.ISO_DATE);
-				
-				while((line = br.readLine()) != null) {
-					String tmp[] = line.split(",");
-					if(tmp[0].equals(SYMBOL) && checkdate.now().toString().equals(tmp[1]) == true) { // tmp[0] == SYMBOL did not work. Remember not to make the same mistake
-																							   //Also, I have to find out a way to know which date is the latest date for stock information
-						localAvailability = true;
-						UpdateNeeds = false;
-						System.out.println(tmp[0] + " First Data : " + tmp[2] + " Last Data : " + tmp[1]);
-						break;
-					} else if (tmp[0].equals(SYMBOL) != true){
-						continue;
-					} else if (tmp[0].equals(SYMBOL) == true && checkdate.now().toString().equals(tmp[1]) != true) {
-						localAvailability = false;
-						UpdateNeeds = true;
-						break;
-					}
-				}
-			} catch (Exception e) { 
-				System.out.println("An error occured while checking local availability");
-				e.printStackTrace();
-			}
-			
-		}
-		return localAvailability;
 	}
 	
 	private void Extractor() { //This method extracts sub data. Will be called within the method retrieve

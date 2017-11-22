@@ -1,0 +1,720 @@
+,Symbol,Name
+0,XXII,"22nd Century Group, Inc"
+1,FAX,Aberdeen Asia-Pacific Income Fund Inc
+2,IAF,Aberdeen Australia Equity Fund Inc
+3,CH,"Aberdeen Chile Fund, Inc."
+4,ABE,Aberdeen Emerging Markets Smaller Company Opportunities Fund I
+5,FCO,"Aberdeen Global Income Fund, Inc."
+6,IF,"Aberdeen Indonesia Fund, Inc."
+7,ISL,"Aberdeen Israel Fund, Inc."
+8,ACU,Acme United Corporation.
+9,ATNM,"Actinium Pharmaceuticals, Inc."
+10,AE,"Adams Resources & Energy, Inc."
+11,ADK,Adcare Health Systems Inc
+12,ADK^A,Adcare Health Systems Inc
+13,ACY,AeroCentury Corp.
+14,AIRI,Air Industries Group
+15,AXU,Alexco Resource Corp
+16,ALO,Alio Gold Inc.
+17,AAU,"Almaden Minerals, Ltd."
+18,APT,"Alpha Pro Tech, Ltd."
+19,AAMC,Altisource Asset Management Corp
+20,DIT,AMCON Distributing Company
+21,ALN,American Lorain Corporation
+22,AMS,American Shared Hospital Services
+23,USAS,Americas Silver Corporation
+24,AMPE,"Ampio Pharmaceuticals, Inc."
+25,APHB,AmpliPhi Biosciences Corporation
+26,AXN,"Aoxing Pharmaceutical Company, Inc."
+27,ARNC^,Arconic Inc.
+28,AKG,Asanko Gold Inc.
+29,AINC,Ashford Inc.
+30,ASB.WS,Associated Banc-Corp
+31,AST,"Asterias Biotherapeutics, Inc."
+32,AST.WS,"Asterias Biotherapeutics, Inc."
+33,AUG,Auryn Resources Inc.
+34,AUXO,"Auxilio, Inc."
+35,AWX,Avalon Holdings Corporation
+36,ASM,Avino Silver
+37,BTG,B2Gold Corp
+38,BTN,"Ballantyne Strong, Inc"
+39,BKJ,"Bancorp of New Jersey, Inc"
+40,BCV,Bancroft Fund Limited
+41,BCV^A,Bancroft Fund Limited
+42,BAA,BANRO CORPORATION
+43,BHB,"Bar Harbor Bankshares, Inc."
+44,BRN,"Barnwell Industries, Inc."
+45,BGSF,BG Staffing Inc
+46,BPMX,BioPharmX Corporation
+47,BTX,"BioTime, Inc."
+48,BTX.WS,"BioTime, Inc."
+49,BGI,Birks Group Inc.
+50,BZM,BlackRock Maryland Municipal Bond Trust
+51,MHE,BlackRock Massachusetts Tax-Exempt Trust
+52,BLE,BlackRock Municipal Income Trust II
+53,BLJ,Blackrock New Jersey Municipal Bond Trust
+54,BFY,BlackRock New York Municipal Income Trust II
+55,BHV,BlackRock Virginia Municipal Bond Trust
+56,BDR,"Blonder Tongue Laboratories, Inc."
+57,BRG,"Bluerock Residential Growth REIT, Inc."
+58,BRG^A,"Bluerock Residential Growth REIT, Inc."
+59,BRG^C,"Bluerock Residential Growth REIT, Inc."
+60,BRG^D,"Bluerock Residential Growth REIT, Inc."
+61,BVX,Bovie Medical Corporation
+62,BWL.A,"Bowl America, Inc."
+63,CMCL,Caledonia Mining Corporation Plc
+64,CEI,"Camber Energy, Inc."
+65,CANF,Can-Fite Biopharma Ltd
+66,ROX,"Castle Brands, Inc."
+67,CAW,"CCA Industries, Inc."
+68,CVM,Cel-Sci Corporation
+69,CVM.WS,Cel-Sci Corporation
+70,CEF,Central Fund of Canada Limited
+71,CET,Central Securities Corporation
+72,LEU,Centrus Energy Corp.
+73,CCF,Chase Corporation
+74,CQH,"Cheniere Energy Partners LP Holdings, LLC"
+75,CQP,"Cheniere Energy Partners, LP"
+76,LNG,"Cheniere Energy, Inc."
+77,CVR,Chicago Rivet & Machine Co.
+78,CPHI,"China Pharma Holdings, Inc."
+79,CISN.WS,Cision Ltd.
+80,CKX,"CKX Lands, Inc."
+81,GLV,Clough Global Dividend and Income Fund
+82,GLQ,Clough Global Equity Fund
+83,GLO,Clough Global Opportunities Fund
+84,MOC,Command Security Corporation
+85,CIX,CompX International Inc.
+86,LODE,"Comstock Mining, Inc."
+87,CDOR,"Condor Hospitality Trust, Inc."
+88,CTO,Consolidated-Tomoka Land Co.
+89,MCF,Contango Oil & Gas Company
+90,CUO,Continental Materials Corporation
+91,CMT,Core Molding Technologies Inc
+92,CVRS,"Corindus Vascular Robotics, Inc."
+93,CRMD,CorMedix Inc
+94,CRF,"Cornerstone Strategic Return Fund, Inc. (The)"
+95,CLM,"Cornerstone Strategic Value Fund, Inc."
+96,CVU,"CPI Aerostructures, Inc."
+97,CIK,"Credit Suisse Asset Management Income Fund, Inc."
+98,DHY,Credit Suisse High Yield Bond Fund
+99,CRHM,CRH Medical Corporation
+100,CRVP,"Crystal Rock Holdings, Inc."
+101,DXR,Daxor Corporation
+102,VCF,"Delaware Investments Colorado Municipal Income Fund, Inc"
+103,VFL,Delaware Investments Florida Insured Municipal Income Fund
+104,VMM,"Delaware Investments Minnesota Municipal Income Fund II, Inc."
+105,DLA,"Delta Apparel, Inc."
+106,DNN,Denison Mine Corp
+107,DGSE,"DGSE Companies, Inc."
+108,DPW,Digital Power Corporation
+109,DSS,"Document Security Systems, Inc."
+110,DMF,"Dreyfus Municipal Income, Inc."
+111,GRF,"Eagle Capital Growth Fund, Inc."
+112,EVM,Eaton Vance California Municipal Bond Fund
+113,EIA,Eaton Vance California Municipal Bond Fund II
+114,CEV,Eaton Vance California Municipal Income Trust
+115,EVV,Eaton Vance Limited Duration Income Fund
+116,MAB,Eaton Vance Massachusetts Municipal Bond Fund
+117,MMV,Eaton Vance Massachusetts Municipal Income Trust
+118,MIW,Eaton Vance Michigan Municipal Bond Fund
+119,EMI,Eaton Vance Michigan Municipal Income Trust
+120,EIM,Eaton Vance Municipal Bond Fund
+121,EIV,Eaton Vance Municipal Bond Fund II
+122,EMJ,Eaton Vance New Jersey Municipal Bond Fund
+123,EVJ,Eaton Vance New Jersey Municipal Income Trust
+124,ENX,Eaton Vance New York Municipal Bond Fund
+125,NYH,Eaton Vance New York Municipal Bond Fund II
+126,EVY,Eaton Vance New York Municipal Income Trust
+127,EIO,Eaton Vance Ohio Municipal Bond Fund
+128,EVO,Eaton Vance Ohio Municipal Income Trust
+129,EIP,Eaton Vance Pennsylvania Municipal Bond Fund
+130,EVP,Eaton Vance Pennsylvania Municipal Income Trust
+131,ELMD,"Electromed, Inc."
+132,ELLO,Ellomay Capital Ltd.
+133,ECF,Ellsworth Growth and Income Fund Ltd.
+134,EMAN,eMagin Corporation
+135,MSN,Emerson Radio Corporation
+136,EMX,EMX Royalty Corporation
+137,UUUU,Energy Fuels Inc
+138,UUUU.WS,Energy Fuels Inc
+139,ENRJ,"EnerJex Resources, Inc."
+140,ENSV,ENSERVCO Corporation
+141,ESNC,"EnSync, Inc."
+142,EGI,Entree Resources Ltd.
+143,EVI,"EnviroStarm, Inc."
+144,ERN,Erin Energy Corp.
+145,ESP,Espey Mfg. & Electronics Corp.
+146,EVBN,"Evans Bancorp, Inc."
+147,EPM,"Evolution Petroleum Corporation, Inc."
+148,FPP,FieldPoint Petroleum Corporation
+149,FPP.WS,FieldPoint Petroleum Corporation
+150,FEN,First Trust Energy Income and Growth Fund
+151,BDL,"Flanigan&#39;s Enterprises, Inc."
+152,FSI,Flexible Solutions International Inc.
+153,FTF,Franklin Limited Duration Income Trust
+154,FSP,Franklin Street Properties Corp.
+155,FRD,Friedman Industries Inc.
+156,GGN,"GAMCO Global Gold, Natural Reources & Income Trust "
+157,GGN^B,"GAMCO Global Gold, Natural Reources & Income Trust "
+158,GST,Gastar Exploration Inc.
+159,GST^A,Gastar Exploration Inc.
+160,GST^B,Gastar Exploration Inc.
+161,JOB,GEE Group Inc.
+162,GMO,"General Moly, Inc"
+163,GSB,"GlobalSCAPE, Inc."
+164,GSAT,"Globalstar, Inc."
+165,GLOW,"Glowpoint, Inc."
+166,GORO,Gold Resource Corporation
+167,GSV,Gold Standard Ventures Corporation
+168,AUMN,Golden Minerals Company
+169,GSS,"Golden Star Resources, Ltd"
+170,GV,Goldfield Corporation (The)
+171,GDP,Goodrich Petroleum Corporation
+172,GTE,Gran Tierra Energy Inc.
+173,GPL,Great Panther Silver Limited
+174,SIM,"Grupo Simec, S.A. de C.V."
+175,GVP,"GSE Systems, Inc."
+176,HEB,"Hemispherx BioPharma, Inc."
+177,HCAC,Hennessy Capital Acquisition Corp. III
+178,HCAC.U,Hennessy Capital Acquisition Corp. III
+179,HCAC.WS,Hennessy Capital Acquisition Corp. III
+180,HLM^,Hillman Group Capital Trust
+181,HMG,"HMG/Courtland Properties, Inc."
+182,HUSA,Houston American Energy Corporation
+183,IBIO,"iBio, Inc."
+184,IBO,IBO (Listing Market - NYSE Amex Network B F)
+185,IEC,IEC Electronics Corp.
+186,IMUC,"ImmunoCellular Therapeutics, Ltd."
+187,IMUC.WS,"ImmunoCellular Therapeutics, Ltd."
+188,IMH,"Impac Mortgage Holdings, Inc."
+189,IMO,Imperial Oil Limited
+190,IOR,"Income Opportunity Realty Investors, Inc."
+191,IGC,India Globalization Capital Inc.
+192,INFU,"InfuSystems Holdings, Inc."
+193,IHT,InnSuites Hospitality Trust
+194,NSPR,"InspireMD, Inc."
+195,NSPR.WS,"InspireMD, Inc."
+196,NSPR.WS.B,"InspireMD, Inc."
+197,IFMI,"Institutional Financial Markets, Inc."
+198,IDN,"Intellicheck, Inc."
+199,INS,Intelligent Systems Corporation
+200,THM,International Tower Hill Mines Ltd
+201,INTT,inTest Corporation
+202,INUV,"Inuvo, Inc"
+203,VKI,Invesco Advantage Municipal Income Trust II
+204,ISR,"IsoRay, Inc."
+205,ISDR,Issuer Direct Corporation
+206,JRJR,"JRjr33, Inc."
+207,KIQ,Kelso Technologies Inc
+208,KLDX,Klondex Mines Ltd.
+209,LTS,Ladenburg Thalmann Financial Services Inc
+210,LTS^A,Ladenburg Thalmann Financial Services Inc
+211,LAQ,"Latin America Equity Fund, Inc. (The)"
+212,LGL,"LGL Group, Inc. (The)"
+213,LBY,"Libbey, Inc."
+214,LLEX,"Lilis Energy, Inc."
+215,LIQT,"LiqTech International, Inc."
+216,MAG,MAG Silver Corporation
+217,MJCO,Majesco
+218,MHH,"Mastech Digital, Inc"
+219,MTNB,"Matinas Biopharma Holdings, Inc."
+220,IPB,"Merrill Lynch & Co., Inc."
+221,MXC,Mexco Energy Corporation
+222,CCA,MFS California Insured Municipal Trust
+223,MICR,"Micron Solutions, Inc."
+224,MLSS,"Milestone Scientific, Inc."
+225,MVF,"MuniVest Fund, Inc."
+226,MZA,"MuniYield Arizona Fund, Inc."
+227,MYO,Myomo Inc.
+228,NNVC,"NanoViricides, Inc."
+229,ATEST,NASDAQ TEST STOCK
+230,ATEST.A,NASDAQ TEST STOCK
+231,ATEST.B,NASDAQ TEST STOCK
+232,ATEST.C,NASDAQ TEST STOCK
+233,NHC,National HealthCare Corporation
+234,NAVB,"Navidea Biopharmaceuticals, Inc."
+235,NTIP,"Network-1 Technologies, Inc."
+236,NBW,Neuberger Berman California Intermediate Municipal Fund Inc.
+237,NHS,Neuberger Berman High Yield Strategies Fund
+238,NBH,Neuberger Berman Intermediate Municipal Fund Inc.
+239,NML,Neuberger Berman MLP Income Fund Inc.
+240,NBO,Neuberger Berman New York Intermediate Municipal Fund Inc.
+241,NRO,"Neuberger Berman Real Estate Securities Income Fund, Inc."
+242,UWN,"Nevada Gold & Casinos, Inc."
+243,NSU,Nevsun Resources Ltd
+244,GBR,"New Concept Energy, Inc"
+245,NEN,New England Realty Associates Limited Partnership
+246,NGD,New Gold Inc.
+247,NXE,Nexgen Energy Ltd.
+248,HLTH,Nobilis Health Corp.
+249,NAK,"Northern Dynasty Minerals, Ltd."
+250,NOG,"Northern Oil and Gas, Inc."
+251,NBY,"NovaBay Pharmaceuticals, Inc."
+252,NG,Novagold Resources Inc.
+253,NTN,"NTN Buzztime, Inc."
+254,NJV,Nuveen New Jersey Municipal Value Fund
+255,NPN,Nuveen Pennsylvania Municipal Value Fund
+256,OCX,OncoCyte Corporation
+257,OGEN,"Oragenics, Inc."
+258,TIS,Orchids Paper Products Company
+259,ONP,"Orient Paper, Inc."
+260,ORM,"Owens Realty Mortgage, Inc."
+261,PCG^A,Pacific Gas & Electric Co.
+262,PCG^B,Pacific Gas & Electric Co.
+263,PCG^C,Pacific Gas & Electric Co.
+264,PCG^D,Pacific Gas & Electric Co.
+265,PCG^E,Pacific Gas & Electric Co.
+266,PCG^G,Pacific Gas & Electric Co.
+267,PCG^H,Pacific Gas & Electric Co.
+268,PCG^I,Pacific Gas & Electric Co.
+269,PTN,"Palatin Technologies, Inc."
+270,PARR,"Par Pacific Holdings, Inc."
+271,PZG,Paramount Gold Nevada Corp.
+272,TEUM,Pareteum Corporation
+273,PRK,Park National Corporation
+274,BTU^,Peabody Energy Corporation
+275,PED,Pedevco Corp.
+276,PFNX,Pfenex Inc.
+277,HNW,Pioneer Diversified High Income Trust
+278,PLG,Platinum Group Metals Ltd.
+279,PLYM,"Plymouth Industrial REIT, Inc."
+280,PLM,Polymet Mining Corp.
+281,PW,Power REIT
+282,PW^A,Power REIT
+283,PLX,"Protalix BioTherapeutics, Inc."
+284,RLGT,"Radiant Logistics, Inc."
+285,RLGT^A,"Radiant Logistics, Inc."
+286,UTG,Reaves Utility Income Fund
+287,REED,"Reeds, Inc."
+288,RWC,RELM Wireless Corporation
+289,RCG,"RENN Fund, Inc."
+290,RVP,"Retractable Technologies, Inc."
+291,RNN,"Rexahn Pharmaceuticals, Inc."
+292,REI,"Ring Energy, Inc."
+293,RIF,RMR Real Estate Income Fund
+294,SACH,Sachem Capital Corp.
+295,SGA,"Saga Communications, Inc."
+296,SSN,Samson Oil & Gas Limited
+297,SNMP,Sanchez Midstream Partners LP
+298,SAND          ,Sandstorm Gold Ltd
+299,SEB,Seaboard Corporation
+300,SENS,"Senseonics Holdings, Inc."
+301,SVT,"Servotronics, Inc."
+302,SMTS,Sierra Metals Inc.
+303,SIF,"SIFCO Industries, Inc."
+304,SVM,Silvercorp Metals Inc.
+305,SKY,Skyline Corporation
+306,XPL,Solitario Zinc Corp.
+307,SCE^B,Southern California Edison Company
+308,SCE^C,Southern California Edison Company
+309,SCE^D,Southern California Edison Company
+310,SCE^E,Southern California Edison Company
+311,SGB,Southwest Georgia Financial Corporation
+312,LOV,"Spark Networks, Inc."
+313,SRCI,SRC Energy Inc.
+314,SGY.WS,Stone Energy Corporation
+315,STRP,Straight Path Communications Inc.
+316,SSY,"SunLink Health Systems, Inc."
+317,SDPI,"Superior Drilling Products, Inc."
+318,STS,"Supreme Industries, Inc."
+319,SYN,"Synthetic Biologics, Inc"
+320,TKAT,"Takung Art Co., Ltd."
+321,TRX,Tanzanian Royalty Exploration Corporation
+322,TGB,Taseko Mines Limited
+323,TIK,Tel-Instrument Electronics Corp.
+324,TGC,"Tengasco, Inc."
+325,GLU,The Gabelli Global Utility and Income Trust
+326,GLU^A,The Gabelli Global Utility and Income Trust
+327,GGO,The Gabelli Go Anywhere Trust
+328,GGO^A,The Gabelli Go Anywhere Trust
+329,TXMD,"TherapeuticsMD, Inc."
+330,TMP,Tompkins Financial Corporation
+331,TAT,Transatlantic Petroleum Ltd
+332,TRXC,"TransEnterix, Inc."
+333,TMQ,Trilogy Metals Inc.
+334,TPHS,Trinity Place Holdings Inc.
+335,TRT,Trio-Tech International
+336,HTM,U.S. Geothermal Inc.
+337,UFAB,"Unique Fabricating, Inc."
+338,UAMY,United States Antimony Corporation
+339,UUU,"Universal Security Instruments, Inc."
+340,UQM,UQM TECHNOLOGIES INC
+341,URG,Ur Energy Inc
+342,UEC,Uranium Energy Corp.
+343,VSR,"Versar, Inc."
+344,VII,"Vicon Industries, Inc."
+345,VHC,VirnetX Holding Corp
+346,VGZ,Vista Gold Corporation
+347,VNRX,VolitionRX Limited
+348,VISI,"Volt Information Sciences, Inc."
+349,EAD,Wells Fargo Income Opportunities Fund
+350,ERC,Wells Fargo Multi-Sector Income Fund
+351,ERH,Wells Fargo Utilities and High Income Fund
+352,SBI,Western Asset Intermediate Muni Fund Inc
+353,WRN,Western Copper and Gold Corporation
+354,WYY,WidePoint Corporation
+355,WTT,"Wireless Telecom Group,  Inc."
+356,XTNT,"Xtant Medical Holdings, Inc."
+357,YUMA,"Yuma Energy, Inc."
+358,ZDGE,"Zedge, Inc."
+,Symbol,Name
+0,XXII,"22nd Century Group, Inc"
+1,FAX,Aberdeen Asia-Pacific Income Fund Inc
+2,IAF,Aberdeen Australia Equity Fund Inc
+3,CH,"Aberdeen Chile Fund, Inc."
+4,ABE,Aberdeen Emerging Markets Smaller Company Opportunities Fund I
+5,FCO,"Aberdeen Global Income Fund, Inc."
+6,IF,"Aberdeen Indonesia Fund, Inc."
+7,ISL,"Aberdeen Israel Fund, Inc."
+8,ACU,Acme United Corporation.
+9,ATNM,"Actinium Pharmaceuticals, Inc."
+10,AE,"Adams Resources & Energy, Inc."
+11,ADK,Adcare Health Systems Inc
+12,ADK^A,Adcare Health Systems Inc
+13,ACY,AeroCentury Corp.
+14,AIRI,Air Industries Group
+15,AXU,Alexco Resource Corp
+16,ALO,Alio Gold Inc.
+17,AAU,"Almaden Minerals, Ltd."
+18,APT,"Alpha Pro Tech, Ltd."
+19,AAMC,Altisource Asset Management Corp
+20,DIT,AMCON Distributing Company
+21,ALN,American Lorain Corporation
+22,AMS,American Shared Hospital Services
+23,USAS,Americas Silver Corporation
+24,AMPE,"Ampio Pharmaceuticals, Inc."
+25,APHB,AmpliPhi Biosciences Corporation
+26,AXN,"Aoxing Pharmaceutical Company, Inc."
+27,ARNC^,Arconic Inc.
+28,AKG,Asanko Gold Inc.
+29,AINC,Ashford Inc.
+30,ASB.WS,Associated Banc-Corp
+31,AST,"Asterias Biotherapeutics, Inc."
+32,AST.WS,"Asterias Biotherapeutics, Inc."
+33,AUG,Auryn Resources Inc.
+34,AUXO,"Auxilio, Inc."
+35,AWX,Avalon Holdings Corporation
+36,ASM,Avino Silver
+37,BTG,B2Gold Corp
+38,BTN,"Ballantyne Strong, Inc"
+39,BKJ,"Bancorp of New Jersey, Inc"
+40,BCV,Bancroft Fund Limited
+41,BCV^A,Bancroft Fund Limited
+42,BAA,BANRO CORPORATION
+43,BHB,"Bar Harbor Bankshares, Inc."
+44,BRN,"Barnwell Industries, Inc."
+45,BGSF,BG Staffing Inc
+46,BPMX,BioPharmX Corporation
+47,BTX,"BioTime, Inc."
+48,BTX.WS,"BioTime, Inc."
+49,BGI,Birks Group Inc.
+50,BZM,BlackRock Maryland Municipal Bond Trust
+51,MHE,BlackRock Massachusetts Tax-Exempt Trust
+52,BLE,BlackRock Municipal Income Trust II
+53,BLJ,Blackrock New Jersey Municipal Bond Trust
+54,BFY,BlackRock New York Municipal Income Trust II
+55,BHV,BlackRock Virginia Municipal Bond Trust
+56,BDR,"Blonder Tongue Laboratories, Inc."
+57,BRG,"Bluerock Residential Growth REIT, Inc."
+58,BRG^A,"Bluerock Residential Growth REIT, Inc."
+59,BRG^C,"Bluerock Residential Growth REIT, Inc."
+60,BRG^D,"Bluerock Residential Growth REIT, Inc."
+61,BVX,Bovie Medical Corporation
+62,BWL.A,"Bowl America, Inc."
+63,CMCL,Caledonia Mining Corporation Plc
+64,CEI,"Camber Energy, Inc."
+65,CANF,Can-Fite Biopharma Ltd
+66,ROX,"Castle Brands, Inc."
+67,CAW,"CCA Industries, Inc."
+68,CVM,Cel-Sci Corporation
+69,CVM.WS,Cel-Sci Corporation
+70,CEF,Central Fund of Canada Limited
+71,CET,Central Securities Corporation
+72,LEU,Centrus Energy Corp.
+73,CCF,Chase Corporation
+74,CQH,"Cheniere Energy Partners LP Holdings, LLC"
+75,CQP,"Cheniere Energy Partners, LP"
+76,LNG,"Cheniere Energy, Inc."
+77,CVR,Chicago Rivet & Machine Co.
+78,CPHI,"China Pharma Holdings, Inc."
+79,CISN.WS,Cision Ltd.
+80,CKX,"CKX Lands, Inc."
+81,GLV,Clough Global Dividend and Income Fund
+82,GLQ,Clough Global Equity Fund
+83,GLO,Clough Global Opportunities Fund
+84,MOC,Command Security Corporation
+85,CIX,CompX International Inc.
+86,LODE,"Comstock Mining, Inc."
+87,CDOR,"Condor Hospitality Trust, Inc."
+88,CTO,Consolidated-Tomoka Land Co.
+89,MCF,Contango Oil & Gas Company
+90,CUO,Continental Materials Corporation
+91,CMT,Core Molding Technologies Inc
+92,CVRS,"Corindus Vascular Robotics, Inc."
+93,CRMD,CorMedix Inc
+94,CRF,"Cornerstone Strategic Return Fund, Inc. (The)"
+95,CLM,"Cornerstone Strategic Value Fund, Inc."
+96,CVU,"CPI Aerostructures, Inc."
+97,CIK,"Credit Suisse Asset Management Income Fund, Inc."
+98,DHY,Credit Suisse High Yield Bond Fund
+99,CRHM,CRH Medical Corporation
+100,CRVP,"Crystal Rock Holdings, Inc."
+101,DXR,Daxor Corporation
+102,VCF,"Delaware Investments Colorado Municipal Income Fund, Inc"
+103,VFL,Delaware Investments Florida Insured Municipal Income Fund
+104,VMM,"Delaware Investments Minnesota Municipal Income Fund II, Inc."
+105,DLA,"Delta Apparel, Inc."
+106,DNN,Denison Mine Corp
+107,DGSE,"DGSE Companies, Inc."
+108,DPW,Digital Power Corporation
+109,DSS,"Document Security Systems, Inc."
+110,DMF,"Dreyfus Municipal Income, Inc."
+111,GRF,"Eagle Capital Growth Fund, Inc."
+112,EVM,Eaton Vance California Municipal Bond Fund
+113,EIA,Eaton Vance California Municipal Bond Fund II
+114,CEV,Eaton Vance California Municipal Income Trust
+115,EVV,Eaton Vance Limited Duration Income Fund
+116,MAB,Eaton Vance Massachusetts Municipal Bond Fund
+117,MMV,Eaton Vance Massachusetts Municipal Income Trust
+118,MIW,Eaton Vance Michigan Municipal Bond Fund
+119,EMI,Eaton Vance Michigan Municipal Income Trust
+120,EIM,Eaton Vance Municipal Bond Fund
+121,EIV,Eaton Vance Municipal Bond Fund II
+122,EMJ,Eaton Vance New Jersey Municipal Bond Fund
+123,EVJ,Eaton Vance New Jersey Municipal Income Trust
+124,ENX,Eaton Vance New York Municipal Bond Fund
+125,NYH,Eaton Vance New York Municipal Bond Fund II
+126,EVY,Eaton Vance New York Municipal Income Trust
+127,EIO,Eaton Vance Ohio Municipal Bond Fund
+128,EVO,Eaton Vance Ohio Municipal Income Trust
+129,EIP,Eaton Vance Pennsylvania Municipal Bond Fund
+130,EVP,Eaton Vance Pennsylvania Municipal Income Trust
+131,ELMD,"Electromed, Inc."
+132,ELLO,Ellomay Capital Ltd.
+133,ECF,Ellsworth Growth and Income Fund Ltd.
+134,EMAN,eMagin Corporation
+135,MSN,Emerson Radio Corporation
+136,EMX,EMX Royalty Corporation
+137,UUUU,Energy Fuels Inc
+138,UUUU.WS,Energy Fuels Inc
+139,ENRJ,"EnerJex Resources, Inc."
+140,ENSV,ENSERVCO Corporation
+141,ESNC,"EnSync, Inc."
+142,EGI,Entree Resources Ltd.
+143,EVI,"EnviroStarm, Inc."
+144,ERN,Erin Energy Corp.
+145,ESP,Espey Mfg. & Electronics Corp.
+146,EVBN,"Evans Bancorp, Inc."
+147,EPM,"Evolution Petroleum Corporation, Inc."
+148,FPP,FieldPoint Petroleum Corporation
+149,FPP.WS,FieldPoint Petroleum Corporation
+150,FEN,First Trust Energy Income and Growth Fund
+151,BDL,"Flanigan&#39;s Enterprises, Inc."
+152,FSI,Flexible Solutions International Inc.
+153,FTF,Franklin Limited Duration Income Trust
+154,FSP,Franklin Street Properties Corp.
+155,FRD,Friedman Industries Inc.
+156,GGN,"GAMCO Global Gold, Natural Reources & Income Trust "
+157,GGN^B,"GAMCO Global Gold, Natural Reources & Income Trust "
+158,GST,Gastar Exploration Inc.
+159,GST^A,Gastar Exploration Inc.
+160,GST^B,Gastar Exploration Inc.
+161,JOB,GEE Group Inc.
+162,GMO,"General Moly, Inc"
+163,GSB,"GlobalSCAPE, Inc."
+164,GSAT,"Globalstar, Inc."
+165,GLOW,"Glowpoint, Inc."
+166,GORO,Gold Resource Corporation
+167,GSV,Gold Standard Ventures Corporation
+168,AUMN,Golden Minerals Company
+169,GSS,"Golden Star Resources, Ltd"
+170,GV,Goldfield Corporation (The)
+171,GDP,Goodrich Petroleum Corporation
+172,GTE,Gran Tierra Energy Inc.
+173,GPL,Great Panther Silver Limited
+174,SIM,"Grupo Simec, S.A. de C.V."
+175,GVP,"GSE Systems, Inc."
+176,HEB,"Hemispherx BioPharma, Inc."
+177,HCAC,Hennessy Capital Acquisition Corp. III
+178,HCAC.U,Hennessy Capital Acquisition Corp. III
+179,HCAC.WS,Hennessy Capital Acquisition Corp. III
+180,HLM^,Hillman Group Capital Trust
+181,HMG,"HMG/Courtland Properties, Inc."
+182,HUSA,Houston American Energy Corporation
+183,IBIO,"iBio, Inc."
+184,IBO,IBO (Listing Market - NYSE Amex Network B F)
+185,IEC,IEC Electronics Corp.
+186,IMUC,"ImmunoCellular Therapeutics, Ltd."
+187,IMUC.WS,"ImmunoCellular Therapeutics, Ltd."
+188,IMH,"Impac Mortgage Holdings, Inc."
+189,IMO,Imperial Oil Limited
+190,IOR,"Income Opportunity Realty Investors, Inc."
+191,IGC,India Globalization Capital Inc.
+192,INFU,"InfuSystems Holdings, Inc."
+193,IHT,InnSuites Hospitality Trust
+194,NSPR,"InspireMD, Inc."
+195,NSPR.WS,"InspireMD, Inc."
+196,NSPR.WS.B,"InspireMD, Inc."
+197,IFMI,"Institutional Financial Markets, Inc."
+198,IDN,"Intellicheck, Inc."
+199,INS,Intelligent Systems Corporation
+200,THM,International Tower Hill Mines Ltd
+201,INTT,inTest Corporation
+202,INUV,"Inuvo, Inc"
+203,VKI,Invesco Advantage Municipal Income Trust II
+204,ISR,"IsoRay, Inc."
+205,ISDR,Issuer Direct Corporation
+206,JRJR,"JRjr33, Inc."
+207,KIQ,Kelso Technologies Inc
+208,KLDX,Klondex Mines Ltd.
+209,LTS,Ladenburg Thalmann Financial Services Inc
+210,LTS^A,Ladenburg Thalmann Financial Services Inc
+211,LAQ,"Latin America Equity Fund, Inc. (The)"
+212,LGL,"LGL Group, Inc. (The)"
+213,LBY,"Libbey, Inc."
+214,LLEX,"Lilis Energy, Inc."
+215,LIQT,"LiqTech International, Inc."
+216,MAG,MAG Silver Corporation
+217,MJCO,Majesco
+218,MHH,"Mastech Digital, Inc"
+219,MTNB,"Matinas Biopharma Holdings, Inc."
+220,IPB,"Merrill Lynch & Co., Inc."
+221,MXC,Mexco Energy Corporation
+222,CCA,MFS California Insured Municipal Trust
+223,MICR,"Micron Solutions, Inc."
+224,MLSS,"Milestone Scientific, Inc."
+225,MVF,"MuniVest Fund, Inc."
+226,MZA,"MuniYield Arizona Fund, Inc."
+227,MYO,Myomo Inc.
+228,NNVC,"NanoViricides, Inc."
+229,ATEST,NASDAQ TEST STOCK
+230,ATEST.A,NASDAQ TEST STOCK
+231,ATEST.B,NASDAQ TEST STOCK
+232,ATEST.C,NASDAQ TEST STOCK
+233,NHC,National HealthCare Corporation
+234,NAVB,"Navidea Biopharmaceuticals, Inc."
+235,NTIP,"Network-1 Technologies, Inc."
+236,NBW,Neuberger Berman California Intermediate Municipal Fund Inc.
+237,NHS,Neuberger Berman High Yield Strategies Fund
+238,NBH,Neuberger Berman Intermediate Municipal Fund Inc.
+239,NML,Neuberger Berman MLP Income Fund Inc.
+240,NBO,Neuberger Berman New York Intermediate Municipal Fund Inc.
+241,NRO,"Neuberger Berman Real Estate Securities Income Fund, Inc."
+242,UWN,"Nevada Gold & Casinos, Inc."
+243,NSU,Nevsun Resources Ltd
+244,GBR,"New Concept Energy, Inc"
+245,NEN,New England Realty Associates Limited Partnership
+246,NGD,New Gold Inc.
+247,NXE,Nexgen Energy Ltd.
+248,HLTH,Nobilis Health Corp.
+249,NAK,"Northern Dynasty Minerals, Ltd."
+250,NOG,"Northern Oil and Gas, Inc."
+251,NBY,"NovaBay Pharmaceuticals, Inc."
+252,NG,Novagold Resources Inc.
+253,NTN,"NTN Buzztime, Inc."
+254,NJV,Nuveen New Jersey Municipal Value Fund
+255,NPN,Nuveen Pennsylvania Municipal Value Fund
+256,OCX,OncoCyte Corporation
+257,OGEN,"Oragenics, Inc."
+258,TIS,Orchids Paper Products Company
+259,ONP,"Orient Paper, Inc."
+260,ORM,"Owens Realty Mortgage, Inc."
+261,PCG^A,Pacific Gas & Electric Co.
+262,PCG^B,Pacific Gas & Electric Co.
+263,PCG^C,Pacific Gas & Electric Co.
+264,PCG^D,Pacific Gas & Electric Co.
+265,PCG^E,Pacific Gas & Electric Co.
+266,PCG^G,Pacific Gas & Electric Co.
+267,PCG^H,Pacific Gas & Electric Co.
+268,PCG^I,Pacific Gas & Electric Co.
+269,PTN,"Palatin Technologies, Inc."
+270,PARR,"Par Pacific Holdings, Inc."
+271,PZG,Paramount Gold Nevada Corp.
+272,TEUM,Pareteum Corporation
+273,PRK,Park National Corporation
+274,BTU^,Peabody Energy Corporation
+275,PED,Pedevco Corp.
+276,PFNX,Pfenex Inc.
+277,HNW,Pioneer Diversified High Income Trust
+278,PLG,Platinum Group Metals Ltd.
+279,PLYM,"Plymouth Industrial REIT, Inc."
+280,PLM,Polymet Mining Corp.
+281,PW,Power REIT
+282,PW^A,Power REIT
+283,PLX,"Protalix BioTherapeutics, Inc."
+284,RLGT,"Radiant Logistics, Inc."
+285,RLGT^A,"Radiant Logistics, Inc."
+286,UTG,Reaves Utility Income Fund
+287,REED,"Reeds, Inc."
+288,RWC,RELM Wireless Corporation
+289,RCG,"RENN Fund, Inc."
+290,RVP,"Retractable Technologies, Inc."
+291,RNN,"Rexahn Pharmaceuticals, Inc."
+292,REI,"Ring Energy, Inc."
+293,RIF,RMR Real Estate Income Fund
+294,SACH,Sachem Capital Corp.
+295,SGA,"Saga Communications, Inc."
+296,SSN,Samson Oil & Gas Limited
+297,SNMP,Sanchez Midstream Partners LP
+298,SAND          ,Sandstorm Gold Ltd
+299,SEB,Seaboard Corporation
+300,SENS,"Senseonics Holdings, Inc."
+301,SVT,"Servotronics, Inc."
+302,SMTS,Sierra Metals Inc.
+303,SIF,"SIFCO Industries, Inc."
+304,SVM,Silvercorp Metals Inc.
+305,SKY,Skyline Corporation
+306,XPL,Solitario Zinc Corp.
+307,SCE^B,Southern California Edison Company
+308,SCE^C,Southern California Edison Company
+309,SCE^D,Southern California Edison Company
+310,SCE^E,Southern California Edison Company
+311,SGB,Southwest Georgia Financial Corporation
+312,LOV,"Spark Networks, Inc."
+313,SRCI,SRC Energy Inc.
+314,SGY.WS,Stone Energy Corporation
+315,STRP,Straight Path Communications Inc.
+316,SSY,"SunLink Health Systems, Inc."
+317,SDPI,"Superior Drilling Products, Inc."
+318,STS,"Supreme Industries, Inc."
+319,SYN,"Synthetic Biologics, Inc"
+320,TKAT,"Takung Art Co., Ltd."
+321,TRX,Tanzanian Royalty Exploration Corporation
+322,TGB,Taseko Mines Limited
+323,TIK,Tel-Instrument Electronics Corp.
+324,TGC,"Tengasco, Inc."
+325,GLU,The Gabelli Global Utility and Income Trust
+326,GLU^A,The Gabelli Global Utility and Income Trust
+327,GGO,The Gabelli Go Anywhere Trust
+328,GGO^A,The Gabelli Go Anywhere Trust
+329,TXMD,"TherapeuticsMD, Inc."
+330,TMP,Tompkins Financial Corporation
+331,TAT,Transatlantic Petroleum Ltd
+332,TRXC,"TransEnterix, Inc."
+333,TMQ,Trilogy Metals Inc.
+334,TPHS,Trinity Place Holdings Inc.
+335,TRT,Trio-Tech International
+336,HTM,U.S. Geothermal Inc.
+337,UFAB,"Unique Fabricating, Inc."
+338,UAMY,United States Antimony Corporation
+339,UUU,"Universal Security Instruments, Inc."
+340,UQM,UQM TECHNOLOGIES INC
+341,URG,Ur Energy Inc
+342,UEC,Uranium Energy Corp.
+343,VSR,"Versar, Inc."
+344,VII,"Vicon Industries, Inc."
+345,VHC,VirnetX Holding Corp
+346,VGZ,Vista Gold Corporation
+347,VNRX,VolitionRX Limited
+348,VISI,"Volt Information Sciences, Inc."
+349,EAD,Wells Fargo Income Opportunities Fund
+350,ERC,Wells Fargo Multi-Sector Income Fund
+351,ERH,Wells Fargo Utilities and High Income Fund
+352,SBI,Western Asset Intermediate Muni Fund Inc
+353,WRN,Western Copper and Gold Corporation
+354,WYY,WidePoint Corporation
+355,WTT,"Wireless Telecom Group,  Inc."
+356,XTNT,"Xtant Medical Holdings, Inc."
+357,YUMA,"Yuma Energy, Inc."
+358,ZDGE,"Zedge, Inc."

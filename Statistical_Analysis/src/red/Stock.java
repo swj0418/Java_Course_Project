@@ -1,6 +1,5 @@
 package red;
 import java.util.*;
-
 import black.DataRetriever;
 
 import java.io.*;
@@ -14,13 +13,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-/*
- * USAGE:
- * 		request in "UPPERCASE"
- * 		I will fix this problem later
- * 		seems like toUpperCase() is not working properly.
- */
 
 public class Stock {
 	public String SYMBOL;
@@ -74,16 +66,7 @@ public class Stock {
 		DR = null;
 	}
 	public ArrayList request(String category, String start, String end) {
-		//System.out.println("You have requested " + SYMBOL + " Category : " + category + " from " + start + " to " + end);
 		ArrayList return_arr = new ArrayList();
-		//Date begin = null; begin.parse(start); Deprecated?
-		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		
-		/*
-		 * To be perfect, I have to make a relational database, but if the data source is perfect,
-		 * I don't have to. I just can match the date and the cat(Category).
-		 */
-		
 		LocalDate time = null;
 		LocalDate begin = LocalDate.parse(start, DateTimeFormatter.ISO_DATE); //Correct
 		LocalDate fin = LocalDate.parse(end, DateTimeFormatter.ISO_DATE);
