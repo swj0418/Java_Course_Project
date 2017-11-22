@@ -147,7 +147,7 @@ public class UpdateControl {
 			writer.close();
 			reader.close();
 		} catch (IOException e) {
-			System.out.println("An error occured while creating a temporary file");
+			System.out.println("An error occurred while creating a temporary file");
 			e.printStackTrace();
 		}
 	}

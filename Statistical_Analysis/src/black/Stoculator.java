@@ -1,6 +1,7 @@
 package black;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public final class Stoculator {
 	public final static ArrayList<Double> Return(ArrayList<Double> A1) {
@@ -86,7 +87,7 @@ public final class Stoculator {
 			mean = GeometricMeanReturn(A1, TimeSlice);
 		}
 		
-		tmp = (ArrayList<Double>) Return(A1, TimeSlice).clone();
+		tmp = Return(A1, TimeSlice);
 		
 		for(int i = 0; i < tmp.size(); i++) {
 			returndeviation.add(tmp.get(i) - mean);
@@ -127,10 +128,77 @@ public final class Stoculator {
 		return Math.pow(ReturnVariance(A1, TimeSlice, type), 0.5d);
 	}
 	
-	public final static Double Covariance(ArrayList<Double> A1, ArrayList<Double> A2) {
+	public final static Double MinMax(ArrayList A1, String type) {
+		type = type.toUpperCase();
+		
+		Double ReturnMax = 0.d;
+		Double ReturnMin = 0.d;
+		Double tmp = 0.d;
+		Iterator itr = A1.iterator();
+		while(itr.hasNext()) {
+			tmp = (Double) itr.next();
+			if(tmp >= ReturnMax) {
+				ReturnMax = tmp;
+			}
+			if(tmp <= ReturnMin) {
+				ReturnMin = tmp;
+			}
+		}
+		
+		if(type.equals("MAX")) {
+			return ReturnMax;
+		} 
+		else if(type.equals("MIN")) {
+			return ReturnMin;
+		}
+		else {
+			System.out.println("Wrong input for Min_Max");
+			return null;
+		}
+	}
+	public final static Double Covariance(ArrayList<Double> Price1, ArrayList<Double> Price2) {
+		String defaulttype = "ARITHMETIC";
+		int defaulttimeslice = 1;
+		return Covariance(Price1, Price2, defaulttimeslice, defaulttype);
+	}
+	
+	public final static Double Covariance(ArrayList<Double> Price1, ArrayList<Double> Price2, int TimeSlice) {
+		String defaulttype = "ARITHMETIC";
+		return Covariance(Price1, Price2, TimeSlice, defaulttype);
+	}
+	
+	public final static Double Covariance(ArrayList<Double> Price1, ArrayList<Double> Price2, int TimeSlice, String Type) {
 		Double covariance = 0.d;
+		ArrayList<Double> tmpDev1 = ReturnDeviation(Price1, TimeSlice, Type);
+		ArrayList<Double> tmpDev2 = ReturnDeviation(Price2, TimeSlice, Type);
+		
+		for(int i = 0; i < tmpDev1.size(); i++) {
+			covariance += (tmpDev1.get(i) * tmpDev2.get(i));
+		}
+		covariance = covariance / (tmpDev1.size() - 1.d);
 		
 		return covariance;
+	}
+	
+	public final static Double Correlation(ArrayList<Double> Price1, ArrayList<Double> Price2) {
+		int defaulttimeslice = 1;
+		String defaulttype = "ARITHMETIC";
+		return Correlation(Price1, Price2, defaulttimeslice, defaulttype);
+	}
+	
+	public final static Double Correlation(ArrayList<Double> Price1, ArrayList<Double> Price2, int TimeSlice) {
+		String defaulttype = "ARITHMETIC";
+		return Correlation(Price1, Price2, TimeSlice, defaulttype);
+	}
+	
+	public final static Double Correlation(ArrayList<Double> Price1, ArrayList<Double> Price2, int TimeSlice, String Type) {
+		Double tmpCov = Covariance(Price1, Price2, TimeSlice, Type);
+		Double SD1 = StandardDeviation(Price1, TimeSlice, Type);
+		Double SD2 = StandardDeviation(Price2, TimeSlice, Type);
+		
+		Double correlation = tmpCov / (SD1*SD2);	
+		
+		return correlation;
 	}
 
 }
