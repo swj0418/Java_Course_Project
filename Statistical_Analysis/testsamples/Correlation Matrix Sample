@@ -1,0 +1,19 @@
+		ArrayList<Double> A1 = new ArrayList<Double>();
+		ArrayList<Double> A2 = new ArrayList<Double>();
+		ArrayList<Double> A3 = new ArrayList<Double>();
+		A1.add(1.5); A1.add(2.7); A1.add(3.5); A1.add(1.9);
+		A2.add(5.5); A2.add(1.7); A2.add(7.5); A2.add(1.2);
+		A3.add(9.5); A3.add(2.7); A3.add(13.5); A3.add(2.9);
+		ArrayList<ArrayList<Double>> TA = new ArrayList<ArrayList<Double>>();
+		TA.add(A1);
+		TA.add(A2);
+		TA.add(A3);
+		
+		ArrayList<ArrayList<Double>> RA;
+		RA = Stoculator.CorrelationMatrix(TA);
+		for(int i = 0; i < RA.size(); i++) {
+			for(int j = 0; j < RA.size(); j++) {
+				System.out.print(RA.get(i).get(j) + " ");
+			}
+			System.out.println();
+		}

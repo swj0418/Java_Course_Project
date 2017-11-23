@@ -196,9 +196,41 @@ public final class Stoculator {
 		Double SD1 = StandardDeviation(Price1, TimeSlice, Type);
 		Double SD2 = StandardDeviation(Price2, TimeSlice, Type);
 		
-		Double correlation = tmpCov / (SD1*SD2);	
+		Double correlation = tmpCov / (SD1*SD2);
+		if(correlation > 0.9999999) {
+			correlation = 1.0d;
+		}
+		
+		int tmp = 0;
+		tmp = (int) (correlation * 100000.d);
+		correlation = tmp / 100000.d;
 		
 		return correlation;
 	}
-
+	
+	public final static ArrayList<ArrayList<Double>> CorrelationMatrix(ArrayList<ArrayList<Double>> PriceMatrix) {
+		int defaulttimeslice = 1;
+		String defaulttype = "ARITHMETIC";
+		return CorrelationMatrix(PriceMatrix, defaulttimeslice, defaulttype);
+	}
+	
+	public final static ArrayList<ArrayList<Double>> CorrelationMatrix(ArrayList<ArrayList<Double>> PriceMatrix, int TimeSlice) {
+		String defaulttype = "ARITHMETIC";
+		return CorrelationMatrix(PriceMatrix, TimeSlice, defaulttype);
+	}
+	
+	public final static ArrayList<ArrayList<Double>> CorrelationMatrix(ArrayList<ArrayList<Double>> PriceMatrix, int TimeSlice, String Type) {
+		ArrayList<ArrayList<Double>> retArr = new ArrayList<ArrayList<Double>>();
+		
+		for(int i = 0; i < PriceMatrix.size(); i++) {
+			ArrayList<Double> tmp = new ArrayList<Double>();
+			
+			for(int j = 0; j < PriceMatrix.size(); j++) {
+				tmp.add(Correlation(PriceMatrix.get(i), PriceMatrix.get(j), TimeSlice, Type));
+			}
+			retArr.add(tmp);
+		}
+		
+		return retArr;
+	}
 }

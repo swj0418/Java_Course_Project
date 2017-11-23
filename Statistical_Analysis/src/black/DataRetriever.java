@@ -53,18 +53,20 @@ public class DataRetriever {
 	
 	@SuppressWarnings("unchecked")
 	public void retrieve(String SYMBOL) {
-		this.SYMBOL = SYMBOL;
+		this.SYMBOL = SYMBOL.trim();
 		System.out.println("Retrieving " + SYMBOL);
 
 		if(!UpdateControl.CheckValidationData(SYMBOL)) {
 			System.out.println(SYMBOL + " is not locally available");
 			URL url;
-		    URLConnection urlConn = null;
+		    @SuppressWarnings("unused")
+			URLConnection urlConn = null;
 		    BufferedReader br = null;
 			String msg;
 			StringBuilder bd;
 			InputStream ins = null;
 			String csvSplitBy = ",";
+			boolean baddatacheck = false;
 			String urlString = new Utils().APIString(SYMBOL);
 			
 			try {
@@ -84,24 +86,21 @@ public class DataRetriever {
 					{
 						String tmpList[] = msg.split(csvSplitBy);
 						
-						bd.append(msg);
-						Total.add(msg);
-						Total.add("\n");
-						bd.append("\n");
-						
-						if(msg == "{") {
+						if(msg.startsWith("{")) {
 							System.out.println("Bad Data");
-							throw new ArrayIndexOutOfBoundsException();
+							baddatacheck = true;
+							break;
 						}
 						if(msg == "    \"Error Message\": \"Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY_ADJUSTED.\"") {
 							System.out.println("Bad Data");
-							throw new BadDataException();
+							baddatacheck = true;
+							break;
 						}
 						if(msg == "}") {
 							System.out.println("Bad Data");
-							throw new BadDataException();
+							baddatacheck = true;
+							break;
 						}
-						
 						try {
 							list.add(tmpList[0]); //Date
 							list.add(tmpList[1]); //Open
@@ -126,7 +125,7 @@ public class DataRetriever {
 						}
 						
 					}
-				} catch (IOException | BadDataException e) {
+				} catch (IOException e) {
 					System.out.println("An error in Retreving " + this.SYMBOL);
 					//e.printStackTrace();
 				} finally {
@@ -139,14 +138,17 @@ public class DataRetriever {
 					e.printStackTrace();
 				}
 			}
-			saveCSV(); //Saving data as a file
-			Extractor(); //Extracting and saving separated datasets in an instance
-			UpdateControl.UpdateValidationData(SYMBOL);
+			if(baddatacheck == false) {
+				saveCSV(); //Saving data as a file
+				Extractor(); //Extracting and saving separated datasets in an instance
+				UpdateControl.WriteValidationData(SYMBOL);
+			}
 		}
 		
 		else if(UpdateControl.CheckValidationData(SYMBOL)) {
 			System.out.println(this.SYMBOL + " is locally available");
 			File file = new File("./Data/Historical/" + SYMBOL + ".csv");
+			boolean baddatacheck = false;
 			String msg = null;
 			BufferedReader br = null;
 			try {
@@ -165,6 +167,11 @@ public class DataRetriever {
 						String tmpList[] = msg.split(",");
 						Total.add(msg);
 						Total.add("\n");
+						if(msg.startsWith("{")) {
+							baddatacheck = true;
+							System.out.println("Bad Data!");
+							break;
+						}
 
 						list.add(tmpList[0]); 
 						list.add(tmpList[1]); 
@@ -191,7 +198,11 @@ public class DataRetriever {
 				} finally {
 					System.out.println("Loading " + SYMBOL + " Done");
 				}
-				Extractor(); //Extracting and saving separated datasets in an instance
+				if(baddatacheck != true) {
+					Extractor(); //Extracting and saving separated datasets in an instance
+					System.out.println("Updating ..... " + SYMBOL);
+					UpdateControl.UpdateValidationData(SYMBOL);
+				}
 			}
 			}
 	}

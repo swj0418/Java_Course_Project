@@ -42,7 +42,7 @@ public class BasicInformation {
 			while((line = br.readLine()) != null) {
 				String tmp[] = line.split(",");
 				SymbolList.put(tmp[1], tmp[2]);
-				symbolList.add(tmp[0], tmp[1], tmp[2]);
+				symbolList.add(tmp[0].trim(), tmp[1].trim(), tmp[2].trim());
 			}
  		} catch (IOException e) {
 			e.printStackTrace();

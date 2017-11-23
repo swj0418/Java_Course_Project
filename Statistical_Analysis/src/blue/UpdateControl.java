@@ -16,6 +16,14 @@ public class UpdateControl {
 			return;
 		}
 	}
+	public static final void CreateAvailabilityFile() {
+		File file = new File("./DataMeta/Availability.csv");
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static final void CreatePriceDataDirectory() {
 		File stockfile = new File("./Data/Historical/");
@@ -28,10 +36,9 @@ public class UpdateControl {
 	
 	public static final boolean CheckValidationData(String Symbol) {
 		CreateMetaDataDirectory();
-		File metafile = new File("./DataMeta/Availability.csv");
 		boolean check = false;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(metafile));
+			BufferedReader reader = Utils.BufferedReaderCreator("./DataMeta/Availability.csv");
 			String line = "";
 			
 			while((line = reader.readLine()) != null) {
@@ -62,7 +69,8 @@ public class UpdateControl {
 		try {
 			BufferedReader reader = Utils.BufferedReaderCreator("./DataMeta/Availability.csv");
 			File tmpfile = new File("./Data/Historical/" + SYMBOL + ".csv");
-			String firstdatetosearch = Utils.StringFinderCSV(tmpfile, 1, 0);
+			//String firstdatetosearch = Utils.StringFinderCSV(tmpfile, 1, 0);
+			String firstdatetosearch = LocalDate.now().toString();
 			String lastdatetosearch = "";
 			BufferedReader reader2 = Utils.BufferedReaderCreator("./Data/Historical/" + SYMBOL + ".csv");
 			String line = "";
@@ -78,8 +86,8 @@ public class UpdateControl {
 				String tmp[] = line.split(",");
 				if(tmp[0].equals(SYMBOL)) {
 					tmp_memory.add(SYMBOL);
-					//tmp_memory.add(firstdatetosearch);
-					tmp_memory.add(LocalDate.now().toString()); //This method needs improvement Varies by my relative timezone.
+					tmp_memory.add(firstdatetosearch);
+					//tmp_memory.add(LocalDate.now().toString()); //This method needs improvement Varies by my relative timezone.
 					tmp_memory.add(lastdatetosearch);
 					checker = true;
 					continue;
@@ -111,6 +119,28 @@ public class UpdateControl {
 	
 	
 	public static final void WriteValidationData(String SYMBOL) {
+		BufferedWriter writer = Utils.BufferedWriterCreator("./DataMeta/Availability.csv");
+		String lastdatetosearch = "";
+		BufferedReader reader2 = Utils.BufferedReaderCreator("./Data/Historical/" + SYMBOL + ".csv");
+		String line = "";
+		try {
+			while((line = reader2.readLine()) != null) {
+				String tmp[] = line.split(",");
+				lastdatetosearch = tmp[0];
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			//System.out.println(SYMBOL + "," + Utils.GetLastDayOfTheTrade(SYMBOL) + "," + lastdatetosearch + "\n");
+			//writer.append(SYMBOL + "," + Utils.GetLastDayOfTheTrade(SYMBOL) + "," + lastdatetosearch + "\n");
+			writer.append(SYMBOL + "," + LocalDate.now().toString() + "," + lastdatetosearch + "\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static final String StringFinderCSV(File file, String key, int target) {
@@ -166,7 +196,7 @@ public class UpdateControl {
 		ArrayList<Stock> StockPool = new ArrayList<Stock>();
 		long start = System.currentTimeMillis();
 		for(int i = 0; i < List.size(); i++) {
-			StockPool.add(new Stock(keys.get(i)));
+			StockPool.add(new Stock(keys.get(i).trim())); //First trim occurring.
 			System.out.println("++++++++++++++++++++++++++++++++++KEYSIZE : " + List.size());
 			int tmpp = (int) (1000000.d * ((i+0.d) / (List.size()+0.d)));
 			Double p = tmpp / 10000.d;

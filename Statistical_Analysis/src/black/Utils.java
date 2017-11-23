@@ -111,8 +111,8 @@ public class Utils {
 	public final static BufferedWriter BufferedWriterCreator(String filepath) {
 		File file = new File(filepath);
 		try {
-			FileWriter fw = new FileWriter(file);
-			FileOutputStream fos = new FileOutputStream(file);
+			FileWriter fw = new FileWriter(file, true);
+			FileOutputStream fos = new FileOutputStream(file, true);
 			BufferedWriter bufferedwriter = new BufferedWriter(new OutputStreamWriter(fos));
 			return bufferedwriter;
 		} catch (IOException e) {
@@ -133,5 +133,19 @@ public class Utils {
 			e.printStackTrace();
 			return null;
 		} 
+	}
+	
+	public final static void DoubleMatrixPrinter(ArrayList<ArrayList<Double>> ArrayToPrint) {
+		for(int i = 0; i < ArrayToPrint.size(); i++) {
+			for(int j = 0; j < ArrayToPrint.size(); j++) {
+				if(ArrayToPrint.get(j).get(i) < 0) {
+					System.out.print(ArrayToPrint.get(i).get(j) + "\t");
+				} else {
+					System.out.print(ArrayToPrint.get(i).get(j) + "\t\t");
+				}
+			}
+			System.out.println();
+		}
+		
 	}
 }
