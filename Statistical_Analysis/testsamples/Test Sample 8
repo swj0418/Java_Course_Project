@@ -1,0 +1,34 @@
+		/*
+		ArrayList<ArrayList<Double>> PriceMatrix = new ArrayList<ArrayList<Double>>();
+		PriceMatrix.add(new Stock("AAPL").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("SFNC").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("EDIG").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		/*
+		PriceMatrix.add(new Stock("GOOG").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("EDIG").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("IRCP").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("WAYN").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("RCKY").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("TRCB").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		PriceMatrix.add(new Stock("TSLA").request("ADJ_CLOSE", "2015-01-01", "2017-01-01"));
+		*/
+		/*
+		ArrayList<ArrayList<Double>> ArrayToPrint = Stoculator.CorrelationMatrix(PriceMatrix, 1, "ARITHMETIC");
+		Utils.DoubleMatrixPrinter(ArrayToPrint);
+		*/
+		
+		ArrayList<ArrayList<Double>> FA = new ArrayList<ArrayList<Double>>();
+		ArrayList<Double> Weights = new ArrayList<Double>();
+		ArrayList<Double> ExpectedReturn = new ArrayList<Double>();
+		
+		ArrayList<Double> A1  = new ArrayList<Double>(); A1.add(4.0); A1.add(5.3); A1.add(6.8); A1.add(5.5); A1.add(10.9);
+		ArrayList<Double> A2  = new ArrayList<Double>(); A2.add(15.0); A2.add(10.3); A2.add(10.8); A2.add(15.5); A2.add(10.9);
+		ArrayList<Double> A3  = new ArrayList<Double>(); A3.add(13.0); A3.add(15.3); A3.add(18.8); A3.add(12.5); A3.add(10.9);
+		FA.add(A1); FA.add(A2); FA.add(A3);
+		
+		Weights.add(0.3); Weights.add(0.3); Weights.add(0.4);
+		ExpectedReturn.add(0.05); ExpectedReturn.add(0.1); ExpectedReturn.add(0.06);
+		
+		Double PortfolioExpectedReturn = Portoculator.PortfolioExpectedReturn(ExpectedReturn, Weights);
+		Double PortfolioVariance = Portoculator.PortfolioVariance(FA, Weights, 1, "ARI");
+		System.out.println(PortfolioExpectedReturn + "   " + PortfolioVariance);

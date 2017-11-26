@@ -163,10 +163,12 @@ public class DataRetriever {
 				}
 				
 			}
-			if(baddatacheck == false) {
+			if(baddatacheck == false && badconnectioncheck == false) {
 				saveCSV(); //Saving data as a file
 				Extractor(); //Extracting and saving separated datasets in an instance
 				UpdateControl.WriteValidationData(SYMBOL);
+			} else {
+				System.out.println("Did not retreive " + SYMBOL + " Correctly");
 			}
 		}
 		
