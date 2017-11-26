@@ -197,12 +197,15 @@ public class UpdateControl {
 		long start = System.currentTimeMillis();
 		for(int i = 0; i < List.size(); i++) {
 			StockPool.add(new Stock(keys.get(i).trim())); //First trim occurring.
-			System.out.println("++++++++++++++++++++++++++++++++++KEYSIZE : " + List.size());
-			int tmpp = (int) (1000000.d * ((i+0.d) / (List.size()+0.d)));
-			Double p = tmpp / 10000.d;
+			System.out.println("=========================");
+			System.out.println(StockPool.get(0).BasicInfo.StockName);
+			int tmpp = (int) (10000.d * ((i+0.d) / (List.size()+0.d)));
+			Double p = tmpp / 100.d;
 			long now = System.currentTimeMillis();
 			long time = (now - start) / 1000;
-			System.out.println("\n" + p + "% Downloaded :::::" + " Time taken : " + time + " seconds ::::: " + i + "th" + "\n");
+			System.out.println(p + "% Downloaded :::::" + " Time taken : " + time + " seconds ::::: ");
+			System.out.println( + i + "th stock");
+			System.out.println("===========================================================================================");
 			StockPool.clear();
 		}
 	}

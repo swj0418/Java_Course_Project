@@ -67,76 +67,101 @@ public class DataRetriever {
 			InputStream ins = null;
 			String csvSplitBy = ",";
 			boolean baddatacheck = false;
+			boolean badconnectioncheck = false;
 			String urlString = new Utils().APIString(SYMBOL);
 			
+			int count = 0;
+			int maxtry = 3;
 			try {
 				url = new URL(urlString);
 				urlConn = url.openConnection();
 				ins = url.openStream();
+				
 			} catch (IOException e) {
+				count++;
 				e.printStackTrace();
-			} finally {
-				br = new BufferedReader(new InputStreamReader(ins));
-				bd = new StringBuilder();
-				msg = null;
+				System.out.println("An error occured while establishing connection with AlphaVantage");
+				badconnectioncheck = true;
 				try {
-					list.clear();
-					int u = 0; // This variable is just for skipping the first line of the data which all are strings
-					while((msg = br.readLine()) != null)
-					{
-						String tmpList[] = msg.split(csvSplitBy);
-						
-						if(msg.startsWith("{")) {
-							System.out.println("Bad Data");
-							baddatacheck = true;
-							break;
-						}
-						if(msg == "    \"Error Message\": \"Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY_ADJUSTED.\"") {
-							System.out.println("Bad Data");
-							baddatacheck = true;
-							break;
-						}
-						if(msg == "}") {
-							System.out.println("Bad Data");
-							baddatacheck = true;
-							break;
-						}
-						try {
-							list.add(tmpList[0]); //Date
-							list.add(tmpList[1]); //Open
-							list.add(tmpList[2]); //High
-							list.add(tmpList[3]); //Low
-							list.add(tmpList[4]); //Close
-							list.add(tmpList[5]); //Volume
-							list.add(tmpList[6]); //Adjusted Close
-							list.add(tmpList[7]); //stock split event
-							if(u != 0) {
-								Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
-								Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
-								Volume_M.put(tmpList[0], Double.valueOf(tmpList[6]));
-								High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
-								Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
-								DATE_M.put(tmpList[0], tmpList[0]);
-								Adj_Close_M.put(tmpList[0], Double.valueOf(tmpList[5]));
-							}
-							u++;
-						} catch(ArrayIndexOutOfBoundsException e) {
-							System.out.println("Bad Data");
-						}
-						
+					Thread.sleep(10000);
+					System.out.println("Retrying to establish connection ... " + count);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				if(count == maxtry) {
+					try {
+						System.out.println("Maximum tryout reached. Giving up. Try later");
+						throw e;
+					} catch (IOException e1) {
+						e1.printStackTrace();
 					}
-				} catch (IOException e) {
-					System.out.println("An error in Retreving " + this.SYMBOL);
-					//e.printStackTrace();
-				} finally {
-					System.out.println(SYMBOL + " Retrieval Done");
+				}
+			} finally {
+				if(badconnectioncheck == false) {
+					br = new BufferedReader(new InputStreamReader(ins));
+					bd = new StringBuilder();
+					msg = null;
+					try {
+						list.clear();
+						int u = 0; // This variable is just for skipping the first line of the data which all are strings
+						while((msg = br.readLine()) != null)
+						{
+							String tmpList[] = msg.split(csvSplitBy);
+							
+							if(msg.startsWith("{")) {
+								System.out.println("Bad Data");
+								baddatacheck = true;
+								break;
+							}
+							if(msg == "    \"Error Message\": \"Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY_ADJUSTED.\"") {
+								System.out.println("Bad Data");
+								baddatacheck = true;
+								break;
+							}
+							if(msg == "}") {
+								System.out.println("Bad Data");
+								baddatacheck = true;
+								break;
+							}
+							try {
+								list.add(tmpList[0]); //Date
+								list.add(tmpList[1]); //Open
+								list.add(tmpList[2]); //High
+								list.add(tmpList[3]); //Low
+								list.add(tmpList[4]); //Close
+								list.add(tmpList[5]); //Volume
+								list.add(tmpList[6]); //Adjusted Close
+								list.add(tmpList[7]); //stock split event
+								if(u != 0) {
+									Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
+									Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
+									Volume_M.put(tmpList[0], Double.valueOf(tmpList[6]));
+									High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
+									Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
+									DATE_M.put(tmpList[0], tmpList[0]);
+									Adj_Close_M.put(tmpList[0], Double.valueOf(tmpList[5]));
+								}
+								u++;
+							} catch(ArrayIndexOutOfBoundsException e) {
+								System.out.println("Bad Data");
+							}
+						}
+					} catch (IOException e) {
+						System.out.println("An error in Retreving " + this.SYMBOL);
+						//e.printStackTrace();
+					} finally {
+						System.out.println(SYMBOL + " Retrieval Done");
+					}
+					
+					try {
+						br.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("Could not connect to AlphaVantage");
 				}
 				
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 			if(baddatacheck == false) {
 				saveCSV(); //Saving data as a file

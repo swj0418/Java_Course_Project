@@ -8,11 +8,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import black.Utils;
+
 public class BasicInformation {
-	String Trade;
-	Integer Number;
-	String StockName;
-	String StockSymbol;
+	public String Trade = "";
+	public Integer Number = 0;
+	public String StockName = "";
+	public String StockSymbol = "";
 	
 	HashMap SymbolList = new HashMap<String, String>();
 	NameInfo symbolList = new NameInfo();
@@ -21,6 +23,7 @@ public class BasicInformation {
 	}
 	public BasicInformation(Stock S) {
 		this.StockSymbol = S.SYMBOL;
+		StockNamegetter();
 	}
 	public BasicInformation(String SymbolorTrade) {
 		if(SymbolorTrade == "NYSE" || SymbolorTrade == "AMEX" || SymbolorTrade == "NASDAQ") {
@@ -31,6 +34,10 @@ public class BasicInformation {
 			System.out.println("Symbol not supported");
 		}
 	}
+	private void TradeFinder() {
+		
+	}
+	
 	public HashMap Symbolgetter(String Index) {
 		System.out.println("Getting Symbols");
 		File file = new File("./Data/INDEX_NAME/" + Index + "_Modified" + ".csv");
@@ -48,6 +55,27 @@ public class BasicInformation {
 			e.printStackTrace();
 		}
 		return SymbolList;
+	}
+	public String StockNamegetter() {
+		BufferedReader reader = Utils.BufferedReaderCreator("./Data/INDEX_NAME/MERGED.csv");
+		String line = "";
+		String name = "";
+		try {
+			while((line = reader.readLine()) != null) {
+				String[] tmp = line.split(",");
+				if(tmp[1].equals(this.StockSymbol)) {
+					this.StockName = tmp[2];
+					name = tmp[2];
+					break;
+				}
+			}
+			reader.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred while retrieving a stock name for " + this.StockSymbol);
+			e.printStackTrace();
+		}
+
+		return name;
 	}
 }
 

@@ -135,6 +135,38 @@ public class Utils {
 		} 
 	}
 	
+	public final static void GeneralLineExtractor(String locationtosave, ArrayList<String> rawdata) {
+		BufferedWriter writer = Utils.BufferedWriterCreator(locationtosave);
+		int columns = 0;
+		int rows    = 0;
+		for(int i = 0; i < rawdata.size(); i++) {
+			String tmp[] = rawdata.get(i).split(",");
+			for(int k = 0; k < tmp.length; k++) {
+				try {
+					writer.write(tmp[k] + ",");
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			try {
+				writer.write("\n");
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			if(i == rawdata.size() - 1) {
+				columns = tmp.length;
+			}
+			rows++;
+		}
+		System.out.println("Writing completed ::::: File created in [" + locationtosave + "]");
+		System.out.println("Wrote " + rows + " rows, " + columns + " column data");
+		try {
+			writer.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public final static void DoubleMatrixPrinter(ArrayList<ArrayList<Double>> ArrayToPrint) {
 		for(int i = 0; i < ArrayToPrint.size(); i++) {
 			for(int j = 0; j < ArrayToPrint.size(); j++) {

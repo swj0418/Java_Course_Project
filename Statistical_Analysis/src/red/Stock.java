@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Stock {
+	public BasicInformation BasicInfo;
 	public String SYMBOL;
 	public String Stock_Name;
 	public Integer Avail_Size;
@@ -63,6 +64,7 @@ public class Stock {
 		
 		this.Avail_Size = this.Adj_Close.size();
 		
+		BasicInfo = new BasicInformation(this);
 		DR = null;
 	}
 	public ArrayList request(String category, String start, String end) {
