@@ -5,7 +5,7 @@ import red.*;
 import javax.swing.*;
 
 import gateFrame.GateFrame_Mother;
-import generalInfoFrame.GeneralInfo_Mother;
+import generalInfoFrame.GeneralInfoFrame_Mother;
 import graphFrame.GraphFrame_Mother;
 
 import java.awt.*;
@@ -18,7 +18,7 @@ public class MotherFrame extends JFrame{
 	
 	GateFrame_Mother mainpanelmother;
 	GraphFrame_Mother graphpanelmother;
-	GeneralInfo_Mother generalinfomother;
+	GeneralInfoFrame_Mother generalinfomother;
 	
 	JMenu mainpanelmothermenu;
 	JMenu graphpanelmothermenu;
@@ -81,7 +81,9 @@ public class MotherFrame extends JFrame{
 		menuitem_gate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Creating GateFrame_Mother");
-				new GateFrame_Mother();
+				if(e.getSource() != null) {
+					jdpDesktop.add(new GateFrame_Mother());
+				}
 			}
 		});
 		

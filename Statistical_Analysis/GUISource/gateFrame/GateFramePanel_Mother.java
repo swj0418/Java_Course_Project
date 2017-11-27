@@ -3,18 +3,22 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class GateFramePanel_Mother extends JPanel{
-	JLabel versioninfo = new JLabel("Version 0.1.0");
-	JLabel authors = new JLabel("Skywalker & Tiruss");
+public class GateFramePanel_Mother extends JPanel implements Runnable{
+	GateFramePanel_AuthorInfo authorinfo = new GateFramePanel_AuthorInfo();
+	GateFramePanel_Time time = new GateFramePanel_Time();
 	
 	GateFramePanel_Mother() {
 		setLayout(null);
 		
-		versioninfo.setBounds(400, 420, 100, 20);
-		authors.setBounds(380, 450, 150, 20);
-		add(versioninfo);
-		add(authors);
+		authorinfo.setBounds(300, 400, 200, 50);
+		add(authorinfo);
+		time.setBounds(0, 400, 100, 50);
+		add(time);
 		
 		setVisible(true);
+	}
+	
+	public void run() {
+		this.time = new GateFramePanel_Time();
 	}
 }
