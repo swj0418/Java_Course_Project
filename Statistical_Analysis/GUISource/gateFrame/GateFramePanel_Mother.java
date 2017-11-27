@@ -6,6 +6,7 @@ import java.awt.event.*;
 public class GateFramePanel_Mother extends JPanel implements Runnable{
 	GateFramePanel_AuthorInfo authorinfo = new GateFramePanel_AuthorInfo();
 	GateFramePanel_Time time = new GateFramePanel_Time();
+	GateFramePanel_Intro intro = new GateFramePanel_Intro();
 	
 	GateFramePanel_Mother() {
 		setLayout(null);
@@ -14,6 +15,8 @@ public class GateFramePanel_Mother extends JPanel implements Runnable{
 		add(authorinfo);
 		time.setBounds(0, 400, 100, 50);
 		add(time);
+		intro.setBounds(0, 20, 200, 50);
+		add(intro);
 		
 		setVisible(true);
 	}
