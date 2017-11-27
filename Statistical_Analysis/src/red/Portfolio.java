@@ -7,9 +7,17 @@ import black.*;
 import blue.*;
 
 public class Portfolio {
+	String PortfolioName = "Default Portfolio";
+	
 	public ArrayList<Stock> StockPool = new ArrayList<Stock>();
 	public ArrayList<Double> Weights = new ArrayList<Double>();
 	public LinkedHashMap<Stock, Double> LinkedStockPool = new LinkedHashMap<Stock, Double>();
+	
+	int Number_of_Securities = 0;
+	String ExpectedReturnEstimatingMethod = "HISTORICAL";
+	
+	public Double PortfolioReturn = 0.d;
+	public Double PortfolioVariance = 0.d;
 	
 	public Portfolio(ArrayList<Stock> StockPool, ArrayList<Double> Weights) {
 		//Basic Form
@@ -36,10 +44,6 @@ public class Portfolio {
 	}
 	
 	
-	
-	public static void main(String[] ar) {
-		
-	}
 }
 
 

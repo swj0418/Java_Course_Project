@@ -168,6 +168,7 @@ public class Utils {
 	}
 	
 	public final static void DoubleMatrixPrinter(ArrayList<ArrayList<Double>> ArrayToPrint) {
+		ArrayList<ArrayList<Double>> tmp = ArrayToPrint;
 		for(int i = 0; i < ArrayToPrint.size(); i++) {
 			for(int j = 0; j < ArrayToPrint.size(); j++) {
 				if(ArrayToPrint.get(j).get(i) < 0) {
