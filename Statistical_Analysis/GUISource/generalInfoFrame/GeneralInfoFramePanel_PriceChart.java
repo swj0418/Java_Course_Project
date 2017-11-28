@@ -19,15 +19,22 @@ public class GeneralInfoFramePanel_PriceChart extends JPanel{
 	}
 	
 	public void renderPanel() {
+		removeAll();
+		
 		stock = new Stock(Global.SYMBOL);
 		
 		setTableContents();
 		
 		pricetable = new JTable(data, column);
-		pricetable.setBounds(0, 0, 500, 300);
+		pricetable.setPreferredScrollableViewportSize(pricetable.getPreferredSize());
+		pricetable.setFillsViewportHeight(false);
+		
 		scrollablepricechartarea = new JScrollPane(pricetable);
 		
 		add(scrollablepricechartarea);
+		
+		validate();
+		repaint();
 	}
 	
 	private void setTableContents() {

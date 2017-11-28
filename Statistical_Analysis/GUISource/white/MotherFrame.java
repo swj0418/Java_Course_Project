@@ -1,5 +1,7 @@
 package white;
 import red.*;
+import tickerLookUpFrame.TickerFrame_Mother;
+
 import javax.swing.*;
 
 import controlsFrame.ControlsFrame_Mother;
@@ -15,15 +17,18 @@ public class MotherFrame extends JFrame{
 	JDesktopPane jdpDesktop;
 	static int openframes = 0; // To keep track of how many frames are open at the moment
 	
-	GateFrame_Mother mainpanelmother;
-	GraphFrame_Mother graphpanelmother;
-	GeneralInfoFrame_Mother generalinfomother;
-	ControlsFrame_Mother controlsframemother;
+	public GateFrame_Mother mainpanelmother;
+	public GraphFrame_Mother graphpanelmother;
+	public GeneralInfoFrame_Mother generalinfomother;
+	public ControlsFrame_Mother controlsframemother;
+	public TickerFrame_Mother tickerframemother;
+	
 	
 	JMenu mainpanelmothermenu;
 	JMenu graphpanelmothermenu;
 	JMenu generalinfomothermenu;
 	JMenu controlsmothermenu;
+	JMenu tickerframemothermenu;
 	
 	JMenuItem menuitem_gate;
 	
@@ -34,6 +39,8 @@ public class MotherFrame extends JFrame{
 	JMenuItem generalinfoMI2;
 	
 	JMenuItem controller;
+	
+	JMenuItem tickersearch;
 	
 	JMenuBar menubar;
 	
@@ -65,7 +72,7 @@ public class MotherFrame extends JFrame{
 	private void setMotherFrame() {
 		borderlayout = new BorderLayout();
 		setLayout(borderlayout);
-		setSize(1024, 768);
+		//setSize(1024, 768);
 		this.setBounds(0, 0, 1600, 900);
 		this.setVisible(true);
 	}
@@ -78,11 +85,15 @@ public class MotherFrame extends JFrame{
 	private void createMenuBar() {
 		menubar = new JMenuBar();
 		
+		//Create Menu
 		mainpanelmothermenu = new JMenu("Main");
 		graphpanelmothermenu = new JMenu("Graph");
 		generalinfomothermenu = new JMenu("General Info");
 		controlsmothermenu = new JMenu("Control Center");
+		tickerframemothermenu = new JMenu("Ticker Search");
 		
+		
+		//Create menuitems
 		menuitem_gate = new JMenuItem("Gate");
 		menuitem_gate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,7 +120,17 @@ public class MotherFrame extends JFrame{
 		generalinfoMI2 = new JMenuItem("Price Information");
 		
 		controller = new JMenuItem("Controller");
-				
+		
+		tickersearch = new JMenuItem("Ticker Search");
+		tickersearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Creating TickerFrame_Mother");
+				jdpDesktop.add(new TickerFrame_Mother());
+			}
+		});
+		
+		
+		//Add menuitems to menu.
 		mainpanelmothermenu.add(menuitem_gate);
 		
 		graphpanelmothermenu.add(graphpanelMI1);
@@ -120,10 +141,14 @@ public class MotherFrame extends JFrame{
 		
 		controlsmothermenu.add(controller);
 		
+		tickerframemothermenu.add(tickersearch);
+		
+		//Add menu to the menubar
 		menubar.add(mainpanelmothermenu);
 		menubar.add(graphpanelmothermenu);
 		menubar.add(generalinfomothermenu);
 		menubar.add(controlsmothermenu);
+		menubar.add(tickerframemothermenu);
 		
 	}
 }

@@ -196,4 +196,27 @@ public class Utils {
 		
 		return retList;
 	}
+	
+	public final static HashMap<String, String> BestMatchSearchAlgorithm(String string) {
+		HashMap<String, String> possiblematch = new HashMap<String, String>();
+		
+		BufferedReader reader = Utils.BufferedReaderCreator("./Data/INDEX_NAME/MERGED.csv");
+		String line = "";
+		try {
+			while((line = reader.readLine()) != null) {
+				String[] tmpinside = line.split(",");
+				
+				for(int i = 0; i < tmpinside.length; i++) {
+					if(tmpinside[i].contains(string)) {
+						possiblematch.put(tmpinside[2], tmpinside[1]);
+					}
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("An error occurred while searching for the best match");
+			e.printStackTrace();
+		}
+		
+		return possiblematch;
+	}
 }

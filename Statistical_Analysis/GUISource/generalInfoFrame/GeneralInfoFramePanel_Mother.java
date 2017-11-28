@@ -8,10 +8,10 @@ import gray.Global;
 import red.Stock;
 
 public class GeneralInfoFramePanel_Mother extends JPanel {
-	GeneralInfoFramePanel_Basics basics;
-	GeneralInfoFramePanel_Controls controls;
-	GeneralInfoFramePanel_LatestData latest;
-	GeneralInfoFramePanel_PriceChart pricechart;
+	public GeneralInfoFramePanel_Basics basics;
+	public GeneralInfoFramePanel_Controls controls;
+	public GeneralInfoFramePanel_LatestData latest;
+	public GeneralInfoFramePanel_PriceChart pricechart;
 	
 	GeneralInfoFramePanel_Mother() {
 		setLayout(null);
@@ -23,7 +23,7 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 		controls.setBounds(300, 0, 200, 50);
 		
 		pricechart = new GeneralInfoFramePanel_PriceChart();
-		pricechart.setBounds(0, 100, 500, 300);
+		pricechart.setBounds(0, 100, 600, 200);
 		
 		ButtonControl();
 		
@@ -38,6 +38,7 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Global.SYMBOL = controls.symbolfield.getText();
 				basics.renderPanel();
+				pricechart.renderPanel();
 			}
 		});
 	}
