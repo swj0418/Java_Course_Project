@@ -4,13 +4,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="GUISource"/>
 	<classpathentry kind="src" path="Global_Region"/>
-	<classpathentry kind="lib" path="E:/Programming/School/JAVA_Application_Project/commons-math3-3.6.1/commons-math3-3.6.1.jar" sourcepath="E:/Programming/School/JAVA_Application_Project/commons-math3-3.6.1/commons-math3-3.6.1-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/E:/Programming/School/JAVA_Application_Project/commons-math3-3.6.1/commons-math3-3.6.1-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="E:/Programming/School/JAVA_Application_Project/commons-math3-3.6.1/commons-math3-3.6.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="E:/Programming/School/JAVA_Application_Project/commons-math3-3.6.1/commons-math3-3.6.1-sources.jar"/>
-	<classpathentry kind="lib" path="E:/Programming/School/JAVA_Application_Project/commons-math3-3.6.1/commons-math3-3.6.1-tools.jar"/>
+	<classpathentry kind="lib" path="E:/Programming/School/JAVA_Application_Project/Java_Course_Project/ExternalLib/Apache/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/Programming/School/JAVA_Application_Project/Java_Course_Project/ExternalLib/Apache/commons-math3-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="E:/Programming/School/JAVA_Application_Project/Java_Course_Project/ExternalLib/Apache/commons-math3-3.6.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

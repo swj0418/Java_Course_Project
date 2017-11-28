@@ -179,6 +179,21 @@ public class Utils {
 			}
 			System.out.println();
 		}
+	}
+	
+	public final static String[][] ArrayListToPlain(ArrayList A1, int colsize) {
+		int rowsize = 0;
+		rowsize = A1.size() / colsize;
 		
+		String[][] retList = new String[rowsize][colsize];
+		int j = 0;
+		for(int i = 0; i < rowsize; i++) {
+			for(int k = 0; k < colsize; k++) {
+				retList[i][k] = A1.get(j).toString();
+				j++;
+			}
+		}
+		
+		return retList;
 	}
 }

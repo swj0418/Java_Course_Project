@@ -21,8 +21,9 @@ public class Stock {
 	public Integer Avail_Size;
 	public String LastDate;
 	public String FirstDate;
+	public String[] column;
 	
-	ArrayList Total = new ArrayList();
+	public ArrayList<?> Total = new ArrayList();
 	public ArrayList<Double> Close = new ArrayList<Double>();		
 	public ArrayList<String> Date = new ArrayList<String>();
 	public ArrayList<Double> Open = new ArrayList<Double>();
@@ -63,6 +64,8 @@ public class Stock {
 		this.DATE_M = DR.DATE_M;
 		
 		this.Avail_Size = this.Adj_Close.size();
+		this.column = DR.column;
+		this.Total = DR.Total;
 		
 		BasicInfo = new BasicInformation(this);
 		DR = null;

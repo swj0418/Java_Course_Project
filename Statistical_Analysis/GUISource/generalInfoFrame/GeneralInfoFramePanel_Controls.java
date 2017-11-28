@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import gray.Global;
 
-public class GeneralInfoFramePanel_Controls extends JPanel implements ActionListener{
+public class GeneralInfoFramePanel_Controls extends JPanel {
 	JLabel symboltolookfor = new JLabel("Find by Symbol : ");
 	JTextField symbolfield = new JTextField();
 	JButton updatebutton = new JButton("Search!");
@@ -18,15 +18,7 @@ public class GeneralInfoFramePanel_Controls extends JPanel implements ActionList
 		layout.setRows(2);
 		setLayout(layout);
 		
-		updatebutton.addActionListener(this);
-		
 		add(symboltolookfor); add(symbolfield);
 		add(updatebutton);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String symbol_to_read = symbolfield.getText().toUpperCase();
-		Global.SYMBOL = symbol_to_read;
 	}
 }

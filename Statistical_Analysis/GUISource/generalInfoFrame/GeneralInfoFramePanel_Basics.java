@@ -23,6 +23,12 @@ public class GeneralInfoFramePanel_Basics extends JPanel{
 	GridLayout layout = new GridLayout();
 	
 	GeneralInfoFramePanel_Basics() {
+		renderPanel();
+	}
+	
+	public void renderPanel() {
+		this.removeAll();
+		
 		stock = new Stock(Global.SYMBOL);
 		
 		layout.setColumns(1);
@@ -36,5 +42,7 @@ public class GeneralInfoFramePanel_Basics extends JPanel{
 		
 		add(stockname); add(stocksymbol); add(IPO_year); add(availabledatasize);
 		
+		this.validate();
+		repaint();
 	}
 }

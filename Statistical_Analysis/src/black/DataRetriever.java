@@ -26,8 +26,9 @@ public class DataRetriever {
 	Boolean localAvailability = false;
 	Boolean UpdateNeeds = false;
 	String SYMBOL;
+	public String[] column = new String[8];
 	
-	ArrayList Total = new ArrayList();
+	public ArrayList Total = new ArrayList();
 	public ArrayList<Double> Close = new ArrayList<Double>();		
 	public ArrayList<String> Date = new ArrayList<String>();
 	public ArrayList<Double> Open = new ArrayList<Double>();
@@ -132,6 +133,7 @@ public class DataRetriever {
 								list.add(tmpList[5]); //Volume
 								list.add(tmpList[6]); //Adjusted Close
 								list.add(tmpList[7]); //stock split event
+								
 								if(u != 0) {
 									Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
 									Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
@@ -208,6 +210,7 @@ public class DataRetriever {
 						list.add(tmpList[5]); //Adj Close
 						list.add(tmpList[6]); //Volume
 						list.add(tmpList[7]); //stock split event
+						
 						if(u != 0) {
 							Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
 							Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
@@ -237,6 +240,10 @@ public class DataRetriever {
 	private void Extractor() { //This method extracts sub data. Will be called within the method retrieve
 		System.out.println("Extracting data for " + SYMBOL);
 		System.out.println("List size : " + list.size());
+		for(int i = 0; i < 8; i++) {
+			column[i] = list.get(i);
+		}
+		Total = list;
 		for(int i = 8; i < list.size(); i++) { // "i" here must be changed when using another data or on a data size
 											   // The reason i starts from 6 is because the first 6 elements are indexes thus they are string
 			if(i % 8 == 0)
