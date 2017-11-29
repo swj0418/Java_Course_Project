@@ -4,6 +4,7 @@ import tickerLookUpFrame.TickerFrame_Mother;
 
 import javax.swing.*;
 
+import consoleFrame.ConsoleFrame_Mother;
 import controlsFrame.ControlsFrame_Mother;
 import gateFrame.GateFrame_Mother;
 import generalInfoFrame.GeneralInfoFrame_Mother;
@@ -22,14 +23,17 @@ public class MotherFrame extends JFrame{
 	public GeneralInfoFrame_Mother generalinfomother;
 	public ControlsFrame_Mother controlsframemother;
 	public TickerFrame_Mother tickerframemother;
+	public ConsoleFrame_Mother consoleframemother;
 	
-	
+	//Menu
 	JMenu mainpanelmothermenu;
 	JMenu graphpanelmothermenu;
 	JMenu generalinfomothermenu;
 	JMenu controlsmothermenu;
 	JMenu tickerframemothermenu;
+	JMenu consoleframemothermenu;
 	
+	//Menu items
 	JMenuItem menuitem_gate;
 	
 	JMenuItem graphpanelMI1;
@@ -42,6 +46,9 @@ public class MotherFrame extends JFrame{
 	
 	JMenuItem tickersearch;
 	
+	JMenuItem console;
+	
+	//Menubar & etc...
 	JMenuBar menubar;
 	
 	BorderLayout borderlayout;
@@ -50,6 +57,8 @@ public class MotherFrame extends JFrame{
 		setMotherFrame();
 		createMenuBar();
 		addMenuBar();
+		
+		//Internal Frames Configuration
 		setInternalFramework();
 		createDefaultInternalFrames();
 		
@@ -60,6 +69,7 @@ public class MotherFrame extends JFrame{
 	private void createDefaultInternalFrames() {
 		jdpDesktop.add(new GateFrame_Mother());
 		jdpDesktop.add(new GeneralInfoFrame_Mother());
+		jdpDesktop.add(new TickerFrame_Mother());
 	}
 	
 	private void setInternalFramework() {
@@ -91,6 +101,7 @@ public class MotherFrame extends JFrame{
 		generalinfomothermenu = new JMenu("General Info");
 		controlsmothermenu = new JMenu("Control Center");
 		tickerframemothermenu = new JMenu("Ticker Search");
+		consoleframemothermenu = new JMenu("Console");
 		
 		
 		//Create menuitems
@@ -129,6 +140,14 @@ public class MotherFrame extends JFrame{
 			}
 		});
 		
+		console = new JMenuItem("Console");
+		console.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Creating ConsoleFrame_Mother");
+				jdpDesktop.add(new ConsoleFrame_Mother());
+			}
+		});
+		
 		
 		//Add menuitems to menu.
 		mainpanelmothermenu.add(menuitem_gate);
@@ -143,12 +162,14 @@ public class MotherFrame extends JFrame{
 		
 		tickerframemothermenu.add(tickersearch);
 		
+		consoleframemothermenu.add(console);
+		
 		//Add menu to the menubar
 		menubar.add(mainpanelmothermenu);
 		menubar.add(graphpanelmothermenu);
 		menubar.add(generalinfomothermenu);
 		menubar.add(controlsmothermenu);
 		menubar.add(tickerframemothermenu);
-		
+		menubar.add(consoleframemothermenu);
 	}
 }

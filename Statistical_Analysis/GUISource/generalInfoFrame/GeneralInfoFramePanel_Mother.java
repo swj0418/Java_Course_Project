@@ -14,6 +14,12 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 	public GeneralInfoFramePanel_PriceChart pricechart;
 	
 	GeneralInfoFramePanel_Mother() {
+		renderFrame();
+	}
+	
+	public void renderFrame() {
+		removeAll();
+		
 		setLayout(null);
 		
 		basics = new GeneralInfoFramePanel_Basics();
@@ -30,6 +36,9 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 		add(basics);
 		add(controls);
 		add(pricechart);
+		
+		validate();
+		repaint();
 	}
 	
 	private void ButtonControl() {
@@ -43,3 +52,4 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 		});
 	}
 }
+

@@ -28,7 +28,7 @@ public class TickerFramePanel_Result extends JPanel {
 			buttonarray.get(i).setSize(300, 10);
 			add(buttonarray.get(i));
 		}
-		//ActionControl(); //This must be placed here. if not, it won't show. or...
+		ActionControl();
 		
 		validate();
 		repaint();
@@ -42,6 +42,11 @@ public class TickerFramePanel_Result extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					JButton button = (JButton) e.getSource();
+					Global.SYMBOL = button.getName();
+					//Global.motherframe.generalinfomother.motherpanel.renderFrame();
+					
+					//Global.motherframe.generalinfomother.motherpanel.basics.renderPanel();
+					//Global.motherframe.generalinfomother.motherpanel.pricechart.renderPanel();
 				}
 
 				@Override
