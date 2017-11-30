@@ -50,7 +50,7 @@ public class Stock {
 		this.Close = DR.Close;
 		this.Date = DR.Date;
 		this.Open = DR.Open;
-		this.Volume = DR.Open;
+		this.Volume = DR.Volume;
 		this.High = DR.High;
 		this.Low = DR.Low;
 		this.Adj_Close = DR.Adj_Close;

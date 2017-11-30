@@ -27,7 +27,7 @@ public class MotherFrame extends JFrame{
 	
 	JMenuItem menuitem_gate;
 	
-	JMenuItem graphpanelMI1;
+	JMenuItem pricegraph;
 	JMenuItem graphpanelMI2;
 	
 	JMenuItem generalinfoMI1;
@@ -53,6 +53,7 @@ public class MotherFrame extends JFrame{
 	private void createDefaultInternalFrames() {
 		jdpDesktop.add(new GateFrame_Mother());
 		jdpDesktop.add(new GeneralInfoFrame_Mother());
+		jdpDesktop.add(new GraphFrame_Mother());
 	}
 	
 	private void setInternalFramework() {
@@ -66,7 +67,7 @@ public class MotherFrame extends JFrame{
 		borderlayout = new BorderLayout();
 		setLayout(borderlayout);
 		setSize(1024, 768);
-		this.setBounds(0, 0, 1600, 900);
+		this.setBounds(0, 0, 1600, 1000);
 		this.setVisible(true);
 	}
 	
@@ -94,7 +95,13 @@ public class MotherFrame extends JFrame{
 		});
 		
 		
-		graphpanelMI1 = new JMenuItem("graphpanelMI1");
+		pricegraph = new JMenuItem("pricegraph");
+		pricegraph.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Creating Price Graph");
+				jdpDesktop.add(new GraphFrame_Mother());
+			}
+		});
 		graphpanelMI2 = new JMenuItem("graphpanelMI2");
 		
 		generalinfoMI1 = new JMenuItem("General Stock Information");
@@ -112,7 +119,7 @@ public class MotherFrame extends JFrame{
 				
 		mainpanelmothermenu.add(menuitem_gate);
 		
-		graphpanelmothermenu.add(graphpanelMI1);
+		graphpanelmothermenu.add(pricegraph);
 		graphpanelmothermenu.add(graphpanelMI2);
 		
 		generalinfomothermenu.add(generalinfoMI1);

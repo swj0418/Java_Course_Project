@@ -1,6 +1,9 @@
 package black;
 
 import java.util.*;
+
+import javax.swing.text.DateFormatter;
+
 import java.io.*;
 import java.time.*;
 import java.time.format.*;
@@ -195,5 +198,19 @@ public class Utils {
 		}
 		
 		return retList;
+	}
+	
+	public final static Date[] StringToDate(ArrayList A1) {
+		Date[] retarr = new Date[A1.size()];
+		DateFormatter format;
+		
+		for(int i = 0; i < retarr.length; i++) {
+			LocalDate d ;
+			d = LocalDate.parse(A1.get(i).toString());
+			Date date = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			
+			retarr[i] = date;
+		}
+		return retarr;
 	}
 }

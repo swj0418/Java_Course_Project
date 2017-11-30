@@ -130,9 +130,9 @@ public class DataRetriever {
 								list.add(tmpList[2]); //High
 								list.add(tmpList[3]); //Low
 								list.add(tmpList[4]); //Close
-								list.add(tmpList[5]); //Volume
-								list.add(tmpList[6]); //Adjusted Close
-								list.add(tmpList[7]); //stock split event
+								list.add(tmpList[5]);
+								list.add(tmpList[6]); 
+								list.add(tmpList[7]);
 								
 								if(u != 0) {
 									Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
@@ -201,16 +201,15 @@ public class DataRetriever {
 							System.out.println("Bad Data!");
 							break;
 						}
-
-						list.add(tmpList[0]); 
-						list.add(tmpList[1]); 
-						list.add(tmpList[2]); 
-						list.add(tmpList[3]); 
-						list.add(tmpList[4]);
+						
+						list.add(tmpList[0]); //Time
+						list.add(tmpList[1]); //Open
+						list.add(tmpList[2]); //High
+						list.add(tmpList[3]); //Low
+						list.add(tmpList[4]); //Close
 						list.add(tmpList[5]); //Adj Close
 						list.add(tmpList[6]); //Volume
-						list.add(tmpList[7]); //stock split event
-						
+						list.add(tmpList[7]); //Dividend
 						if(u != 0) {
 							Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
 							Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
