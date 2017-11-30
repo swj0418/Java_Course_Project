@@ -10,6 +10,9 @@ import gateFrame.GateFrame_Mother;
 import generalInfoFrame.GeneralInfoFrame_Mother;
 import graphFrame.GraphFrame_Mother;
 import gray.Global;
+import portfolioFramework.PortfolioFrameWork_Father;
+import portfolioFramework.PortfolioManagerFrame_Mother;
+import portfolioFramework.PortfolioManagerPanel_Mother;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -21,9 +24,12 @@ public class MotherFrame extends JFrame{
 	public GateFrame_Mother mainpanelmother;
 	public GraphFrame_Mother graphpanelmother;
 	public GeneralInfoFrame_Mother generalinfomother;
-	public ControlsFrame_Mother controlsframemother;
-	public TickerFrame_Mother tickerframemother;
-	public ConsoleFrame_Mother consoleframemother;
+	public ControlsFrame_Mother controlsframemother; // 1 Approach and above
+	public TickerFrame_Mother tickerframemother;  // 2 Approach
+	public ConsoleFrame_Mother consoleframemother; // 2 Approach
+	
+	public PortfolioFrameWork_Father portfolioframework; // 3 Different Approach
+	public PortfolioManagerFrame_Mother portfoliomanagerframemother;
 	
 	//Menu
 	JMenu mainpanelmothermenu;
@@ -32,6 +38,7 @@ public class MotherFrame extends JFrame{
 	JMenu controlsmothermenu;
 	JMenu tickerframemothermenu;
 	JMenu consoleframemothermenu;
+	JMenu portfolioframemothermenu;
 	
 	//Menu items
 	JMenuItem menuitem_gate;
@@ -48,6 +55,10 @@ public class MotherFrame extends JFrame{
 	
 	JMenuItem console;
 	
+	JMenuItem portfoliomanager;
+	JMenuItem portfolioviewer;
+	JMenuItem portfoliocorrelation;
+	
 	//Menubar & etc...
 	JMenuBar menubar;
 	
@@ -55,6 +66,9 @@ public class MotherFrame extends JFrame{
 	
 	public MotherFrame() {
 		setMotherFrame();
+		
+		createFrameWork();
+		
 		createMenuBar();
 		addMenuBar();
 		
@@ -102,6 +116,7 @@ public class MotherFrame extends JFrame{
 		controlsmothermenu = new JMenu("Control Center");
 		tickerframemothermenu = new JMenu("Ticker Search");
 		consoleframemothermenu = new JMenu("Console");
+		portfolioframemothermenu = new JMenu("Portfolio");
 		
 		
 		//Create menuitems
@@ -148,6 +163,16 @@ public class MotherFrame extends JFrame{
 			}
 		});
 		
+		portfoliomanager = new JMenuItem("Portfolio Manager");
+		portfoliomanager.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Creating PorfolioManagerFrame_Mother");
+				jdpDesktop.add(portfolioframework.manager);
+			}
+		});
+		portfolioviewer = new JMenuItem("Portfolio Viewer");
+		portfoliocorrelation = new JMenuItem("Correlation");
+		
 		
 		//Add menuitems to menu.
 		mainpanelmothermenu.add(menuitem_gate);
@@ -164,6 +189,11 @@ public class MotherFrame extends JFrame{
 		
 		consoleframemothermenu.add(console);
 		
+		portfolioframemothermenu.add(portfoliomanager);
+		portfolioframemothermenu.add(portfolioviewer);
+		portfolioframemothermenu.addSeparator();
+		portfolioframemothermenu.add(portfoliocorrelation);
+		
 		//Add menu to the menubar
 		menubar.add(mainpanelmothermenu);
 		menubar.add(graphpanelmothermenu);
@@ -171,5 +201,10 @@ public class MotherFrame extends JFrame{
 		menubar.add(controlsmothermenu);
 		menubar.add(tickerframemothermenu);
 		menubar.add(consoleframemothermenu);
+		menubar.add(portfolioframemothermenu);
+	}
+	
+	public void createFrameWork() {
+		portfolioframework = new PortfolioFrameWork_Father();
 	}
 }
