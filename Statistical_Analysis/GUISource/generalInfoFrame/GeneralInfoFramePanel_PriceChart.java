@@ -1,4 +1,6 @@
 package generalInfoFrame;
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 import black.Utils;
@@ -14,20 +16,22 @@ public class GeneralInfoFramePanel_PriceChart extends JPanel{
 	String[]   column;
 	String[][] data;
 	
+	BorderLayout layout = new BorderLayout(); //JTable and ScrollPane has some serious problem. They are said to be hard-coded. To override, add borderlayout.
 	GeneralInfoFramePanel_PriceChart() {
 		renderPanel();
 	}
 	
 	public void renderPanel() {
 		removeAll();
-		
+		setLayout(layout);
 		stock = new Stock(Global.SYMBOL);
+		
 		
 		setTableContents();
 		
 		pricetable = new JTable(data, column);
 		pricetable.setPreferredScrollableViewportSize(pricetable.getPreferredSize());
-		pricetable.setFillsViewportHeight(false);
+		//pricetable.setFillsViewportHeight(false);
 		
 		scrollablepricechartarea = new JScrollPane(pricetable);
 		

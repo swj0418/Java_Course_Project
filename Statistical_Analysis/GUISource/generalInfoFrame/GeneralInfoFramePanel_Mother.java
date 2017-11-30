@@ -26,10 +26,10 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 		basics.setBounds(0, 0, 200, 100);
 		
 		controls = new GeneralInfoFramePanel_Controls();
-		controls.setBounds(300, 0, 200, 50);
+		controls.setBounds(500, 0, 200, 50);
 		
 		pricechart = new GeneralInfoFramePanel_PriceChart();
-		pricechart.setBounds(0, 100, 600, 200);
+		pricechart.setBounds(0, 100, 690, 200);
 		
 		ButtonControl();
 		

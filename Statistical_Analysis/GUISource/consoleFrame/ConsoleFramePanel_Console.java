@@ -17,6 +17,7 @@ public class ConsoleFramePanel_Console extends ConsoleFramePanel_Mother {
 	JScrollPane scrollableconsole;
 	Console console;
 	ConsoleOutputCapturer capturer = new ConsoleOutputCapturer();
+	String str = "";
 	
 	ConsoleFramePanel_Console() {
 		renderPanel();
@@ -46,7 +47,7 @@ public class ConsoleFramePanel_Console extends ConsoleFramePanel_Mother {
 			public void run() {
 				capturer.start();
 			}
-		}, 0, 500);
+		}, 0, 2);
 	}
 	
 	public void TimerTaskHandlerTerminal() {
@@ -54,9 +55,10 @@ public class ConsoleFramePanel_Console extends ConsoleFramePanel_Mother {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				String str = capturer.stop();
+				str += capturer.stop();
 				consolearea.append(str);
+				str = "";
 			}
-		}, 0, 1000);
+		}, 500, 1000);
 	}
 }
