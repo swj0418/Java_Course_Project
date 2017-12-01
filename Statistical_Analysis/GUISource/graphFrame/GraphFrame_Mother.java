@@ -3,7 +3,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
-public class GraphFrame_Mother extends JInternalFrame{
+public class GraphFrame_Mother extends JInternalFrame {
 	GraphFramePanel_Mother motherpanel;
 	
 	BorderLayout layout = new BorderLayout();

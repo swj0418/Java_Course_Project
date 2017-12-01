@@ -30,9 +30,6 @@ import gray.Global;
 import red.Stock;
 
 public class GraphFramePanel_Chart extends JPanel{
-	
-	GraphFramePanel_Search search = new GraphFramePanel_Search();
-
 	Stock stock; 
 	
 	String symbol;
@@ -55,55 +52,36 @@ public class GraphFramePanel_Chart extends JPanel{
 	Double y_axis_min;
 	Double y_axis_max;
 
-	
-	public String start_init = "2016-01-01";
-	public String end_init = "2017-11-01";
-
 	GraphFramePanel_Chart(){
-		renderPanel(start_init, end_init);
+		renderPanel();
 	}
 	
-	public void renderPanel(String start, String end) {
-		
-		
+	public void renderPanel() {
 		removeAll();
-		revalidate();
 		
-		data  = createDataset(start, end);
+		setLayout(layout);
+		
+		data  = createDataset();
 		chart = createChart(data);
 		chartPanel = new ChartPanel(chart);
 		
-		setLayout(layout);
 		add(chartPanel);
 
+		validate();
 		repaint();
 	}
 	
-	/*public void refreshPanel() {
-		removeAll();
-		revalidate();
-		
-		data  = createDataset(search.start, search.end);
-		chart = createChart(data);
-		chartPanel = new ChartPanel(chart);
-		
-		setLayout(layout);
-		add(chartPanel);
-
-		repaint();
-	}
-	*/
 	@SuppressWarnings("unchecked")
-	public DefaultHighLowDataset createDataset(String start, String end) {
+	public DefaultHighLowDataset createDataset() {
 		stock = new Stock(Global.SYMBOL);
 		
 		symbol = stock.SYMBOL;
-		date = stock.request("DATE", start, end);
-		high = stock.request("HIGH", start, end);
-		low = stock.request("LOW", start, end);
-		open = stock.request("OPEN", start, end);
-		adj_close = stock.request("ADJ_CLOSE", start, end);
-		volume = stock.request("VOLUME", start, end);
+		date = stock.request("DATE", Global.GraphStart, Global.GraphEnd);
+		high = stock.request("HIGH", Global.GraphStart, Global.GraphEnd);
+		low = stock.request("LOW", Global.GraphStart, Global.GraphEnd);
+		open = stock.request("OPEN", Global.GraphStart, Global.GraphEnd);
+		adj_close = stock.request("ADJ_CLOSE", Global.GraphStart, Global.GraphEnd);
+		volume = stock.request("VOLUME", Global.GraphStart, Global.GraphEnd);
 		
 		Date[] date_list = new Date[date.size()];
 		date_list = Utils.StringToDate(date);
