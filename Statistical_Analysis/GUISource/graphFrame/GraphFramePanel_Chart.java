@@ -30,6 +30,9 @@ import gray.Global;
 import red.Stock;
 
 public class GraphFramePanel_Chart extends JPanel{
+	
+	GraphFramePanel_Search search = new GraphFramePanel_Search();
+
 	Stock stock; 
 	
 	String symbol;
@@ -44,41 +47,63 @@ public class GraphFramePanel_Chart extends JPanel{
 	
 	DefaultHighLowDataset data;
 
+
 	JFreeChart chart;
-	ChartPanel insidepanel;
+	ChartPanel chartPanel;
+
 	
 	Double y_axis_min;
 	Double y_axis_max;
 
 	
+	public String start_init = "2016-01-01";
+	public String end_init = "2017-11-01";
+
 	GraphFramePanel_Chart(){
-		renderPanel();
+		renderPanel(start_init, end_init);
 	}
 	
-	public void renderPanel() {
+	public void renderPanel(String start, String end) {
+		
+		
 		removeAll();
-		setLayout(layout);
+		revalidate();
 		
-		data  = createDataset();
+		data  = createDataset(start, end);
 		chart = createChart(data);
-		insidepanel = new ChartPanel(chart);
-		add(insidepanel);
-
+		chartPanel = new ChartPanel(chart);
 		
-		validate();
+		setLayout(layout);
+		add(chartPanel);
+
 		repaint();
 	}
 	
-	public DefaultHighLowDataset createDataset() {
+	/*public void refreshPanel() {
+		removeAll();
+		revalidate();
+		
+		data  = createDataset(search.start, search.end);
+		chart = createChart(data);
+		chartPanel = new ChartPanel(chart);
+		
+		setLayout(layout);
+		add(chartPanel);
+
+		repaint();
+	}
+	*/
+	@SuppressWarnings("unchecked")
+	public DefaultHighLowDataset createDataset(String start, String end) {
 		stock = new Stock(Global.SYMBOL);
 		
 		symbol = stock.SYMBOL;
-		date = stock.request("DATE", "2017-09-01", "2017-11-01");
-		high = stock.request("HIGH", "2017-09-01", "2017-11-01");
-		low = stock.request("LOW", "2017-09-01", "2017-11-01");
-		open = stock.request("OPEN", "2017-09-01", "2017-11-01");
-		adj_close = stock.request("ADJ_CLOSE", "2017-09-01", "2017-11-01");
-		volume = stock.request("VOLUME", "2017-09-01", "2017-11-01");
+		date = stock.request("DATE", start, end);
+		high = stock.request("HIGH", start, end);
+		low = stock.request("LOW", start, end);
+		open = stock.request("OPEN", start, end);
+		adj_close = stock.request("ADJ_CLOSE", start, end);
+		volume = stock.request("VOLUME", start, end);
 		
 		Date[] date_list = new Date[date.size()];
 		date_list = Utils.StringToDate(date);
@@ -104,8 +129,8 @@ public class GraphFramePanel_Chart extends JPanel{
 		return data;
 	}
 
-	private JFreeChart createChart(final DefaultHighLowDataset dataset) {
-		 
+	public JFreeChart createChart(DefaultHighLowDataset dataset) {
+
 		chart = ChartFactory.createCandlestickChart("History of " + stock.SYMBOL, "Time", "Price", dataset, true);
 		
 		XYPlot plot = chart.getXYPlot();
@@ -117,4 +142,5 @@ public class GraphFramePanel_Chart extends JPanel{
 		
 		return chart;
 	}
+	
 }
