@@ -8,7 +8,7 @@ public class GateFrame_Mother extends JInternalFrame {
 	
 	public GateFrame_Mother() {
 		super("Gate Frame", true, true, true, true);
-		setSize(500, 500);
+		setSize(350, 500);
 		setLocation(xPosition, yPosition);
 		
 		

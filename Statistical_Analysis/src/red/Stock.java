@@ -1,6 +1,7 @@
 package red;
 import java.util.*;
 import black.DataRetriever;
+import black.Stoculator;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -40,6 +41,11 @@ public class Stock {
 	public LinkedHashMap<String, Double> Low_M = new LinkedHashMap<String, Double>();
 	public LinkedHashMap<String, String> DATE_M = new LinkedHashMap<String, String>(); //For the ease of printing dates
 	
+	//Test
+	public ArrayList<Double> Adj_Open = new ArrayList<Double>();
+	public LinkedHashMap<String, Double> Adj_Open_M = new LinkedHashMap<String, Double>();
+	
+	
 	public Stock() {
 		
 	}
@@ -66,6 +72,8 @@ public class Stock {
 		this.Avail_Size = this.Adj_Close.size();
 		this.column = DR.column;
 		this.Total = DR.Total;
+		
+		this.Adj_Open = Stoculator.AdjustOpen(this.Adj_Close, this.Close, this.Open);
 		
 		BasicInfo = new BasicInformation(this);
 		DR = null;
@@ -135,7 +143,9 @@ public class Stock {
 				begin = begin.plusDays(1);
 			}
 			return return_arr;
-		} 
+		} else if (cat == "ADJ_OPEN") {
+			return Adj_Open;
+		}
 		else {
 			// May need to add more if date category increases
 			System.out.println("No such data");

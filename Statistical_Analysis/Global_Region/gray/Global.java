@@ -18,8 +18,14 @@ public class Global {
 	public static String SYMBOL = "AAPL";
 	public static MotherFrame motherframe;
 	
+	//Portfolio Global
 	public static double weightleft = 100;
 	public static ArrayList<Stock> stockpool;
+	
+	//Graph Global
+	public static String GraphStart = "2016-01-01";
+	public static String GraphEnd = "2017-10-01";
+	public static String Graph_SYMBOL = "AAPL";
 	
 	public Global() {
 		

@@ -233,4 +233,12 @@ public final class Stoculator {
 		
 		return retArr;
 	}
+	
+	public final static ArrayList<Double> AdjustOpen(ArrayList<Double> ADJ_CLOSE, ArrayList<Double> CLOSE, ArrayList<Double> OPEN) {
+		ArrayList<Double> retArr = new ArrayList<Double>();
+		for(int i = 0; i < ADJ_CLOSE.size(); i++) {
+			retArr.add(OPEN.get(i) + ((CLOSE.get(i) - ADJ_CLOSE.get(i))));
+		}
+		return retArr;
+	}
 }

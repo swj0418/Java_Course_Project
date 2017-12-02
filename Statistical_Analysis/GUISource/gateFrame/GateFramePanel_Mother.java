@@ -11,7 +11,7 @@ public class GateFramePanel_Mother extends JPanel implements Runnable{
 	GateFramePanel_Mother() {
 		setLayout(null);
 		
-		authorinfo.setBounds(300, 400, 200, 50);
+		authorinfo.setBounds(170, 400, 200, 50);
 		add(authorinfo);
 		time.setBounds(0, 400, 100, 50);
 		add(time);

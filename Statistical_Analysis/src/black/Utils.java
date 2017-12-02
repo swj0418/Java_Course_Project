@@ -229,4 +229,15 @@ public class Utils {
 		
 		return retnum;
 	}
+	
+	public final static Date[] StringToDate(ArrayList A1) {
+		Date[] retarr = new Date[A1.size()];
+		for(int i = 0; i < retarr.length; i++) {
+			LocalDate d ;
+			d = LocalDate.parse(A1.get(i).toString());
+			Date date = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			retarr[i] = date;
+		}
+		return retarr;
+	}
 }

@@ -14,7 +14,7 @@ public class TickerFrame_Mother extends JInternalFrame{
 		setLayout(null);
 		
 		setSize(300, 500);
-		setLocation(500, 0);
+		setLocation(350, 0);
 		
 		motherpanel = new TickerFramePanel_Mother();
 		motherpanel.setBounds(0, 0, 300, 500);
