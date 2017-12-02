@@ -12,12 +12,12 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.DefaultHighLowDataset;
 
 public class GraphFramePanel_Search extends JPanel{
-	JLabel start_search = new JLabel("Start Date : ");
-	JLabel end_search = new JLabel("  End Date : ");
-	JLabel blank = new JLabel("");
+	JLabel start_search = new JLabel();
+	JLabel end_search = new JLabel();
+	JLabel blank = new JLabel();
 	JTextField start_date = new JTextField();
 	JTextField end_date = new JTextField();
-	JButton button = new JButton("Search!");
+	JButton button = new JButton();
 	
 	String start;
 	String end;
