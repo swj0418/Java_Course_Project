@@ -24,11 +24,11 @@ public class MotherFrame extends JFrame{
 	public GateFrame_Mother mainpanelmother;
 	public GraphFrame_Mother graphpanelmother;
 	public GeneralInfoFrame_Mother generalinfomother;
-	public ControlsFrame_Mother controlsframemother; // 1 Approach and above
-	public TickerFrame_Mother tickerframemother;  // 2 Approach
-	public ConsoleFrame_Mother consoleframemother; // 2 Approach
+	public ControlsFrame_Mother controlsframemother; // 1 Approach and above 1
+	public TickerFrame_Mother tickerframemother;  // 2 Approach 2
+	public ConsoleFrame_Mother consoleframemother; // 2 Approach 2
 	
-	public PortfolioFrameWork_Father portfolioframework; // 3 Different Approach
+	public PortfolioFrameWork_Father portfolioframework; // 3 Different Approach 3
 	public PortfolioManagerFrame_Mother portfoliomanagerframemother;
 	
 	//Menu
@@ -167,7 +167,7 @@ public class MotherFrame extends JFrame{
 		portfoliomanager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Creating PorfolioManagerFrame_Mother");
-				jdpDesktop.add(portfolioframework.manager);
+				jdpDesktop.add(portfolioframework.manager, 0);
 			}
 		});
 		portfolioviewer = new JMenuItem("Portfolio Viewer");

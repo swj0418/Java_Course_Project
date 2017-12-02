@@ -1,5 +1,8 @@
 package portfolioFramework;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,11 +31,11 @@ public class PortfolioManagerPanel_AddStock extends JPanel{
 		setLayout(null);
 		
 		symbol = new JLabel("Symbol : ");
-		weight = new JLabel("Weight : ");
+		weight = new JLabel("Weight (in %) : ");
 		symbolfield = new JTextField();
 		weightfield = new JTextField();
 		addstock = new JButton("Add Stock");
-		weightleft = new JLabel("Weights left : " + Global.weightleft);
+		weightleft = new JLabel("Weights left : " + Global.weightleft + "%");
 		
 		symbol.setBounds(0, 0, 100, 50);
 		weight.setBounds(0, 50, 100, 50);

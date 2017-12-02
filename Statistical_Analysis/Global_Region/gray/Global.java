@@ -18,7 +18,7 @@ public class Global {
 	public static String SYMBOL = "AAPL";
 	public static MotherFrame motherframe;
 	
-	public static double weightleft = 1;
+	public static double weightleft = 100;
 	public static ArrayList<Stock> stockpool;
 	
 	public Global() {

@@ -1,6 +1,11 @@
 package portfolioFramework;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
+
+import gray.Global;
 
 public class PortfolioManagerPanel_Mother extends JPanel{
 	PortfolioManagerPanel_AddStock addstockpanel;

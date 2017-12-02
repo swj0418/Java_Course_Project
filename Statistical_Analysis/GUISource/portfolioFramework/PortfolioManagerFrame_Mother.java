@@ -1,6 +1,11 @@
 package portfolioFramework;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JInternalFrame;
+
+import gray.Global;
 
 public class PortfolioManagerFrame_Mother extends JInternalFrame{
 	PortfolioManagerPanel_Mother motherpanel;
@@ -17,10 +22,10 @@ public class PortfolioManagerFrame_Mother extends JInternalFrame{
 		setLocation(300, 300);
 		add(motherpanel);
 		
+		
 		validate();
 		repaint();
 		
 		setVisible(true);
 	}
-
 }

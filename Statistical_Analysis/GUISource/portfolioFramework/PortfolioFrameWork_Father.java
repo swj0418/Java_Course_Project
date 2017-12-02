@@ -3,6 +3,9 @@ package portfolioFramework;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JInternalFrame;
+
+import black.Utils;
 import gray.Global;
 
 /*
@@ -20,21 +23,24 @@ public class PortfolioFrameWork_Father {
 	
 
 	public void renderFrameWork() {
-		manager = new PortfolioManagerFrame_Mother();
-		viewer = new PortfolioViewerFrame_Mother();
-		correlation = new PortfolioCorrelationFrame_Mother();
+		this.manager = new PortfolioManagerFrame_Mother();
+		this.viewer = new PortfolioViewerFrame_Mother();
+		this.correlation = new PortfolioCorrelationFrame_Mother();
 		
 		ActionControl();
 	}
 	
 	public void ActionControl() {
-		manager.motherpanel.addstockpanel.addstock.addActionListener(new ActionListener() {
+		this.manager.motherpanel.addstockpanel.addstock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Global.weightleft = Global.weightleft - Double.valueOf(manager.motherpanel.addstockpanel.weightfield.getText());
+				Global.weightleft = Utils.SmallNumberHandler(Global.weightleft, 3);
+				
 				System.out.println(Global.weightleft + "");
 				manager.motherpanel.renderPanel();
 				
-				renderFrameWork();
+				//Of course you have to recursively add the actionlistener again after deleting everything and adding them all again.
+				ActionControl();
 			}
 		});
 	}

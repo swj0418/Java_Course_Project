@@ -219,4 +219,14 @@ public class Utils {
 		
 		return possiblematch;
 	}
+	
+	public final static Double SmallNumberHandler(Double number, int digit) {
+		double retnum = 0.d;
+		retnum = number;
+		
+		 int tmpnum = (int) (number * (10*digit));
+		retnum = tmpnum / (10*digit * 1.d);
+		
+		return retnum;
+	}
 }
