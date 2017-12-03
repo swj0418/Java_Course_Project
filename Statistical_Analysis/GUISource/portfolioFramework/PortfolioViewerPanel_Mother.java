@@ -1,5 +1,15 @@
 package portfolioFramework;
 
-public class PortfolioViewerPanel_Mother {
+import javax.swing.JPanel;
 
+public class PortfolioViewerPanel_Mother extends JPanel{
+	
+	
+	PortfolioViewerPanel_Mother() {
+		
+	}
+	
+	public void renderPanel() {
+		
+	}
 }

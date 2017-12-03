@@ -26,7 +26,7 @@ public class DataRetriever {
 	Boolean localAvailability = false;
 	Boolean UpdateNeeds = false;
 	String SYMBOL;
-	public String[] column = new String[8];
+	public String[] column = new String[9];
 	
 	public ArrayList Total = new ArrayList();
 	public ArrayList<Double> Close = new ArrayList<Double>();		
@@ -36,6 +36,9 @@ public class DataRetriever {
 	public ArrayList<Double> High = new ArrayList<Double>();
 	public ArrayList<Double> Low = new ArrayList<Double>();
 	public ArrayList<Double> Adj_Close = new ArrayList<Double>();
+	public ArrayList<Double> Dividend = new ArrayList<Double>();
+	public ArrayList<Double> StockSplit = new ArrayList<Double>();
+	
 	
 	private ArrayList<String> list = new ArrayList<String>();
 	
@@ -46,6 +49,12 @@ public class DataRetriever {
 	public LinkedHashMap<String, Double> High_M = new LinkedHashMap<String, Double>();
 	public LinkedHashMap<String, Double> Low_M = new LinkedHashMap<String, Double>();
 	public LinkedHashMap<String, String> DATE_M = new LinkedHashMap<String, String>(); //For the ease of printing dates
+	public LinkedHashMap<String, Double> Dividend_M = new LinkedHashMap<String, Double>();
+	public LinkedHashMap<String, Double> StockSplit_M = new LinkedHashMap<String, Double>();
+	
+	//Experimental
+	public ArrayList<Double> Adj_Open = new ArrayList<Double>();
+	public LinkedHashMap<String, String> Adj_Open_M = new LinkedHashMap<String, String>();
 	
 	public DataRetriever(String API) {
 		API = API.toUpperCase();
@@ -69,7 +78,7 @@ public class DataRetriever {
 			String csvSplitBy = ",";
 			boolean baddatacheck = false;
 			boolean badconnectioncheck = false;
-			String urlString = new Utils().APIString(SYMBOL);
+			String urlString = Utils.APIString(SYMBOL);
 			
 			int count = 0;
 			int maxtry = 3;
@@ -132,7 +141,8 @@ public class DataRetriever {
 								list.add(tmpList[4]); //Close
 								list.add(tmpList[5]); //Volume
 								list.add(tmpList[6]); //Adjusted Close
-								list.add(tmpList[7]); //stock split event
+								list.add(tmpList[7]); //Dividend
+								list.add(tmpList[8]); //StockSplit
 								
 								if(u != 0) {
 									Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
@@ -142,6 +152,8 @@ public class DataRetriever {
 									Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
 									DATE_M.put(tmpList[0], tmpList[0]);
 									Adj_Close_M.put(tmpList[0], Double.valueOf(tmpList[5]));
+									Dividend_M.put(tmpList[0], Double.valueOf(tmpList[7]));
+									StockSplit_M.put(tmpList[0], Double.valueOf(tmpList[8]));
 								}
 								u++;
 							} catch(ArrayIndexOutOfBoundsException e) {
@@ -202,23 +214,26 @@ public class DataRetriever {
 							break;
 						}
 
-						list.add(tmpList[0]); 
-						list.add(tmpList[1]); 
-						list.add(tmpList[2]); 
-						list.add(tmpList[3]); 
-						list.add(tmpList[4]);
-						list.add(tmpList[5]); //Adj Close
-						list.add(tmpList[6]); //Volume
-						list.add(tmpList[7]); //stock split event
+						list.add(tmpList[0]); //Date
+						list.add(tmpList[1]); //Open
+						list.add(tmpList[2]); //High
+						list.add(tmpList[3]); //Low
+						list.add(tmpList[4]); //Close
+						list.add(tmpList[5]); //Volume
+						list.add(tmpList[6]); //Adjusted Close
+						list.add(tmpList[7]); //Dividend
+						list.add(tmpList[8]); //StockSplit
 						
 						if(u != 0) {
+							DATE_M.put(tmpList[0], tmpList[0]);
 							Close_M.put(tmpList[0], Double.valueOf(tmpList[4]));
 							Open_M.put(tmpList[0], Double.valueOf(tmpList[1]));
 							Volume_M.put(tmpList[0], Double.valueOf(tmpList[6]));
 							High_M.put(tmpList[0], Double.valueOf(tmpList[2]));
 							Low_M.put(tmpList[0], Double.valueOf(tmpList[3]));
-							DATE_M.put(tmpList[0], tmpList[0]);
 							Adj_Close_M.put(tmpList[0], Double.valueOf(tmpList[5]));
+							Dividend_M.put(tmpList[0], Double.valueOf(tmpList[7]));
+							StockSplit_M.put(tmpList[0], Double.valueOf(tmpList[8]));
 						}
 						u++;
 					}
@@ -240,40 +255,50 @@ public class DataRetriever {
 	private void Extractor() { //This method extracts sub data. Will be called within the method retrieve
 		System.out.println("Extracting data for " + SYMBOL);
 		System.out.println("List size : " + list.size());
-		for(int i = 0; i < 8; i++) {
+		int blocksize = 9;
+		
+		for(int i = 0; i < blocksize; i++) {
 			column[i] = list.get(i);
 		}
 		Total = list;
-		for(int i = 8; i < list.size(); i++) { // "i" here must be changed when using another data or on a data size
+		for(int i = blocksize; i < list.size(); i++) { // "i" here must be changed when using another data or on a data size
 											   // The reason i starts from 6 is because the first 6 elements are indexes thus they are string
-			if(i % 8 == 0)
+			if(i % blocksize == 0)
 			{
 				Date.add(list.get(i).toString());
-			} else if (i % 8 == 1) {
+			} else if (i % blocksize == 1) {
 				try {
 					Open.add(Double.valueOf(list.get(i)));
 				} catch(NumberFormatException e) {System.out.println("Error in list line " + i);}
-			} else if(i % 8 == 2) {
+			} else if(i % blocksize == 2) {
 				try {
 					High.add(Double.valueOf(list.get(i)));
 				} catch(NumberFormatException e) {System.out.println("Error in list line " + i);}
-			} else if(i % 8 == 3) {
+			} else if(i % blocksize == 3) {
 				try {
 					Low.add(Double.valueOf(list.get(i)));
 				} catch(NumberFormatException e) {}
-			} else if (i % 8 == 4) {
+			} else if (i % blocksize == 4) {
 				try {
 					Close.add(Double.valueOf(list.get(i)));
 				} catch(NumberFormatException e) {}
-			} else if (i % 8 == 5) {
+			} else if (i % blocksize == 5) {
 				try {
 					Adj_Close.add(Double.valueOf(list.get(i)));
 				} catch(NumberFormatException e) {}
-			} else if (i % 8 == 6) {
+			} else if (i % blocksize == 6) {
 				try {
 					Volume.add(Double.valueOf(list.get(i)));
 				} catch(NumberFormatException e) {}
-			} else if (i % 8 == 7) {
+			} else if (i % blocksize == 7) {
+				try {
+					Dividend.add(Double.valueOf(list.get(i)));
+				} catch(NumberFormatException e) {}
+			} else if (i % blocksize == 8) {
+				try {
+					StockSplit.add(Double.valueOf(list.get(i)));
+				} catch(NumberFormatException e) {}
+			} else {
 				continue;
 			}
 		}
@@ -297,9 +322,9 @@ public class DataRetriever {
 		//Core writing
 		try {
 			fw = new FileWriter(file);
-			int blocksize = 8; // Might need to be adjusted when data source is changed
+			int blocksize = 9; // Might need to be adjusted when data source is changed
 			/*
-			 * Block size 8 for call with adjusted close data
+			 * Block size 9 for call with adjusted close data
 			 * Block size 6 for a call without any adjusted close data
 			 */
 			int j = 1;
@@ -309,14 +334,14 @@ public class DataRetriever {
 				fw.write(list.get(i));
 				fw.write(",");
 				
-				if(i == 7)
+				if(i == blocksize - 1)
 				{
 					j++;
 					fw.write(",");
 					fw.write("\n");
 				}
 				
-				else if(i == 8 * j - 1)
+				else if(i == blocksize * j - 1)
 				{
 					j++;
 					fw.write(",");
