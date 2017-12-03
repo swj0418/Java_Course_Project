@@ -15,7 +15,7 @@ import javax.swing.event.*;
 import white.MotherFrame;
 
 public class Global {
-	public static String SYMBOL = "AAPL";
+	public static String SYMBOL = "GOOG";
 	public static MotherFrame motherframe;
 	
 	//Portfolio Global
