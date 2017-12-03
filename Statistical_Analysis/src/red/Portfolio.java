@@ -1,8 +1,6 @@
 package red;
 
 import java.util.*;
-import org.apache.commons.math3.*;
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import black.*;
 import blue.*;
 

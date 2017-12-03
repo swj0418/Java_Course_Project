@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import graphFrame.GraphFramePanel_Mother;
 import gray.Global;
 import red.Stock;
 
@@ -12,6 +13,8 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 	public GeneralInfoFramePanel_Controls controls;
 	public GeneralInfoFramePanel_LatestData latest;
 	public GeneralInfoFramePanel_PriceChart pricechart;
+	
+	public GraphFramePanel_Mother graph;
 	
 	GeneralInfoFramePanel_Mother() {
 		renderFrame();
@@ -48,6 +51,10 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 				Global.SYMBOL = controls.symbolfield.getText();
 				basics.renderPanel();
 				pricechart.renderPanel();
+				
+				//Synchronize with GraphFrame -DG-
+				graph = new GraphFramePanel_Mother();
+				graph.renderpanel();
 			}
 		});
 	}
