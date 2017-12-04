@@ -13,7 +13,7 @@ import javax.swing.*;
 import gray.Global;
 
 public class GraphFramePanel_Mother extends JPanel{
-	GraphFramePanel_Chart chart;
+	public GraphFramePanel_Chart chart;
 	GraphFramePanel_Search search;
 
 	public GraphFramePanel_Mother() {

@@ -48,10 +48,11 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 		//Connects to GeneralInfoFramePanel_Controls & GeneralInfoFramePanel_Basics
 		controls.updatebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*
 				Global.SYMBOL = controls.symbolfield.getText();
 				basics.renderPanel();
 				pricechart.renderPanel();
-				
+				*/
 				/*Synchronize with GraphFrame -DG-
 				graph = new GraphFramePanel_Mother();
 				graph.renderpanel();*/
