@@ -8,6 +8,7 @@ import consoleFrame.ConsoleFrame_Mother;
 import controlsFrame.ControlsFrame_Mother;
 import gateFrame.GateFrame_Mother;
 import generalInfoFrame.GeneralInfoFrame_Mother;
+import graphFrame.GraphFramePanel_Mother;
 import graphFrame.GraphFrame_Mother;
 import gray.Global;
 import portfolioFramework.PortfolioFrameWork_Father;

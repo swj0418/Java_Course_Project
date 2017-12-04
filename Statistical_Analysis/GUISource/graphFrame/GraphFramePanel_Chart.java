@@ -120,6 +120,7 @@ public class GraphFramePanel_Chart extends JPanel{
 
 		chart = ChartFactory.createCandlestickChart("History of " + stock.SYMBOL, "Time", "Price", dataset, true);
 		
+		//add moving avg
 		final XYDataset mov_30_avg = MovingAverage.createMovingAverage(dataset, "_90_MOV_AVG", 3 * 24 * 60 * 60 * 10000L, 0L);
 		
 		//final XYDataset mov_90_avg = MovingAverage.createMovingAverage(dataset, " 30_MOV_AVG", 3 * 24 * 60 * 60 * 30000L, 0L);
