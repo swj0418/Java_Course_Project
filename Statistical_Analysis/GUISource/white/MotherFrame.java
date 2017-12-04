@@ -21,15 +21,15 @@ public class MotherFrame extends JFrame{
 	JDesktopPane jdpDesktop;
 	static int openframes = 0; // To keep track of how many frames are open at the moment
 	
-	public GateFrame_Mother mainpanelmother;
-	public GraphFrame_Mother graphpanelmother;
+	public GateFrame_Mother gatemother;
+	public GraphFrame_Mother graphmother;
 	public GeneralInfoFrame_Mother generalinfomother;
-	public ControlsFrame_Mother controlsframemother; // 1 Approach and above 1
-	public TickerFrame_Mother tickerframemother;  // 2 Approach 2
-	public ConsoleFrame_Mother consoleframemother; // 2 Approach 2
+	public ControlsFrame_Mother controlsmother; // 1 Approach and above 1
+	public TickerFrame_Mother tickermother;  // 2 Approach 2
+	public ConsoleFrame_Mother consolemother; // 2 Approach 2
 	
 	public PortfolioFrameWork_Father portfolioframework; // 3 Different Approach 3
-	public PortfolioManagerFrame_Mother portfoliomanagerframemother;
+	public PortfolioManagerFrame_Mother portfoliomanagermother;
 	
 	//Menu
 	JMenu mainpanelmothermenu;
@@ -66,6 +66,7 @@ public class MotherFrame extends JFrame{
 	
 	public MotherFrame() {
 		setMotherFrame();
+		createMothers();
 		
 		createFrameWork();
 		
@@ -76,16 +77,24 @@ public class MotherFrame extends JFrame{
 		setInternalFramework();
 		createDefaultInternalFrames();
 		
-		
+		Graph_General_Bridge();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	private void createMothers() {
+		generalinfomother = new GeneralInfoFrame_Mother();
+		graphmother = new GraphFrame_Mother();
+		tickermother = new TickerFrame_Mother();
+		gatemother = new GateFrame_Mother();
+		consolemother = new ConsoleFrame_Mother();
+	}
+	
 	private void createDefaultInternalFrames() {
-		jdpDesktop.add(new GateFrame_Mother());
-		jdpDesktop.add(new ConsoleFrame_Mother());
-		jdpDesktop.add(new GeneralInfoFrame_Mother());
-		jdpDesktop.add(new TickerFrame_Mother());
-		jdpDesktop.add(new GraphFrame_Mother());
+		jdpDesktop.add(gatemother);
+		jdpDesktop.add(consolemother);
+		jdpDesktop.add(generalinfomother);
+		jdpDesktop.add(tickermother);
+		jdpDesktop.add(graphmother);
 	}
 	
 	private void setInternalFramework() {
@@ -135,7 +144,7 @@ public class MotherFrame extends JFrame{
 		pricegraph = new JMenuItem("Price Graph");
 		pricegraph.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jdpDesktop.add(new GraphFrame_Mother());
+				jdpDesktop.add(graphmother);
 			}
 		});
 		graphpanelMI2 = new JMenuItem("graphpanelMI2");
@@ -144,9 +153,8 @@ public class MotherFrame extends JFrame{
 		generalinfoMI1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Creating GeneralInfoFrame_Mother");
-				if(e.getSource() != null) {
-					jdpDesktop.add(new GeneralInfoFrame_Mother());
-				}
+				jdpDesktop.add(generalinfomother);
+				Graph_General_Bridge();
 			}
 		});
 		generalinfoMI2 = new JMenuItem("Price Information");
@@ -157,7 +165,7 @@ public class MotherFrame extends JFrame{
 		tickersearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Creating TickerFrame_Mother");
-				jdpDesktop.add(new TickerFrame_Mother());
+				jdpDesktop.add(tickermother);
 			}
 		});
 		
@@ -212,5 +220,21 @@ public class MotherFrame extends JFrame{
 	
 	public void createFrameWork() {
 		portfolioframework = new PortfolioFrameWork_Father();
+	}
+	
+	public void Graph_General_Bridge() {
+		generalinfomother.motherpanel.controls.updatebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Global.SYMBOL = generalinfomother.motherpanel.controls.symbolfield.getText();
+				Global.Graph_SYMBOL = generalinfomother.motherpanel.controls.symbolfield.getText();
+				System.out.println(Global.Graph_SYMBOL);
+				
+				generalinfomother.motherpanel.basics.renderPanel();
+				generalinfomother.motherpanel.pricechart.renderPanel();
+				graphmother.motherpanel.renderpanel();
+				
+				Graph_General_Bridge();
+			}
+		});
 	}
 }

@@ -69,7 +69,7 @@ public class GraphFramePanel_Chart extends JPanel{
 	
 	@SuppressWarnings("unchecked")
 	public DefaultHighLowDataset createDataset() {
-		stock = new Stock(Global.SYMBOL);
+		stock = new Stock(Global.Graph_SYMBOL);
 		
 		symbol = stock.SYMBOL;
 		date = stock.request("DATE", Global.GraphStart, Global.GraphEnd);
