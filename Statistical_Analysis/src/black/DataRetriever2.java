@@ -44,8 +44,37 @@ public class DataRetriever2 {
 		Utils.GeneralLineExtractor("./DataMeta/SYMBOLS/" + Trade + ".csv", RawData);
 	}
 	
-	public static void main(String[] ar) {
-		new DataRetriever2();
+	public static void mergetickers() {
+		BufferedWriter writer = Utils.BufferedWriterCreatorRewrite("./DataMeta/SYMBOLS/MERGED.csv");
+		BufferedReader reader = Utils.BufferedReaderCreator("./DataMeta/SYMBOLS/NASDAQ.csv");
+		BufferedReader reader2 = Utils.BufferedReaderCreator("./DataMeta/SYMBOLS/NYSE.csv");
+		
+		String line = "";
+		try {
+			while((line = reader.readLine()) != null) {
+				String[] tmp = line.split(",");
+				for(int i = 0; i < tmp.length; i++) {
+					if(i % tmp.length == tmp.length - 1) {
+						writer.write(tmp[i] + "," + "\n");
+					} else {
+						writer.write(tmp[i] + ",");
+					}
+				}
+			}
+			
+			while((line = reader2.readLine()) != null) {
+				String[] tmp = line.split(",");
+				for(int i = 0; i < tmp.length; i++) {
+					if(i % tmp.length == tmp.length - 1) {
+						writer.write(tmp[i] + "," + "\n");
+					} else {
+						writer.write(tmp[i] + ",");
+					}
+				}
+			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-
 }

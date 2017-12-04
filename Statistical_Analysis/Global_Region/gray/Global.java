@@ -17,6 +17,8 @@ import javax.swing.event.*;
 import white.MotherFrame;
 
 public class Global {
+	public static Boolean Validation = false;
+	
 	public static String SYMBOL = "GOOG";
 	public static MotherFrame motherframe;
 	

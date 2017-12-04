@@ -124,6 +124,21 @@ public class Utils {
 			return null;
 		} 
 	}
+	
+	public final static BufferedWriter BufferedWriterCreatorRewrite(String filepath) {
+		File file = new File(filepath);
+		try {
+			FileWriter fw = new FileWriter(file);
+			FileOutputStream fos = new FileOutputStream(file);
+			BufferedWriter bufferedwriter = new BufferedWriter(new OutputStreamWriter(fos));
+			return bufferedwriter;
+		} catch (IOException e) {
+			System.out.println("An error occured while creating a buffered writer");
+			e.printStackTrace();
+			return null;
+		} 
+	}
+	
 	public final static BufferedReader BufferedReaderCreator(String filepath) {
 		File file = new File(filepath);
 		BufferedReader bufferedreader = null;
@@ -147,7 +162,7 @@ public class Utils {
 	}
 	
 	public final static void GeneralLineExtractor(String locationtosave, ArrayList<String> rawdata) {
-		BufferedWriter writer = Utils.BufferedWriterCreator(locationtosave);
+		BufferedWriter writer = Utils.BufferedWriterCreatorRewrite(locationtosave);
 		int columns = 0;
 		int rows    = 0;
 		for(int i = 0; i < rawdata.size(); i++) {
@@ -211,7 +226,7 @@ public class Utils {
 	public final static HashMap<String, String> BestMatchSearchAlgorithm(String string) {
 		HashMap<String, String> possiblematch = new HashMap<String, String>();
 		
-		BufferedReader reader = Utils.BufferedReaderCreator("./Data/INDEX_NAME/MERGED.csv");
+		BufferedReader reader = Utils.BufferedReaderCreator("./DataMeta/SYMBOLS/MERGED.csv");
 		String line = "";
 		try {
 			while((line = reader.readLine()) != null) {
@@ -219,7 +234,7 @@ public class Utils {
 				
 				for(int i = 0; i < tmpinside.length; i++) {
 					if(tmpinside[i].contains(string)) {
-						possiblematch.put(tmpinside[2], tmpinside[1]);
+						possiblematch.put(tmpinside[0], tmpinside[1]);
 					}
 				}
 			}

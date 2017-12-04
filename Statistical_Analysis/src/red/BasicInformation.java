@@ -40,7 +40,8 @@ public class BasicInformation {
 	
 	public HashMap Symbolgetter(String Index) {
 		System.out.println("Getting Symbols");
-		File file = new File("./Data/INDEX_NAME/" + Index + "_Modified" + ".csv");
+		Index = Index.toUpperCase();
+		File file = new File("./DataMeta/SYMBOLS/" + Index + ".csv");
 		try {
 			FileInputStream fis = new FileInputStream(file);
 			String line = null;
@@ -48,7 +49,7 @@ public class BasicInformation {
 			
 			while((line = br.readLine()) != null) {
 				String tmp[] = line.split(",");
-				SymbolList.put(tmp[1], tmp[2]);
+				SymbolList.put(tmp[0], tmp[1]);
 				symbolList.add(tmp[0].trim(), tmp[1].trim(), tmp[2].trim());
 			}
  		} catch (IOException e) {
@@ -57,7 +58,7 @@ public class BasicInformation {
 		return SymbolList;
 	}
 	public String StockNamegetter() {
-		BufferedReader reader = Utils.BufferedReaderCreator("./Data/INDEX_NAME/MERGED.csv");
+		BufferedReader reader = Utils.BufferedReaderCreator("./DataMeta/SYMBOLS/MERGED.csv");
 		String line = "";
 		String name = "";
 		try {
