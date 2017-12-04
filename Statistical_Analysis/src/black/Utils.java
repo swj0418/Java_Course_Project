@@ -1,6 +1,9 @@
 package black;
 
 import java.util.*;
+
+import blue.UpdateControl;
+
 import java.io.*;
 import java.time.*;
 import java.time.format.*;
@@ -123,16 +126,24 @@ public class Utils {
 	}
 	public final static BufferedReader BufferedReaderCreator(String filepath) {
 		File file = new File(filepath);
-		try {
-			FileReader fr = new FileReader(file);
-			FileInputStream fis = new FileInputStream(file);
-			BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(fis));
-			return bufferedreader;
-		} catch (IOException e) {
-			System.out.println("An error occured while creating a buffered writer");
-			e.printStackTrace();
+		BufferedReader bufferedreader = null;
+		if(!file.exists()) {
+			UpdateControl.CreateAvailabilityFile();
+		} else if(file.exists()) {
+			try {
+				FileReader fr = new FileReader(file);
+				FileInputStream fis = new FileInputStream(file);
+				bufferedreader = new BufferedReader(new InputStreamReader(fis));
+				return bufferedreader;
+			} catch (IOException e) {
+				System.out.println("An error occured while creating a buffered writer");
+				e.printStackTrace();
+				return null;
+			}
+		} else {
 			return null;
-		} 
+		}
+		return bufferedreader;
 	}
 	
 	public final static void GeneralLineExtractor(String locationtosave, ArrayList<String> rawdata) {

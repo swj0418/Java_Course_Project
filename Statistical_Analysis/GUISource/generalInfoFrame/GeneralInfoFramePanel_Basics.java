@@ -42,6 +42,8 @@ public class GeneralInfoFramePanel_Basics extends JPanel{
 		
 		add(stockname); add(stocksymbol); add(IPO_year); add(availabledatasize);
 		
+		System.out.println(stock.Dividend_M);
+		
 		this.validate();
 		repaint();
 	}

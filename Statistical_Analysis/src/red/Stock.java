@@ -32,6 +32,8 @@ public class Stock {
 	public ArrayList<Double> High = new ArrayList<Double>();
 	public ArrayList<Double> Low = new ArrayList<Double>();
 	public ArrayList<Double> Adj_Close = new ArrayList<Double>();
+	public ArrayList<Double> Dividend = new ArrayList<Double>();
+	public ArrayList<Double> StockSplit = new ArrayList<Double>();
 	
 	public LinkedHashMap<String, Double> Adj_Close_M = new LinkedHashMap<String, Double>();
 	public LinkedHashMap<String, Double> Close_M = new LinkedHashMap<String, Double>();
@@ -40,19 +42,22 @@ public class Stock {
 	public LinkedHashMap<String, Double> High_M = new LinkedHashMap<String, Double>();
 	public LinkedHashMap<String, Double> Low_M = new LinkedHashMap<String, Double>();
 	public LinkedHashMap<String, String> DATE_M = new LinkedHashMap<String, String>(); //For the ease of printing dates
+	public LinkedHashMap<String, Double> Dividend_M = new LinkedHashMap<String, Double>();
+	public LinkedHashMap<String, Double> StockSplit_M = new LinkedHashMap<String, Double>();
 	
 	//Test
 	public ArrayList<Double> Adj_Open = new ArrayList<Double>();
-	public LinkedHashMap<String, Double> Adj_Open_M = new LinkedHashMap<String, Double>();
-	
+	public LinkedHashMap<String, String> Adj_Open_M = new LinkedHashMap<String, String>();
 	
 	public Stock() {
 		
 	}
 	public Stock(String SYMBOL) {
 		this.SYMBOL = SYMBOL.trim();
+		this.SYMBOL = SYMBOL.toUpperCase();
 		DataRetriever DR = new DataRetriever("AlphaVantage");
 		DR.retrieve(SYMBOL);
+		
 		this.Close = DR.Close;
 		this.Date = DR.Date;
 		this.Open = DR.Open;
@@ -60,6 +65,8 @@ public class Stock {
 		this.High = DR.High;
 		this.Low = DR.Low;
 		this.Adj_Close = DR.Adj_Close;
+		this.Dividend = DR.Dividend;
+		this.StockSplit = DR.StockSplit;
 		
 		this.Adj_Close_M = DR.Adj_Close_M;
 		this.Close_M = DR.Close_M;
@@ -68,6 +75,8 @@ public class Stock {
 		this.High_M = DR.High_M;
 		this.Low_M = DR.Low_M;
 		this.DATE_M = DR.DATE_M;
+		this.Dividend_M = DR.Dividend_M;
+		this.StockSplit_M = DR.StockSplit_M;
 		
 		this.Avail_Size = this.Adj_Close.size();
 		this.column = DR.column;
@@ -76,11 +85,13 @@ public class Stock {
 		this.Adj_Open = Stoculator.AdjustOpen(this.Adj_Close, this.Close, this.Open);
 		
 		BasicInfo = new BasicInformation(this);
-		DR = null;
-	}
+		
+		DR = null; //Nullify for memory.
+ 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ArrayList request(String category, String start, String end) {
 		ArrayList return_arr = new ArrayList();
-		LocalDate time = null;
 		LocalDate begin = LocalDate.parse(start, DateTimeFormatter.ISO_DATE); //Correct
 		LocalDate fin = LocalDate.parse(end, DateTimeFormatter.ISO_DATE);
 		String cat = category.toUpperCase();

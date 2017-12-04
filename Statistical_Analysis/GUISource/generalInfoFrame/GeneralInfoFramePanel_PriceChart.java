@@ -31,7 +31,6 @@ public class GeneralInfoFramePanel_PriceChart extends JPanel{
 		
 		pricetable = new JTable(data, column);
 		pricetable.setPreferredScrollableViewportSize(pricetable.getPreferredSize());
-		//pricetable.setFillsViewportHeight(false);
 		
 		scrollablepricechartarea = new JScrollPane(pricetable);
 		
@@ -43,6 +42,9 @@ public class GeneralInfoFramePanel_PriceChart extends JPanel{
 	
 	private void setTableContents() {
 		column = stock.column;
-		data = (Utils.ArrayListToPlain(stock.Total, 8));
+		data = (Utils.ArrayListToPlain(stock.Total, 9));
+		for(int i = 0; i < 9; i++) {
+			data[0][i] = "";
+		}
 	}
 }

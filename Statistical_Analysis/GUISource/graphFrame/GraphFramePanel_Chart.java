@@ -60,13 +60,13 @@ public class GraphFramePanel_Chart extends JPanel{
 		data  = createDataset();
 		chart = createChart(data);
 		chartPanel = new ChartPanel(chart);
-
+		
 		add(chartPanel);
 
 		validate();
 		repaint();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public DefaultHighLowDataset createDataset() {
 		stock = new Stock(Global.SYMBOL);
@@ -114,7 +114,7 @@ public class GraphFramePanel_Chart extends JPanel{
 
 		return data;
 	}
-	
+
 
 	public JFreeChart createChart(DefaultHighLowDataset dataset) {
 
@@ -124,7 +124,7 @@ public class GraphFramePanel_Chart extends JPanel{
 		final XYDataset mov_30_avg = MovingAverage.createMovingAverage(dataset, "_90_MOV_AVG", 3 * 24 * 60 * 60 * 10000L, 0L);
 		
 		//final XYDataset mov_90_avg = MovingAverage.createMovingAverage(dataset, " 30_MOV_AVG", 3 * 24 * 60 * 60 * 30000L, 0L);
-		
+
 		
 		XYPlot plot = chart.getXYPlot();
 		plot.setDataset(1, mov_30_avg);

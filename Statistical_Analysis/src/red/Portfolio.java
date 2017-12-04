@@ -25,6 +25,17 @@ public class Portfolio {
 		for(int i = 0; i < StockPool.size(); i++) {
 			LinkedStockPool.put(this.StockPool.get(i), this.Weights.get(i));
 		}
+		
+		ArrayList<Double> tmpER = new ArrayList<Double>();
+		ArrayList<Double> tmpV = new ArrayList<Double>();
+		
+		for(int i = 0; i < StockPool.size(); i++) {
+			tmpER.add(Stoculator.ArithmeticMeanReturn(StockPool.get(i).Adj_Close));
+			tmpV.add(Stoculator.ReturnVariance(StockPool.get(i).Adj_Close));
+		}
+		
+		PortfolioReturn = Portoculator.PortfolioExpectedReturn(tmpER, Weights);
+		PortfolioVariance = Portoculator.PortfolioVariance(tmpV, Weights);
 	}
 	
 	public Portfolio(String SYMBOL[]) { //Default Operation. Assumes equal weighted portfolio.
