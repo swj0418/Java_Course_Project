@@ -37,6 +37,9 @@ public class Global {
 	public static String GraphEnd = "2017-11-30";
 	public static String Graph_SYMBOL = "AAPL";
 	
+	//Graph Compare Global
+	public static String Compare_SYMBOL = "GOOG";
+	
 	public Global() {
 		
 	}

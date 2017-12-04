@@ -17,6 +17,7 @@ import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.data.time.MovingAverage;
 import org.jfree.data.xy.DefaultHighLowDataset;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
 
 import black.Utils;
 import gray.Global;
@@ -42,8 +43,8 @@ public class GraphFramePanel_Chart extends JPanel{
 	JFreeChart chart;
 	ChartPanel chartPanel;
 	
-	XYDataset mov_30_avg;
-	//XYDataset mov_90_avg;
+	XYDataset mov_90_avg;
+	XYSeries compare_chart;
 
 	Double y_axis_min;
 	Double y_axis_max;
@@ -54,7 +55,7 @@ public class GraphFramePanel_Chart extends JPanel{
 
 	public void renderPanel() {
 		removeAll();
-
+		
 		setLayout(layout);
 
 		data  = createDataset();
@@ -69,7 +70,7 @@ public class GraphFramePanel_Chart extends JPanel{
 	
 	@SuppressWarnings("unchecked")
 	public DefaultHighLowDataset createDataset() {
-		stock = new Stock(Global.Graph_SYMBOL);
+		stock = new Stock(Global.SYMBOL);
 		
 		symbol = stock.SYMBOL;
 		date = stock.request("DATE", Global.GraphStart, Global.GraphEnd);
@@ -120,15 +121,12 @@ public class GraphFramePanel_Chart extends JPanel{
 
 		chart = ChartFactory.createCandlestickChart("History of " + stock.SYMBOL, "Time", "Price", dataset, true);
 		
-		//add moving avg
-		final XYDataset mov_30_avg = MovingAverage.createMovingAverage(dataset, "_90_MOV_AVG", 3 * 24 * 60 * 60 * 10000L, 0L);
-		
-		//final XYDataset mov_90_avg = MovingAverage.createMovingAverage(dataset, " 30_MOV_AVG", 3 * 24 * 60 * 60 * 30000L, 0L);
+		//add moving average
+		mov_90_avg = MovingAverage.createMovingAverage(dataset, "_90_MOV_AVG", 3 * 24 * 60 * 60 * 10000L, 0L);
 
-		
+
 		XYPlot plot = chart.getXYPlot();
-		plot.setDataset(1, mov_30_avg);
-		//plot.setDataset(1, mov_90_avg);
+		plot.setDataset(1, mov_90_avg);
 		plot.setRenderer(1, new StandardXYItemRenderer());
 		CandlestickRenderer renderer = (CandlestickRenderer) plot.getRenderer();
 		renderer.setAutoWidthMethod(CandlestickRenderer.WIDTHMETHOD_SMALLEST);

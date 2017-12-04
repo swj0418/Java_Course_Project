@@ -155,7 +155,7 @@ public class MotherFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Creating GeneralInfoFrame_Mother");
 				jdpDesktop.add(generalinfomother);
-				Graph_General_Bridge();
+				//Graph_General_Bridge();
 			}
 		});
 		generalinfoMI2 = new JMenuItem("Price Information");
@@ -240,7 +240,6 @@ public class MotherFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Global.SYMBOL = generalinfomother.motherpanel.controls.symbolfield.getText();
 				Global.Graph_SYMBOL = generalinfomother.motherpanel.controls.symbolfield.getText();
-				System.out.println(Global.Graph_SYMBOL);
 				
 				generalinfomother.motherpanel.basics.renderPanel();
 				generalinfomother.motherpanel.pricechart.renderPanel();
