@@ -57,7 +57,7 @@ public class PortfolioFrameWork_Father {
 					Global.weightleft = Global.weightleft - Double.valueOf(manager.motherpanel.addstockpanel.weightfield.getText());
 					Global.weightleft = Utils.SmallNumberHandler(Global.weightleft, 3);
 					Global.stockpool.add(s);
-					Global.weightpool.add(Double.valueOf(manager.motherpanel.addstockpanel.weightfield.getText()));
+					Global.weightpool.add(Double.valueOf(manager.motherpanel.addstockpanel.weightfield.getText()) / 100.d);
 					Global.calculatingtimeslice = Integer.parseInt(manager.motherpanel.addstockpanel.timeslicebox.getSelectedItem().toString());
 					
 					System.out.println(Global.weightleft + "");
@@ -73,18 +73,6 @@ public class PortfolioFrameWork_Father {
 			}
 		});
 		
-		this.manager.motherpanel.addstockpanel.calculate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String defaultstartdate = "2017-01-01";
-				String defaultenddate = LocalDate.now().toString();
-				int defaulttimeslice = 30;
-				String defaulttype = "ARITHMETIC";
-				
-				Statistics stat;
-				
-			}
-		});
-		
 		this.manager.motherpanel.addstockpanel.clear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Global.stockpool = new ArrayList<Stock>();
@@ -93,10 +81,84 @@ public class PortfolioFrameWork_Father {
 				Global.calculatingtimeslice = 30;
 				Global.calculatingtype = "ARITHMETIC";
 				
+				Global.corr_column = null;
+				Global.corr_data = null;
+				
+				
 				portfolio = new Portfolio(Global.stockpool, Global.weightpool);
 				manager.motherpanel.renderPanel();
 				
 				ActionControl();
+			}
+		});
+		
+		this.manager.motherpanel.addstockpanel.calculate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int conflicts = 0;
+				if(manager.motherpanel.addstockpanel.startdate.getText().equals("") ||
+						manager.motherpanel.addstockpanel.enddate.getText().equals("")) {
+					JFrame f = new JFrame();
+					JOptionPane.showMessageDialog(f, "Specify the time window for calculating portfolio.");
+					conflicts++;
+				}
+				if(conflicts > 0) {
+					JFrame f = new JFrame();
+					JOptionPane.showMessageDialog(f, conflicts + " Conflicts still remain check the fields");
+				}
+				if(conflicts == 0) {
+					int TimeSlice = Integer.parseInt(manager.motherpanel.addstockpanel.timeslicebox.getSelectedItem().toString());
+					String startdate = manager.motherpanel.addstockpanel.startdate.getText();
+					String enddate = manager.motherpanel.addstockpanel.enddate.getText();
+					String datatype = "";
+					
+					if(manager.motherpanel.addstockpanel.arithmeticbutton.isSelected()) {
+						datatype = "ARITHMETIC";
+					} else if(manager.motherpanel.addstockpanel.geometricbutton.isSelected()) {
+						datatype = "GEOMETRIC";
+					}
+					System.out.println(Global.stockpool.get(0).SYMBOL + "  " + Global.stockpool.get(1).SYMBOL);
+					System.out.println(Global.weightpool.get(0) + "    " + Global.weightpool.get(1));
+					Global.portfolio = new Portfolio(Global.stockpool, Global.weightpool, TimeSlice, datatype, startdate, enddate);
+					
+					viewer.motherpanel.renderPanel();
+					viewer.motherpanel.info.renderPanel();
+				}
+			}
+		});
+		
+		this.manager.motherpanel.addstockpanel.correlate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Global.corr_data = new String[Global.stockpool.size()][Global.stockpool.size() + 1];
+				Global.corr_column = new String[Global.stockpool.size() + 1];
+				String startdate = manager.motherpanel.addstockpanel.startdate.getText();
+				String enddate = manager.motherpanel.addstockpanel.enddate.getText();
+				
+				Global.corr_column[0] = "";
+				for(int i = 1; i <= Global.stockpool.size(); i++) {
+					Global.corr_column[i] = Global.stockpool.get(i - 1).SYMBOL;
+				}
+				
+				
+				for(int i = 0; i < Global.stockpool.size(); i++) {
+					Global.corr_data[i][0] = Global.stockpool.get(i).SYMBOL;
+				}
+				
+				ArrayList<ArrayList<Double>> tmpArr = new ArrayList<ArrayList<Double>>();
+				for(int i = 0; i < Global.stockpool.size(); i++) {
+					tmpArr.add(new Stock(Global.stockpool.get(i).SYMBOL).request("ADJ_CLOSE", startdate, enddate));
+				}
+				ArrayList<ArrayList<Double>> recArr = new ArrayList<ArrayList<Double>>();
+				
+				recArr = black.Stoculator.CorrelationMatrix(tmpArr, 1, "ARITHMETIC");
+				
+				for(int i = 0; i < Global.stockpool.size(); i++) {
+					for(int j = 1; j < Global.stockpool.size() + 1; j++) {
+						Global.corr_data[i][j] = recArr.get(i).get(j - 1).toString();
+					}
+				}
+				
+				correlation.motherpanel.renderPanel();
+				
 			}
 		});
 	}

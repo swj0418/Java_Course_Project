@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import red.Portfolio;
 import red.Stock;
 
 import javax.swing.event.*;
@@ -20,11 +21,16 @@ public class Global {
 	public static MotherFrame motherframe;
 	
 	//Portfolio Global
+	public static Portfolio portfolio = new Portfolio();
 	public static double weightleft = 100.0d;
 	public static ArrayList<Stock> stockpool = new ArrayList<Stock>();
 	public static ArrayList<Double> weightpool = new ArrayList<Double>();
 	public static int calculatingtimeslice = 30;
 	public static String calculatingtype = "ARITHMETIC";
+	
+	//Portfolio Correlation Global
+	public static String[][] corr_data = {{"AAPL", "1.0", "0.7"}, {"TSLA", "0.7", "1.0"}};
+	public static String[] corr_column = {" ", "AAPL", "TSLA"};
 	
 	//Graph Global
 	public static String GraphStart = "2017-01-01";

@@ -39,7 +39,7 @@ public class PortfolioManagerPanel_AddStock extends JPanel{
 	JTextField enddate;
 	
 	JButton calculate;
-	
+	JButton correlate;
 	JButton clear;
 	
 	PortfolioManagerPanel_AddStock() {
@@ -73,12 +73,14 @@ public class PortfolioManagerPanel_AddStock extends JPanel{
 		typebuttongroup = new ButtonGroup(); typebuttongroup.add(arithmeticbutton);
 											 typebuttongroup.add(geometricbutton);
 											 
-		startdate = new JTextField();
+		startdate = new JTextField(); startdate.setText("2016-01-01");
 		to = new JLabel(" ~ ");
-		enddate = new JTextField();
+		enddate = new JTextField(); enddate.setText("2017-10-01");
 		
 		calculate = new JButton("Calculate!");
-		
+		correlate = new JButton("Correlation Matrix");
+		correlate.setBackground(Color.BLACK);
+		correlate.setForeground(Color.WHITE);
 		clear = new JButton("Clear");
 		clear.setForeground(Color.RED);
 		clear.setBackground(Color.BLACK);
@@ -100,6 +102,7 @@ public class PortfolioManagerPanel_AddStock extends JPanel{
 		enddate.setBounds(120, 280, 80, 30);
 		
 		calculate.setBounds(0, 320, 200, 30);
+		correlate.setBounds(0, 350, 200, 30);
 		clear.setBounds(0, 400, 200, 50);
 		
 		add(symbol);
@@ -118,6 +121,7 @@ public class PortfolioManagerPanel_AddStock extends JPanel{
 		add(enddate);
 		
 		add(calculate);
+		add(correlate);
 		add(clear);
 		
 		validate();

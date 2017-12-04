@@ -186,7 +186,19 @@ public class MotherFrame extends JFrame{
 			}
 		});
 		portfolioviewer = new JMenuItem("Portfolio Viewer");
+		portfolioviewer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Creating Portfolio Viewer");
+				jdpDesktop.add(portfolioframework.viewer, 0);
+			}
+		});
 		portfoliocorrelation = new JMenuItem("Correlation");
+		portfoliocorrelation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Creating Correlation Matrix");
+				jdpDesktop.add(portfolioframework.correlation, 0);
+			}
+		});
 		
 		
 		//Add menuitems to menu.

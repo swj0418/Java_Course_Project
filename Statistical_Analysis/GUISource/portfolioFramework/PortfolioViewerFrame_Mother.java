@@ -14,8 +14,8 @@ public class PortfolioViewerFrame_Mother extends JInternalFrame{
 	public void renderFrame() {
 		motherpanel = new PortfolioViewerPanel_Mother();
 		
-		setSize(500, 500);
-		setLocation(300, 300);
+		setSize(500, 300);
+		setLocation(600, 300);
 		motherpanel = new PortfolioViewerPanel_Mother();
 		add(motherpanel);
 		
