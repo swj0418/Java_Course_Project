@@ -54,7 +54,7 @@ public class GraphFramePanel_Chart extends JPanel{
 
 	public void renderPanel() {
 		removeAll();
-
+		
 		setLayout(layout);
 
 		data  = createDataset();

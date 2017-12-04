@@ -52,9 +52,9 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 				basics.renderPanel();
 				pricechart.renderPanel();
 				
-				//Synchronize with GraphFrame -DG-
+				/*Synchronize with GraphFrame -DG-
 				graph = new GraphFramePanel_Mother();
-				graph.renderpanel();
+				graph.renderpanel();*/
 			}
 		});
 	}
