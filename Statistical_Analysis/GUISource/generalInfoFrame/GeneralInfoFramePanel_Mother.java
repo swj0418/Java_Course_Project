@@ -26,7 +26,7 @@ public class GeneralInfoFramePanel_Mother extends JPanel {
 		setLayout(null);
 		
 		basics = new GeneralInfoFramePanel_Basics();
-		basics.setBounds(0, 0, 200, 100);
+		basics.setBounds(0, 0, 500, 100);
 		
 		controls = new GeneralInfoFramePanel_Controls();
 		controls.setBounds(500, 0, 200, 50);

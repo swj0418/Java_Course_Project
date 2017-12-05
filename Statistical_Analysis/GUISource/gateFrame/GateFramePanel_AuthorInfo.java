@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GateFramePanel_AuthorInfo extends JPanel {
-	JLabel versioninfo = new JLabel("Version                :            0.3.0");
+	JLabel versioninfo = new JLabel("Version                :            0.3.1");
 	JLabel authors = new JLabel("Author : Skywalker & Tiruss");
 	
 	GridLayout layout = new GridLayout();

@@ -17,6 +17,8 @@ public class GeneralInfoFramePanel_Basics extends JPanel{
 	JLabel stockname;
 	JLabel stocksymbol;
 	JLabel IPO_year;
+	JLabel marketcap;
+	JLabel sector;
 	
 	JLabel availabledatasize;
 	
@@ -39,8 +41,10 @@ public class GeneralInfoFramePanel_Basics extends JPanel{
 		stocksymbol = new JLabel("Stock Symbol : " + stock.SYMBOL);
 		IPO_year = new JLabel("Date of the IPO : " + stock.Date.get(stock.Date.size() - 1));
 		availabledatasize = new JLabel("Available data size : " + stock.Avail_Size);
+		marketcap = new JLabel("Market Captal : $" + stock.BasicInfo.MarketCap);
+		sector = new JLabel("Sector : " + stock.BasicInfo.Sector);
 		
-		add(stockname); add(stocksymbol); add(IPO_year); add(availabledatasize);
+		add(stockname); add(stocksymbol); add(IPO_year); add(marketcap); add(sector); add(availabledatasize);
 		
 		System.out.println(stock.Dividend_M);
 		

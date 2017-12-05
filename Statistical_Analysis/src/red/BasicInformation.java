@@ -15,6 +15,8 @@ public class BasicInformation {
 	public Integer Number = 0;
 	public String StockName = "";
 	public String StockSymbol = "";
+	public String MarketCap = "";
+	public String Sector = "";
 	
 	HashMap SymbolList = new HashMap<String, String>();
 	NameInfo symbolList = new NameInfo();
@@ -25,6 +27,7 @@ public class BasicInformation {
 		this.StockSymbol = S.SYMBOL;
 		StockNamegetter();
 	}
+	/*
 	public BasicInformation(String SymbolorTrade) {
 		if(SymbolorTrade == "NYSE" || SymbolorTrade == "AMEX" || SymbolorTrade == "NASDAQ") {
 			this.Trade = SymbolorTrade;
@@ -37,6 +40,7 @@ public class BasicInformation {
 	private void TradeFinder() {
 		
 	}
+	*/
 	
 	public HashMap Symbolgetter(String Index) {
 		System.out.println("Getting Symbols");
@@ -57,17 +61,26 @@ public class BasicInformation {
 		}
 		return SymbolList;
 	}
-	public String StockNamegetter() {
+	
+	public void StockNamegetter() {
 		BufferedReader reader = Utils.BufferedReaderCreator("./DataMeta/SYMBOLS/MERGED.csv");
 		String line = "";
 		String name = "";
 		try {
 			while((line = reader.readLine()) != null) {
 				String[] tmp = line.split(",");
-				if(tmp[1].equals(this.StockSymbol)) {
-					this.StockName = tmp[2];
-					name = tmp[2];
+				for(int i = 0; i < tmp.length; i++) {
+					tmp[i] = tmp[i].substring(1, tmp[i].length() - 1); // Getting rid of the ""
+				}
+				if(StockSymbol.equals(tmp[0])) {
+					this.StockName = tmp[1];
+					this.MarketCap = tmp[3];
+					this.Sector = tmp[6];
+					name = tmp[1];
+					System.out.println("Retrieved basic information for " + StockSymbol);
 					break;
+				} else {
+					continue;
 				}
 			}
 			reader.close();
@@ -75,8 +88,6 @@ public class BasicInformation {
 			System.out.println("An error occurred while retrieving a stock name for " + this.StockSymbol);
 			e.printStackTrace();
 		}
-
-		return name;
 	}
 }
 
